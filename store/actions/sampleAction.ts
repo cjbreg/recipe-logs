@@ -1,4 +1,3 @@
-import { Dispatch } from "react";
 import { GET_SAMPLE, SAMPLE_ERROR } from "../types";
 
 export const getSampleData = () => (dispatch: any) => {

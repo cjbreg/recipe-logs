@@ -30,6 +30,7 @@ export const categories = [
 
 export const recipes: Recipe[] = [
   {
+    id: "awrgsdfsdfasdg",
     name: "Poke Bowl met kip",
     recipeUrl: "https://www.ah.nl/allerhande/recept/R-R1192928/pokebowl-kip",
     durationMinutes: 25,
@@ -38,6 +39,7 @@ export const recipes: Recipe[] = [
       "https://static.ah.nl/static/recepten/img_RAM_PRD123720_890x594_JPG.jpg",
   },
   {
+    id: "asdfgasdfgasdg",
     name: "Vindaloo",
     recipeUrl: "https://www.ah.nl/allerhande/recept/R-R1196981/vindaloo",
     durationMinutes: 30,
@@ -46,6 +48,7 @@ export const recipes: Recipe[] = [
       "https://static.ah.nl/static/recepten/img_RAM_PRD165043_890x594_JPG.jpg",
   },
   {
+    id: "adsfgasdgawasgdf",
     name: "Onigiri",
     recipeUrl: "https://www.ah.nl/allerhande/recept/R-R1196810/onigiri",
     durationMinutes: 60,
@@ -54,6 +57,7 @@ export const recipes: Recipe[] = [
       "https://static.ah.nl/static/recepten/img_RAM_PRD164587_612x450_JPG.jpg",
   },
   {
+    id: "agsdgawergwser",
     name: "Vegatarische lasagne",
     recipeUrl:
       "https://www.ah.nl/allerhande/recept/R-R1185036/vegetarische-lasagne",
