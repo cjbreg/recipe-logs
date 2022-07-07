@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import FilterComponent from "../components/FilterComponent";
 import HeaderComponent from "../components/HeaderComponent";
 import RecipeComponent from "../components/recipes/RecipeComponent";
-import { recipes } from "../shared/fakeData";
 import { getSampleData } from "../store/actions/sampleAction";
 import { useAppDispatch } from "../store/store";
 
@@ -13,6 +12,7 @@ const Home: NextPage = () => {
   const sampleListData = useSelector((state: any) => state.sampleData);
   const { sample } = sampleListData;
 
+  const { recipes } = useSelector((state: any) => state.recipeData);
   useEffect(() => {
     dispatch(getSampleData());
   }, []);

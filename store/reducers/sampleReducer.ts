@@ -1,4 +1,3 @@
-import { AnyAction } from "redux";
 import { GET_SAMPLE, SAMPLE_ERROR } from "../types";
 
 const initialState = {
