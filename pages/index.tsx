@@ -1,11 +1,8 @@
 import type { NextPage } from "next";
-import Head from "next/head";
-import Image from "next/image";
 import FilterComponent from "../components/FilterComponent";
 import HeaderComponent from "../components/HeaderComponent";
 import RecipeComponent from "../components/recipes/RecipeComponent";
 import { recipes } from "../shared/fakeData";
-import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
   return (
