@@ -1,9 +1,10 @@
 import React from "react";
 import { Clock } from "react-feather";
+import { Recipe } from "../../models/Recipe";
 import FavoriteIconComponent from "./FavoriteIconComponent";
 
 type Props = {
-  recipe: any;
+  recipe: Recipe;
 };
 
 const RecipeComponent = (props: Props) => {
@@ -12,7 +13,7 @@ const RecipeComponent = (props: Props) => {
   return (
     <div
       className="w-full my-3 h-48 rounded-3xl bg-cover bg-center "
-      style={{ backgroundImage: `url(${recipe.backgroundUrl})` }}
+      style={{ backgroundImage: `url(${recipe.backgroundImageUrl})` }}
     >
       <div className="w-full h-full rounded-3xl bg-gradient-to-b from-transparent to-dark">
         <div className="flex flex-col h-full items-start justify-end p-4 relative">
@@ -22,7 +23,9 @@ const RecipeComponent = (props: Props) => {
           <h1 className="text-white text-2xl font-semibold ">{recipe.name}</h1>
           <div className="flex flex-row text-white items-center">
             <Clock size={18} strokeWidth={1.5} />
-            <h4 className="pl-2 text-md ">{recipe.duration.toString()} min</h4>
+            <h4 className="pl-2 text-md ">
+              {recipe.durationMinutes.toString()} min
+            </h4>
           </div>
         </div>
       </div>

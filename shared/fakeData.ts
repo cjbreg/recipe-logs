@@ -1,4 +1,5 @@
 import { CategoryEnum } from "../models/CategoryEnum";
+import { Recipe } from "../models/Recipe";
 
 export const categories = [
   {
@@ -27,37 +28,38 @@ export const categories = [
   },
 ];
 
-export const recipes = [
+export const recipes: Recipe[] = [
   {
     name: "Poke Bowl met kip",
-    duration: 25,
+    recipeUrl: "https://www.ah.nl/allerhande/recept/R-R1192928/pokebowl-kip",
+    durationMinutes: 25,
     favorite: true,
-    backgroundUrl:
+    backgroundImageUrl:
       "https://static.ah.nl/static/recepten/img_RAM_PRD123720_890x594_JPG.jpg",
-    categories: ["chicken"],
   },
   {
     name: "Vindaloo",
-    duration: 30,
+    recipeUrl: "https://www.ah.nl/allerhande/recept/R-R1196981/vindaloo",
+    durationMinutes: 30,
     favorite: false,
-    backgroundUrl:
+    backgroundImageUrl:
       "https://static.ah.nl/static/recepten/img_RAM_PRD165043_890x594_JPG.jpg",
-    categories: ["chicken, salad"],
   },
   {
     name: "Onigiri",
-    duration: 60,
+    recipeUrl: "https://www.ah.nl/allerhande/recept/R-R1196810/onigiri",
+    durationMinutes: 60,
     favorite: false,
-    backgroundUrl:
+    backgroundImageUrl:
       "https://static.ah.nl/static/recepten/img_RAM_PRD164587_612x450_JPG.jpg",
-    categories: ["fish"],
   },
   {
     name: "Vegatarische lasagne",
-    duration: 15,
+    recipeUrl:
+      "https://www.ah.nl/allerhande/recept/R-R1185036/vegetarische-lasagne",
+    durationMinutes: 15,
     favorite: true,
-    backgroundUrl:
+    backgroundImageUrl:
       "https://static.ah.nl/static/recepten/img_123313_890x594_JPG.jpg",
-    categories: ["vegan"],
   },
 ];
