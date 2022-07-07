@@ -1,9 +1,9 @@
 import React from "react";
 import * as Icon from "react-feather";
-import { Category } from "../../models/Category";
+import { CategoryEnum } from "../../models/CategoryEnum";
 
 type Props = {
-  category: Category;
+  category: CategoryEnum;
 };
 
 const CategoryItemComponent = (props: Props) => {
@@ -12,17 +12,17 @@ const CategoryItemComponent = (props: Props) => {
 
   const getCategoryIcon = (category: string) => {
     switch (category) {
-      case Category.VEGAN:
+      case CategoryEnum.VEGAN:
         return <Icon.CloudDrizzle size={size} strokeWidth={strokeWidth} />;
-      case Category.CHICKEN:
+      case CategoryEnum.CHICKEN:
         return <Icon.CloudLightning size={size} strokeWidth={strokeWidth} />;
-      case Category.DESERT:
+      case CategoryEnum.DESERT:
         return <Icon.CloudOff size={size} strokeWidth={strokeWidth} />;
-      case Category.FISH:
+      case CategoryEnum.FISH:
         return <Icon.CloudRain size={size} strokeWidth={strokeWidth} />;
-      case Category.SALAD:
+      case CategoryEnum.SALAD:
         return <Icon.CloudSnow size={size} strokeWidth={strokeWidth} />;
-      case Category.PASTA:
+      case CategoryEnum.PASTA:
         return <Icon.Cloud size={size} strokeWidth={strokeWidth} />;
 
       default:

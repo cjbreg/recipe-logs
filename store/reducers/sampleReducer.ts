@@ -6,7 +6,7 @@ const initialState = {
   loading: true,
 };
 
-const sampleReducer = (state = initialState, action: AnyAction) => {
+const sampleReducer = (state = initialState, action: any) => {
   switch (action.type) {
     case GET_SAMPLE:
       return {

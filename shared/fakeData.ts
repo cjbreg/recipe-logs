@@ -1,29 +1,29 @@
-import { Category } from "../models/Category";
+import { CategoryEnum } from "../models/CategoryEnum";
 
 export const categories = [
   {
     name: "Vegan",
-    enum: Category.VEGAN,
+    enum: CategoryEnum.VEGAN,
   },
   {
     name: "Fish",
-    enum: Category.FISH,
+    enum: CategoryEnum.FISH,
   },
   {
     name: "Pasta",
-    enum: Category.PASTA,
+    enum: CategoryEnum.PASTA,
   },
   {
     name: "Salad",
-    enum: Category.SALAD,
+    enum: CategoryEnum.SALAD,
   },
   {
     name: "Chicken",
-    enum: Category.CHICKEN,
+    enum: CategoryEnum.CHICKEN,
   },
   {
     name: "Desert",
-    enum: Category.DESERT,
+    enum: CategoryEnum.DESERT,
   },
 ];
 

@@ -1,6 +1,7 @@
+import { Dispatch } from "react";
 import { GET_SAMPLE, SAMPLE_ERROR } from "../types";
 
-export const getSampleData = () => async (dispatch: any) => {
+export const getSampleData = () => (dispatch: any) => {
   try {
     dispatch({
       type: GET_SAMPLE,

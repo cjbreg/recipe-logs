@@ -3,6 +3,7 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { createWrapper } from "next-redux-wrapper";
 import rootReducer from "./reducers";
+import { useDispatch } from "react-redux";
 
 // initial states here
 const initalState = {};
@@ -19,5 +20,8 @@ export const store = createStore(
 
 // assigning store to next wrapper
 const makeStore = () => store;
+
+export type AppDispatch = typeof store.dispatch;
+export const useAppDispatch = () => useDispatch<AppDispatch>();
 
 export const wrapper = createWrapper(makeStore);
