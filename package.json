@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/uuid": "^8.3.4",
     "immer": "^9.0.15",
     "next": "12.2.0",
     "next-redux-wrapper": "^7.0.5",
@@ -19,7 +20,8 @@
     "redux": "^4.2.0",
     "redux-devtools-extension": "^2.13.9",
     "redux-persist": "^6.0.0",
-    "redux-thunk": "^2.4.1"
+    "redux-thunk": "^2.4.1",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/node": "18.0.3",

@@ -3,6 +3,7 @@ import { Recipe } from "../../models/Recipe";
 import { recipes } from "../../shared/fakeData";
 import {
   GET_SAMPLE,
+  RECIPE_ADD_RECIPE,
   RECIPE_ERROR,
   RECIPE_TOGGLED_FAVORITE,
   RECIPE_TOGGLE_FAVORITE,
@@ -43,6 +44,11 @@ const recipeReducer = (state = initialState, action: any) => {
             recipe.favorite = !recipe.favorite;
           }
         });
+      });
+
+    case RECIPE_ADD_RECIPE:
+      return produce(state, (draftState) => {
+        draftState.recipes.push(action.payload);
       });
 
     case RECIPE_ERROR:
