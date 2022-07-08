@@ -8,18 +8,10 @@ import { getSampleData } from "../store/actions/sampleAction";
 import { useAppDispatch } from "../store/store";
 
 const Home: NextPage = () => {
-  const dispatch = useAppDispatch();
-  const sampleListData = useSelector((state: any) => state.sampleData);
-  const { sample } = sampleListData;
-
   const { recipes } = useSelector((state: any) => state.recipeData);
-  useEffect(() => {
-    dispatch(getSampleData());
-  }, []);
 
   return (
     <div className="text-center container mx-auto px-4 py-8 flex flex-col">
-      <h1>{sample}</h1>
       <div className="pb-8">
         <HeaderComponent />
       </div>

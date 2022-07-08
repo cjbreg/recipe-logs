@@ -5,7 +5,7 @@ import { addRecipe } from "../../store/actions/recipeAction";
 import { useAppDispatch } from "../../store/store";
 import { useRouter } from "next/router";
 
-const add = () => {
+const Add = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -96,4 +96,4 @@ const add = () => {
   );
 };
 
-export default add;
+export default Add;
