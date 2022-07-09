@@ -3,9 +3,10 @@ import FavoriteIconComponent from "../../components/recipes/FavoriteIconComponen
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../store/store";
-import { toggleFavorite } from "../../store/actions/recipeAction";
+import { removeRecipe, toggleFavorite } from "../../store/actions/recipeAction";
 import { defaultRecipeState } from "../../store/reducers/recipeReducer";
 import BackButtonComponent from "../../components/common/BackButtonComponent";
+import RemoveButtonComponent from "../../components/common/RemoveButtonComponent";
 
 const Index = () => {
   const router = useRouter();
@@ -23,11 +24,22 @@ const Index = () => {
     dispatch(toggleFavorite(recipe));
   };
 
+  const handleRemovePress = () => {
+    dispatch(removeRecipe(recipe));
+    router.push("/");
+  };
+
   const renderpPage = () => {
     return (
       <div className=" flex flex-col bg-primary min-h-screen	">
         <div className="absolute left-0 top-0 m-4 pt-8">
           <BackButtonComponent />
+        </div>
+        <div
+          className="absolute right-0 top-0 m-4 pt-8"
+          onClick={handleRemovePress}
+        >
+          <RemoveButtonComponent />
         </div>
         <div
           className="w-full h-64 bg-cover bg-center"

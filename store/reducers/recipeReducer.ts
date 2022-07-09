@@ -5,9 +5,10 @@ import {
   GET_SAMPLE,
   RECIPE_ADD_RECIPE,
   RECIPE_ERROR,
-  RECIPE_TOGGLED_FAVORITE,
+  RECIPE_REMOVE_RECIPE,
   RECIPE_TOGGLE_FAVORITE,
 } from "../types";
+import { remove } from "lodash";
 
 export interface RecipeState {
   recipes: Recipe[];
@@ -59,6 +60,13 @@ const recipeReducer = (state = initialState, action: any) => {
     case RECIPE_ADD_RECIPE:
       return produce(state, (draftState) => {
         draftState.recipes.push(action.payload);
+      });
+
+    case RECIPE_REMOVE_RECIPE:
+      console.log();
+
+      return produce(state, (draftState) => {
+        remove(draftState.recipes, (recipe) => recipe.id === action.payload.id);
       });
 
     case RECIPE_ERROR:
