@@ -22,6 +22,14 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.1",
+    "undici": "^5.6.1",
+    "metascraper": "^5.29.14",
+    "metascraper-author": "^5.29.14",
+    "metascraper-description": "^5.29.14",
+    "metascraper-image": "^5.29.14",
+    "metascraper-logo": "^5.29.14",
+    "metascraper-publisher": "^5.29.14",
+    "metascraper-title": "^5.29.14",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
