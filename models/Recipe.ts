@@ -5,4 +5,5 @@ export type Recipe = {
   backgroundImageUrl: string;
   favorite: boolean;
   durationMinutes: number;
+  comment?: string;
 };

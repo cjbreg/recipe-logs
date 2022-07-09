@@ -12,12 +12,14 @@ const Add = () => {
   const [recipeUrl, setRecipeUrl] = useState("");
   const [name, setName] = useState("");
   const [durationMinutes, setDurationMinutes] = useState();
+  const [comment, setComment] = useState("");
 
   const handleRecipeUrlChange = (event: any) =>
     setRecipeUrl(event.target.value);
   const handleNameChange = (event: any) => setName(event.target.value);
   const handleDurationMinutesChange = (event: any) =>
     setDurationMinutes(event.target.value);
+  const handleCommentChange = (event: any) => setComment(event.target.value);
 
   const handleSubminRecipe = (event: any) => {
     event.preventDefault();
@@ -29,6 +31,7 @@ const Add = () => {
       favorite: false,
       backgroundImageUrl:
         "https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      comment,
     };
     dispatch(addRecipe(newRecipe));
     router.push("/");
@@ -47,11 +50,11 @@ const Add = () => {
               type="text"
               name="recipe_url"
               className="block py-2.5 px-0 w-full text-sm text-dark bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-green-600 peer"
-              placeholder=""
+              placeholder=" "
               required
               onChange={handleRecipeUrlChange}
             />
-            <label className="peer-focus:font-medium absolute text-sm text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+            <label className="peer-focus:font-medium absolute text-sm text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
               Recipe URL
             </label>
           </div>
@@ -81,6 +84,19 @@ const Add = () => {
             />
             <label className="peer-focus:font-medium absolute text-sm text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
               Duration (minutes)
+            </label>
+          </div>
+          <div className="relative z-0 w-full mb-6 group">
+            <textarea
+              value={comment}
+              name="duration_minutes"
+              className="block h-24 py-2.5 px-0 w-full text-sm text-dark bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-green-600 peer"
+              placeholder=" "
+              required
+              onChange={handleCommentChange}
+            />
+            <label className="peer-focus:font-medium absolute text-sm text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+              Comment
             </label>
           </div>
 
