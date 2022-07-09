@@ -1,5 +1,7 @@
+import { useRouter } from "next/router";
 import React from "react";
 import { Clock } from "react-feather";
+import { useSelector } from "react-redux";
 import { Recipe } from "../../models/Recipe";
 import { toggleFavorite } from "../../store/actions/recipeAction";
 import { useAppDispatch } from "../../store/store";
@@ -10,23 +12,31 @@ type Props = {
 };
 
 const RecipeComponent = (props: Props) => {
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+
   const { recipe } = props;
 
-  const dispatch = useAppDispatch();
-
-  const handleFavoritePress = () => {
+  const handleFavoritePress = (event: any) => {
+    event.stopPropagation();
     dispatch(toggleFavorite(recipe));
+  };
+
+  const handleNavigateRecipe = (event: any) => {
+    event.stopPropagation();
+    router.push(`/recipe/${recipe.id}`);
   };
 
   return (
     <div
       className="w-full my-3 h-48 rounded-3xl bg-cover bg-center "
       style={{ backgroundImage: `url(${recipe.backgroundImageUrl})` }}
+      onClick={handleNavigateRecipe}
     >
       <div className="w-full h-full rounded-3xl bg-gradient-to-b from-transparent to-dark">
         <div className="flex flex-col h-full items-start justify-end p-4 relative">
           <div
-            className="absolute right-0 top-0 m-4"
+            className="absolute right-0 top-0 m-4 z-10"
             onClick={handleFavoritePress}
           >
             <FavoriteIconComponent favorite={recipe.favorite} />

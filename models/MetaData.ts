@@ -3,6 +3,6 @@ export type MetaData = {
   description?: string;
   image: string;
   logo?: string;
-  publisher?: string;
+  publisher: string;
   title: string;
 };

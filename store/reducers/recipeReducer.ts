@@ -27,6 +27,16 @@ const initialState: RecipeState = {
   },
 };
 
+export const defaultRecipeState: Recipe = {
+  id: "",
+  name: "",
+  recipeUrl: "",
+  backgroundImageUrl: "",
+  favorite: false,
+  durationMinutes: 0,
+  comment: "",
+};
+
 const recipeReducer = (state = initialState, action: any) => {
   switch (action.type) {
     case GET_SAMPLE:

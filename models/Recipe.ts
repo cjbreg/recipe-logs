@@ -1,3 +1,5 @@
+import { MetaData } from "./MetaData";
+
 export type Recipe = {
   id?: string;
   name: string;
@@ -6,4 +8,5 @@ export type Recipe = {
   favorite: boolean;
   durationMinutes: number;
   comment?: string;
+  metaData?: MetaData;
 };
