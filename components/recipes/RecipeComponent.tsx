@@ -15,9 +15,6 @@ const RecipeComponent = (props: Props) => {
   const dispatch = useAppDispatch();
 
   const handleFavoritePress = () => {
-    console.log("Clicked");
-    console.log(recipe);
-
     dispatch(toggleFavorite(recipe));
   };
 
