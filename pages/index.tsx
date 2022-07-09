@@ -1,15 +1,11 @@
 import type { NextPage } from "next";
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import FilterComponent from "../components/FilterComponent";
 import HeaderComponent from "../components/HeaderComponent";
 import RecipeComponent from "../components/recipes/RecipeComponent";
-import { getSampleData } from "../store/actions/sampleAction";
-import { useAppDispatch } from "../store/store";
 
 const Home: NextPage = () => {
   const { recipes } = useSelector((state: any) => state.recipeData);
-
   return (
     <div className="text-center container mx-auto px-4 py-8 flex flex-col">
       <div className="pb-8">
