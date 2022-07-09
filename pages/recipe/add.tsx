@@ -4,6 +4,7 @@ import { Recipe } from "../../models/Recipe";
 import { addRecipe } from "../../store/actions/recipeAction";
 import { useAppDispatch } from "../../store/store";
 import { useRouter } from "next/router";
+import { getRandomBackgroundUrl } from "../../shared/helpers";
 
 const Add = () => {
   const dispatch = useAppDispatch();
@@ -23,16 +24,20 @@ const Add = () => {
 
   const handleSubminRecipe = (event: any) => {
     event.preventDefault();
-    const newRecipe: Recipe = {
+    let newRecipe: Recipe = {
       id: uuidv4(),
       name,
       recipeUrl,
       durationMinutes: durationMinutes ?? 0,
       favorite: false,
-      backgroundImageUrl:
-        "https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      comment,
+      backgroundImageUrl: getRandomBackgroundUrl(),
     };
+    if (comment !== "" || null) {
+      newRecipe = {
+        ...newRecipe,
+        comment,
+      };
+    }
     dispatch(addRecipe(newRecipe));
     router.push("/");
   };
