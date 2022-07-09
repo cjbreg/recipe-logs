@@ -34,7 +34,9 @@ const RecipeComponent = (props: Props) => {
           >
             <FavoriteIconComponent favorite={recipe.favorite} />
           </div>
-          <h1 className="text-white text-2xl font-semibold ">{recipe.name}</h1>
+          <h1 className="text-white text-2xl font-semibold text-left ">
+            {recipe.name}
+          </h1>
           <div className="flex flex-row text-white items-center">
             <Clock size={18} strokeWidth={1.5} />
             <h4 className="pl-2 text-md ">
