@@ -36,7 +36,7 @@ const RecipeComponent = (props: Props) => {
       <div className="w-full h-full rounded-3xl bg-gradient-to-b from-transparent to-dark">
         <div className="flex flex-col h-full items-start justify-end p-4 relative">
           <div
-            className="absolute right-0 top-0 m-4 z-10"
+            className="absolute right-0 top-0 m-4 "
             onClick={handleFavoritePress}
           >
             <FavoriteIconComponent favorite={recipe.favorite} />

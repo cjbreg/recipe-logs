@@ -6,7 +6,7 @@ import { useAppDispatch } from "../../store/store";
 import { useRouter } from "next/router";
 import { Image } from "react-feather";
 import { MetaData } from "../../models/MetaData";
-import Main from "../../components/layout/Main";
+import Page from "../../components/layout/Page";
 
 const Add = () => {
   const dispatch = useAppDispatch();
@@ -84,7 +84,7 @@ const Add = () => {
   };
 
   return (
-    <Main>
+    <Page>
       <div className="pb-8">
         <h1 className="text-dark text-3xl font-bold">Add new recipe</h1>
       </div>
@@ -185,7 +185,7 @@ const Add = () => {
           </button>
         </form>
       </div>
-    </Main>
+    </Page>
   );
 };
 

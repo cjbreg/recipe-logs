@@ -1,19 +1,13 @@
 import Head from "next/head";
-import { useRouter } from "next/router";
 import React from "react";
-import Navbar from "../common/Navbar";
 
-const Main = ({ children }: any) => {
-  const router = useRouter();
+const Page = ({ children }: any) => {
   return (
     <div className="">
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Recipe Log</title>
       </Head>
-
-      <Navbar path={router.asPath} />
-
       <div className="container mx-auto px-4 py-8 flex flex-col">
         {children}
       </div>
@@ -21,4 +15,4 @@ const Main = ({ children }: any) => {
   );
 };
 
-export default Main;
+export default Page;
