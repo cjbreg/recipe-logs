@@ -31,7 +31,7 @@ const Index = () => {
 
   const renderpPage = () => {
     return (
-      <div className=" flex flex-col bg-primary min-h-screen	">
+      <div className="flex flex-col bg-primary min-h-screen	">
         <div className="absolute left-0 top-0 m-4 pt-8">
           <BackButtonComponent />
         </div>
