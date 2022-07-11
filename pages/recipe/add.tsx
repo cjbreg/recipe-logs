@@ -12,6 +12,7 @@ const Add = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
+  const [loading, setLoading] = useState(false);
   const [recipeUrl, setRecipeUrl] = useState("");
   const [name, setName] = useState("");
   const [durationMinutes, setDurationMinutes] = useState();
@@ -60,6 +61,7 @@ const Add = () => {
 
   const fetchMetaData = async (event: any) => {
     event.preventDefault();
+    setLoading(true);
     const res = await fetch(
       "/api/metascraper?" +
         new URLSearchParams({
@@ -67,8 +69,18 @@ const Add = () => {
         })
     );
     const data = await res.json();
-
+    setLoading(false);
     setMetaData(data.data);
+  };
+
+  const isDisabled = () => {
+    if (loading) return true;
+    return false;
+  };
+
+  const isSearchEmpty = () => {
+    if (recipeUrl === "" || recipeUrl === null) return true;
+    return false;
   };
 
   const renderBackgroundUrl = () => {
@@ -111,17 +123,29 @@ const Add = () => {
               </label>
             </div>
             <button
+              disabled={isSearchEmpty()}
               type="submit"
               onClick={fetchMetaData}
-              className="p-2.5 ml-2 text-sm font-medium text-white bg-primary rounded-lg border-0  hover:bg-blue-100 focus:ring-4 focus:outline-none focus:ring-blue-200 "
+              className="p-2.5 disabled:bg-gray-200 transition-colors duration-300 disabled:text-white ml-2 text-sm font-medium text-dark bg-primary rounded-lg border-0  hover:bg-blue-100 focus:ring-4 focus:outline-none focus:ring-blue-200 "
             >
               <Search />
             </button>
           </div>
         </form>
+
         <form>
-          <div className="relative z-0 w-full mb-6 group">
+          <div
+            // className={
+            //   isDisabled()
+            //     ? "relative z-0 w-full mb-6 group opacity-30 transition-opacity duration-300"
+            //     : "relative z-0 w-full mb-6 group transition-opacity duration-300"
+            // }
+            className={`relative z-0 w-full mb-6 group ${
+              isDisabled() ? "opacity-30" : ""
+            } transition-opacity duration-300`}
+          >
             <input
+              disabled={isDisabled()}
               value={name}
               type="text"
               name="recipe_name"
@@ -134,29 +158,43 @@ const Add = () => {
               Recipe name
             </label>
           </div>
-          <div className="relative z-0 w-full mb-6 group">
+          <div
+            className={`relative z-0 w-full mb-6 group ${
+              isDisabled() ? "opacity-30" : ""
+            } transition-opacity duration-300`}
+          >
             <label className=" text-sm text-gray-500 scale-75 top-3     ">
               Image
             </label>
             {renderBackgroundUrl()}
           </div>
 
-          <div className="relative z-0 w-full mb-6 group">
+          <div
+            className={`relative z-0 w-full mb-6 group ${
+              isDisabled() ? "opacity-30" : ""
+            } transition-opacity duration-300`}
+          >
             <input
+              disabled={isDisabled()}
               value={durationMinutes}
               type="number"
               name="duration_minutes"
-              className="block py-2.5 px-0 w-full text-sm text-dark bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-green-600 peer"
+              className=" block py-2.5 px-0 w-full text-sm text-dark bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-green-600 peer"
               placeholder=" "
               required
               onChange={handleDurationMinutesChange}
             />
-            <label className="peer-focus:font-medium absolute text-sm text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+            <label className=" peer-focus:font-medium absolute text-sm text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-green-600  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
               Duration (minutes)
             </label>
           </div>
-          <div className="relative z-0 w-full mb-6 group">
+          <div
+            className={`relative z-0 w-full mb-6 group ${
+              isDisabled() ? "opacity-30" : ""
+            } transition-opacity duration-300`}
+          >
             <textarea
+              disabled={isDisabled()}
               value={comment}
               name="comment"
               className="block h-24 py-2.5 px-0 w-full text-sm text-dark bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-green-600 peer"
@@ -171,8 +209,9 @@ const Add = () => {
 
           <button
             onClick={handleSubminRecipe}
+            disabled={isDisabled()}
             type="submit"
-            className="text-white bg-secondary hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center 0"
+            className="text-white transition-colors duration-300 bg-secondary disabled:bg-green-200 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center 0"
           >
             Submit
           </button>
