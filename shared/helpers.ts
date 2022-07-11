@@ -22,3 +22,18 @@ export const getRandomBackgroundUrl = () => {
     backgroundUrls[Math.floor(Math.random() * backgroundUrls.length)];
   return backgroundUrl;
 };
+
+export const getCleanString = (url: string) => {
+  let cleanString: string = "";
+  cleanString = url.replace(/(^\w+:|^)\/\//, "");
+
+  if (cleanString.substring(0, 3) === "www") {
+    cleanString = cleanString.replace("www.", "");
+  }
+
+  if (cleanString.includes("/")) {
+    cleanString = cleanString.split("/")[0];
+  }
+
+  return cleanString;
+};
