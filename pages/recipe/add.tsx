@@ -15,7 +15,7 @@ const Add = () => {
   const [loading, setLoading] = useState(false);
   const [recipeUrl, setRecipeUrl] = useState("");
   const [name, setName] = useState("");
-  const [durationMinutes, setDurationMinutes] = useState();
+  const [durationMinutes, setDurationMinutes] = useState(0);
   const [comment, setComment] = useState("");
   const [backgroundImageUrl, setBackgroundImageUrl] = useState("");
   const [metaData, setMetaData] = useState<MetaData>();
@@ -75,6 +75,10 @@ const Add = () => {
 
   const isDisabled = () => {
     if (loading) return true;
+    if (recipeUrl === "") return true;
+    if (name === "") return true;
+    if (durationMinutes === 0) return true;
+
     return false;
   };
 
@@ -141,11 +145,11 @@ const Add = () => {
             //     : "relative z-0 w-full mb-6 group transition-opacity duration-300"
             // }
             className={`relative z-0 w-full mb-6 group ${
-              isDisabled() ? "opacity-30" : ""
+              loading ? "opacity-30" : ""
             } transition-opacity duration-300`}
           >
             <input
-              disabled={isDisabled()}
+              disabled={loading}
               value={name}
               type="text"
               name="recipe_name"
@@ -160,7 +164,7 @@ const Add = () => {
           </div>
           <div
             className={`relative z-0 w-full mb-6 group ${
-              isDisabled() ? "opacity-30" : ""
+              loading ? "opacity-30" : ""
             } transition-opacity duration-300`}
           >
             <label className=" text-sm text-gray-500 scale-75 top-3     ">
@@ -171,11 +175,11 @@ const Add = () => {
 
           <div
             className={`relative z-0 w-full mb-6 group ${
-              isDisabled() ? "opacity-30" : ""
+              loading ? "opacity-30" : ""
             } transition-opacity duration-300`}
           >
             <input
-              disabled={isDisabled()}
+              disabled={loading}
               value={durationMinutes}
               type="number"
               name="duration_minutes"
@@ -190,11 +194,11 @@ const Add = () => {
           </div>
           <div
             className={`relative z-0 w-full mb-6 group ${
-              isDisabled() ? "opacity-30" : ""
+              loading ? "opacity-30" : ""
             } transition-opacity duration-300`}
           >
             <textarea
-              disabled={isDisabled()}
+              disabled={loading}
               value={comment}
               name="comment"
               className="block h-24 py-2.5 px-0 w-full text-sm text-dark bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-green-600 peer"
