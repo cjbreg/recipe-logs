@@ -48,6 +48,12 @@ const Add = () => {
         comment,
       };
     }
+    if (metaData) {
+      newRecipe = {
+        ...newRecipe,
+        metaData,
+      };
+    }
     dispatch(addRecipe(newRecipe));
     router.push("/");
   };
@@ -165,7 +171,7 @@ const Add = () => {
           <div className="relative z-0 w-full mb-6 group">
             <textarea
               value={comment}
-              name="duration_minutes"
+              name="comment"
               className="block h-24 py-2.5 px-0 w-full text-sm text-dark bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-green-600 peer"
               placeholder=" "
               required

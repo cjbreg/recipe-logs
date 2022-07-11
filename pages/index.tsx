@@ -1,7 +1,6 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
-import Navbar from "../components/common/Navbar";
 import AddRecipeComponents from "../components/dashboard/AddRecipeComponents";
 import FilterComponent from "../components/FilterComponent";
 import HeaderComponent from "../components/HeaderComponent";
@@ -32,7 +31,7 @@ const Home: NextPage = () => {
           })}
         </div>
         <div
-          className="fixed bottom-0 right-0 m-4 mb-16 z-10"
+          className="fixed bottom-0 right-0 m-4 mb-20 z-10"
           onClick={handleNewRecipePress}
         >
           <AddRecipeComponents />
