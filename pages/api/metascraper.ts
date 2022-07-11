@@ -40,9 +40,6 @@ export default async function handler(
     res.status(200).send({ data: metadata });
     res.end();
   } catch (error) {
-    // res.status(500);
-    // res.send({ data: { error: "Website not found" } });
-    // res.end();
     throw error;
   }
 }

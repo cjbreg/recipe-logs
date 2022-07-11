@@ -13,6 +13,7 @@ const Add = () => {
   const router = useRouter();
 
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   const [recipeUrl, setRecipeUrl] = useState("");
   const [name, setName] = useState("");
   const [durationMinutes, setDurationMinutes] = useState(0);
@@ -25,6 +26,12 @@ const Add = () => {
     setName(metaData.title);
     setBackgroundImageUrl(metaData.image);
   }, [metaData]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setError(false);
+    }, 3000);
+  }, [error]);
 
   const handleRecipeUrlChange = (event: any) =>
     setRecipeUrl(event.target.value);
@@ -78,22 +85,9 @@ const Add = () => {
       setMetaData(data.data);
     } catch (error) {
       setLoading(false);
+      setError(true);
       console.log("ERROR: ", error);
     }
-
-    // const res = await fetch(
-    //   "/api/metascraper?" +
-    //     new URLSearchParams({
-    //       targetUrl: recipeUrl,
-    //     })
-    // );
-
-    // const data = await res.json();
-
-    // console.log(data);
-
-    // setLoading(false);
-    // setMetaData(data.data);
   };
 
   const isDisabled = () => {
@@ -128,6 +122,14 @@ const Add = () => {
     );
   };
 
+  const renderErrorMessage = () => {
+    return (
+      <div className="-mt-6">
+        <p className="text-red-500 text-xs ">Website not recognised</p>
+      </div>
+    );
+  };
+
   return (
     <Page>
       <div className="pb-8">
@@ -158,6 +160,7 @@ const Add = () => {
               <Search />
             </button>
           </div>
+          {error ? renderErrorMessage() : <></>}
         </form>
 
         <form>
