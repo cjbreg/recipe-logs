@@ -8,6 +8,8 @@ import metascraperTitle from "metascraper-title";
 import metascraperAuthor from "metascraper-author";
 import metascraperLogo from "metascraper-logo";
 import metascraperPublisher from "metascraper-publisher";
+import { resolve } from "path";
+import { resolveSoa } from "dns";
 
 const metascraper = createMetascraper([
   metascraperDescription(),
@@ -33,11 +35,14 @@ export default async function handler(
       url: res.url,
       html: await res.text(),
     }));
-
     const metadata = await metascraper({ html, url });
 
     res.status(200).send({ data: metadata });
+    res.end();
   } catch (error) {
-    res.status(500);
+    // res.status(500);
+    // res.send({ data: { error: "Website not found" } });
+    // res.end();
+    throw error;
   }
 }

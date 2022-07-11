@@ -62,15 +62,38 @@ const Add = () => {
   const fetchMetaData = async (event: any) => {
     event.preventDefault();
     setLoading(true);
-    const res = await fetch(
-      "/api/metascraper?" +
-        new URLSearchParams({
-          targetUrl: recipeUrl,
-        })
-    );
-    const data = await res.json();
-    setLoading(false);
-    setMetaData(data.data);
+
+    try {
+      const res = await fetch(
+        "/api/metascraper?" +
+          new URLSearchParams({
+            targetUrl: recipeUrl,
+          })
+      );
+
+      const data = await res.json();
+      console.log(data);
+
+      setLoading(false);
+      setMetaData(data.data);
+    } catch (error) {
+      setLoading(false);
+      console.log("ERROR", error);
+    }
+
+    // const res = await fetch(
+    //   "/api/metascraper?" +
+    //     new URLSearchParams({
+    //       targetUrl: recipeUrl,
+    //     })
+    // );
+
+    // const data = await res.json();
+
+    // console.log(data);
+
+    // setLoading(false);
+    // setMetaData(data.data);
   };
 
   const isDisabled = () => {
