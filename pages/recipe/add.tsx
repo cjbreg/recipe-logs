@@ -78,7 +78,7 @@ const Add = () => {
       setMetaData(data.data);
     } catch (error) {
       setLoading(false);
-      console.log("ERROR", error);
+      console.log("ERROR: ", error);
     }
 
     // const res = await fetch(
