@@ -1,17 +1,23 @@
 import React from "react";
 import { Search } from "react-feather";
-import { categories } from "../../shared/fakeData";
+import { availableCategories } from "../../shared/staticData";
 import CategoryItemComponent from "./CategoryItemComponent";
 
 type Props = {
   queryChange: any;
   query: string;
+  categories: any;
+  categoriesChange: any;
 };
 
 const FilterComponent = (props: Props) => {
-  const { queryChange, query } = props;
+  const { queryChange, query, categoriesChange, categories } = props;
 
   const handleRecipeUrlChange = (event: any) => queryChange(event.target.value);
+
+  const categoryIsActive = (categry: string) => {
+    return categories.includes(categry);
+  };
 
   return (
     <div className="flex flex-col ">
@@ -34,8 +40,36 @@ const FilterComponent = (props: Props) => {
         </button>
       </div>
       <div className="flex flex-row pt-4 w-full ">
-        {categories.map((category: any, index: number) => {
-          return <CategoryItemComponent key={index} category={category.enum} />;
+        {availableCategories.map((category: string, index: number) => {
+          const handleCategoriePressed = () => {
+            if (categoryIsActive(category)) {
+              let updatedCategories: string[] = categories;
+              updatedCategories = updatedCategories.filter(
+                (item) => item !== category
+              );
+              categoriesChange(updatedCategories);
+              return;
+            }
+            categoriesChange([category, ...categories]);
+          };
+
+          const backgroundColor = categoryIsActive(category)
+            ? "bg-secondary"
+            : "bg-primary";
+
+          const iconColor = categoryIsActive(category)
+            ? "text-white"
+            : "text-dark";
+
+          return (
+            <div
+              className={`p-2 m-2 ${backgroundColor} rounded-md ${iconColor} drop-shadow-lg`}
+              onClick={handleCategoriePressed}
+              key={index}
+            >
+              <CategoryItemComponent category={category} />
+            </div>
+          );
         })}
       </div>
     </div>
