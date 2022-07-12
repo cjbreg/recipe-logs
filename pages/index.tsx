@@ -51,7 +51,7 @@ const Home: NextPage = () => {
         <div className="pb-8">
           <HeaderComponent />
         </div>
-        <div className="pb-8">
+        <div className="pb-2">
           <FilterComponent
             queryChange={setQuery}
             query={query}
