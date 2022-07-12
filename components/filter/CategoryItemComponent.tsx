@@ -3,7 +3,7 @@ import * as Icon from "react-feather";
 import { CategoryEnum } from "../../models/CategoryEnum";
 
 type Props = {
-  category: CategoryEnum;
+  category: string;
 };
 
 const CategoryItemComponent = (props: Props) => {
@@ -11,7 +11,7 @@ const CategoryItemComponent = (props: Props) => {
   const strokeWidth = 2;
 
   const getCategoryIcon = (category: string) => {
-    switch (category) {
+    switch (category.toLowerCase()) {
       case CategoryEnum.VEGAN:
         return <Icon.CloudDrizzle size={size} strokeWidth={strokeWidth} />;
       case CategoryEnum.CHICKEN:
@@ -29,11 +29,7 @@ const CategoryItemComponent = (props: Props) => {
         break;
     }
   };
-  return (
-    <div className="p-2 m-2 bg-primary rounded-md text-dark drop-shadow-lg">
-      {getCategoryIcon(props.category)}
-    </div>
-  );
+  return <div>{getCategoryIcon(props.category)}</div>;
 };
 
 export default CategoryItemComponent;
