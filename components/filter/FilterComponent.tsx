@@ -6,18 +6,19 @@ import CategoryItemComponent from "./CategoryItemComponent";
 type Props = {
   queryChange: any;
   query: string;
-  categories: any;
-  categoriesChange: any;
+  // categories: any;
+  // categoriesChange: any;
 };
 
 const FilterComponent = (props: Props) => {
-  const { queryChange, query, categoriesChange, categories } = props;
+  // const { queryChange, query, categoriesChange, categories } = props;
+  const { queryChange, query } = props;
 
   const handleRecipeUrlChange = (event: any) => queryChange(event.target.value);
 
-  const categoryIsActive = (categry: string) => {
-    return categories.includes(categry);
-  };
+  // const categoryIsActive = (categry: string) => {
+  //   return categories.includes(categry);
+  // };
 
   return (
     <div className="flex flex-col ">
@@ -39,7 +40,7 @@ const FilterComponent = (props: Props) => {
           <Search />
         </button>
       </div>
-      <div className="flex flex-row pt-4 w-full ">
+      {/* <div className="flex flex-row pt-4 w-full ">
         {availableCategories.map((category: string, index: number) => {
           const handleCategoriePressed = () => {
             if (categoryIsActive(category)) {
@@ -71,7 +72,7 @@ const FilterComponent = (props: Props) => {
             </div>
           );
         })}
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -24,7 +24,9 @@ const RecipeComponent = (props: Props) => {
 
   const handleNavigateRecipe = (event: any) => {
     event.stopPropagation();
-    router.push(`/recipe/${recipe.id}`);
+    console.log(recipe);
+
+    // router.push(`/recipe/${recipe.id}`);
   };
 
   return (

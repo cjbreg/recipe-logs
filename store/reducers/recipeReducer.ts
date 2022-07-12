@@ -6,6 +6,7 @@ import {
   RECIPE_ADD_RECIPE,
   RECIPE_ERROR,
   RECIPE_REMOVE_RECIPE,
+  RECIPE_RESET_RECIPES,
   RECIPE_TOGGLE_FAVORITE,
 } from "../types";
 import { remove } from "lodash";
@@ -63,8 +64,6 @@ const recipeReducer = (state = initialState, action: any) => {
       });
 
     case RECIPE_REMOVE_RECIPE:
-      console.log();
-
       return produce(state, (draftState) => {
         remove(draftState.recipes, (recipe) => recipe.id === action.payload.id);
       });
@@ -76,6 +75,11 @@ const recipeReducer = (state = initialState, action: any) => {
         };
         draftState.error.enabled = true;
         draftState.loading = false;
+      });
+
+    case RECIPE_RESET_RECIPES:
+      return produce(state, (draftState) => {
+        draftState.recipes = recipes;
       });
 
     default:
