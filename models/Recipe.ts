@@ -5,6 +5,7 @@ export type Recipe = {
   name: string;
   recipeUrl: string;
   backgroundImageUrl: string;
+  categories?: string[];
   favorite: boolean;
   durationMinutes: number;
   comment?: string;
