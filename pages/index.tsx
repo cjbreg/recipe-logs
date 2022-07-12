@@ -18,14 +18,14 @@ const Home: NextPage = () => {
 
   return (
     <Main>
-      <div className="text-center ">
+      <div className="text-center flex flex-col overflow-hidden">
         <div className="pb-8">
           <HeaderComponent />
         </div>
         <div className="pb-8">
           <FilterComponent />
         </div>
-        <div className="overflow-y-auto mb-8">
+        <div className="overflow-y-auto  max-h-fit pb-12 scrollbar-hide">
           {recipes.map((recipe: any, index: number) => {
             return <RecipeComponent recipe={recipe} key={index} />;
           })}

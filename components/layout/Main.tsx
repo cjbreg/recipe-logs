@@ -14,7 +14,7 @@ const Main = ({ children }: any) => {
 
       <Navbar path={router.asPath} />
 
-      <div className="container mx-auto px-4 py-8 flex flex-col">
+      <div className="container mx-auto px-4 py-8 max-h-screen flex flex-col ">
         {children}
       </div>
     </div>
