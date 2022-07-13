@@ -9,7 +9,11 @@ const Navbar = (props: any) => {
 
     return (
       <NextLink href={href}>
-        <div className={active ? "text-secondary" : "text-dark"}>
+        <div
+          className={
+            active ? "text-secondary" : "text-dark hover:cursor-pointer"
+          }
+        >
           {children}
         </div>
       </NextLink>
@@ -18,7 +22,7 @@ const Navbar = (props: any) => {
 
   return (
     <div className="fixed bottom-0  bg-white w-full shadow-[0px_-4px_16px_rgba(14,14,14,0.25)] rounded-t-3xl py-5 z-10">
-      <div className="justify-around flex flex-row text-dark">
+      <div className="justify-around flex flex-row text-dark ">
         <NavItem href="/" path={path}>
           <Home size={28} />
         </NavItem>
