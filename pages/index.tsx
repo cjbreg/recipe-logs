@@ -8,6 +8,7 @@ import HeaderComponent from "../components/HeaderComponent";
 import Main from "../components/layout/Main";
 import RecipeComponent from "../components/recipes/RecipeComponent";
 import { Recipe } from "../models/Recipe";
+import Image from "next/image";
 
 const Home: NextPage = () => {
   const router = useRouter();
@@ -22,10 +23,24 @@ const Home: NextPage = () => {
   };
 
   const renderRecipes = () => {
+    if (recipes.length === 0) return renderEmptyState();
     return recipes.map((recipe: Recipe, index: number) => {
       if (!recipe.name.toLowerCase().includes(query.toLowerCase())) return;
       return <RecipeComponent recipe={recipe} key={index} />;
     });
+  };
+
+  const renderEmptyState = () => {
+    return (
+      <div
+        className="text-dark h-full hover:cursor-pointer"
+        onClick={handleNewRecipePress}
+      >
+        <Image src="/images/undraw_barbecue.svg" height={300} width={300} />
+        <p>No recipes found yet.</p>
+        <p>Go ahead and add your first recipe!</p>
+      </div>
+    );
   };
 
   return (
@@ -46,7 +61,7 @@ const Home: NextPage = () => {
           {renderRecipes()}
         </div>
         <div
-          className="fixed bottom-0 right-0 m-4 mb-20 z-10"
+          className="fixed bottom-0 right-0 m-4 mb-20 z-10 hover:cursor-pointer"
           onClick={handleNewRecipePress}
         >
           <AddRecipeComponents />

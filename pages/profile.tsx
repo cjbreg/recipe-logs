@@ -5,9 +5,9 @@ import Image from "next/image";
 const Profile = () => {
   return (
     <Main>
-      <div className="flex flex-col justify-center items-center h-screen">
+      <div className="flex flex-col justify-center items-center h-screen ">
         <Image src="/images/undraw_building.svg" height={400} width={400} />
-        <p>Work in progress</p>
+        <p className="opacity-40">Work in progress</p>
       </div>
     </Main>
   );

@@ -1,17 +1,37 @@
-import { useRouter } from "next/router";
 import React from "react";
 import { useSelector } from "react-redux";
-import HeaderComponent from "../components/HeaderComponent";
 import Main from "../components/layout/Main";
 import RecipeComponent from "../components/recipes/RecipeComponent";
 import { Recipe } from "../models/Recipe";
+import Image from "next/image";
 
 const Favorites = () => {
-  const router = useRouter();
-
   const { recipes } = useSelector((state: any) => state.recipeData);
+  const favoriteRecipes = recipes.filter((recipe: Recipe) => recipe.favorite);
+
+  const renderEmptyState = () => {
+    return (
+      <div className="text-dark h-full hover:cursor-pointer">
+        <Image src="/images/undraw_barbecue.svg" height={300} width={300} />
+        <p>No recipes found yet.</p>
+        <p>Go ahead and add your first recipe!</p>
+      </div>
+    );
+  };
+
+  const renderNoFavoritesState = () => {
+    return (
+      <div className="text-dark h-full hover:cursor-pointer">
+        <Image src="/images/undraw_add_files.svg" height={300} width={300} />
+        <p>No favorite recipes found</p>
+        <p>Go ahead and favorite your first recipe!</p>
+      </div>
+    );
+  };
 
   const renderRecipes = () => {
+    if (recipes.length === 0) return renderEmptyState();
+    if (favoriteRecipes.length === 0) return renderNoFavoritesState();
     return recipes.map((recipe: Recipe, index: number) => {
       if (!recipe.favorite) return;
       return <RecipeComponent recipe={recipe} key={index} />;
