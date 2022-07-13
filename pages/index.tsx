@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import AddRecipeComponents from "../components/dashboard/AddRecipeComponents";
 import FilterComponent from "../components/filter/FilterComponent";
@@ -16,33 +16,16 @@ const Home: NextPage = () => {
 
   const [query, setQuery] = useState("");
   // const [categoriesFilter, setCategoriesFilter] = useState([]);
-  const [filteredRecipes, setFilteredRecipes] = useState(recipes);
-
-  useEffect(() => {
-    if (query === "") {
-      setFilteredRecipes(recipes);
-      return;
-    }
-
-    let newRecipeList: Recipe[] = recipes;
-
-    if (query) {
-      newRecipeList = recipes.filter((recipe: Recipe) =>
-        recipe.name.toLowerCase().includes(query.toLowerCase())
-      );
-      setFilteredRecipes(newRecipeList);
-      return;
-    }
-  }, [query]);
 
   const handleNewRecipePress = () => {
     router.push("/recipe/add");
   };
 
   const renderRecipes = () => {
-    return filteredRecipes.map((recipe: Recipe, index: number) => (
-      <RecipeComponent recipe={recipe} key={index} />
-    ));
+    return recipes.map((recipe: Recipe, index: number) => {
+      if (!recipe.name.toLowerCase().includes(query.toLowerCase())) return;
+      return <RecipeComponent recipe={recipe} key={index} />;
+    });
   };
 
   return (
