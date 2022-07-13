@@ -66,6 +66,10 @@ const Add = () => {
     router.push("/");
   };
 
+  const handleCancelPress = () => {
+    router.back();
+  };
+
   const fetchMetaData = async (event: any) => {
     event.preventDefault();
     setLoading(true);
@@ -165,11 +169,6 @@ const Add = () => {
 
         <form>
           <div
-            // className={
-            //   isDisabled()
-            //     ? "relative z-0 w-full mb-6 group opacity-30 transition-opacity duration-300"
-            //     : "relative z-0 w-full mb-6 group transition-opacity duration-300"
-            // }
             className={`relative z-0 w-full mb-6 group ${
               loading ? "opacity-30" : ""
             } transition-opacity duration-300`}
@@ -244,6 +243,12 @@ const Add = () => {
             className="text-white transition-colors duration-300 bg-secondary disabled:bg-green-200 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center 0"
           >
             Submit
+          </button>
+          <button
+            onClick={handleCancelPress}
+            className="text-dark mt-4 bg-primary  hover:bg-gray-300 focus:ring-0 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center 0"
+          >
+            Cancel
           </button>
         </form>
       </div>
