@@ -22,7 +22,7 @@ type Error = {
 };
 
 const initialState: RecipeState = {
-  recipes: recipes,
+  recipes: [],
   loading: false,
   error: {
     enabled: false,
