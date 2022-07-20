@@ -10,7 +10,9 @@
     "export": "next build && next export"
   },
   "dependencies": {
+    "@prisma/client": "^4.1.0",
     "@types/uuid": "^8.3.4",
+    "axios": "^0.27.2",
     "immer": "^9.0.15",
     "lodash": "^4.17.21",
     "metascraper": "^5.29.14",
