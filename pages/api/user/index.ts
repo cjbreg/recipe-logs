@@ -7,11 +7,16 @@ import {
   updateUser,
 } from "../../../prisma/user";
 import bcrypt from "bcryptjs";
+import { getToken } from "next-auth/jwt";
+
+const secret = process.env.NEXTAUTH_SECRET || "";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  const token = await getToken({ req, secret });
+  console.log("JSON Web Token", token);
   try {
     switch (req.method) {
       case "GET":

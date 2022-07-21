@@ -38,13 +38,5 @@ export default NextAuth({
       },
     }),
   ],
-  callbacks: {
-    async jwt({ token, user }) {
-      if (user) {
-        token.user = user;
-      }
-
-      return token;
-    },
-  },
+  session: { strategy: "jwt" },
 });
