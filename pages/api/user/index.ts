@@ -5,13 +5,12 @@ import {
   getAllUsers,
   getUser,
   updateUser,
-} from "../../prisma/user";
+} from "../../../prisma/user";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  console.log("got here");
   try {
     switch (req.method) {
       case "GET":
@@ -38,7 +37,6 @@ export default async function handler(
         break;
     }
   } catch (error: any) {
-    console.log(req.body);
     return res.status(500).json({ ...error, message: error.message });
   }
 }

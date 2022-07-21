@@ -10,7 +10,11 @@ const test = () => {
         password: "pasword123",
       };
 
-      const res = await axios.post("/api/user", newUser);
+      const res = await axios.get("/api/user", {
+        headers: {
+          Authorization: "Bearer " + "asdf", //the token is a variable which holds the token
+        },
+      });
 
       const data = await res.data;
       console.log(data);
