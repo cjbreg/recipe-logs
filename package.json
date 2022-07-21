@@ -13,6 +13,7 @@
     "@prisma/client": "^4.1.0",
     "@types/uuid": "^8.3.4",
     "axios": "^0.27.2",
+    "bcryptjs": "^2.4.3",
     "immer": "^9.0.15",
     "lodash": "^4.17.21",
     "metascraper": "^5.29.14",
@@ -23,6 +24,7 @@
     "metascraper-publisher": "^5.29.14",
     "metascraper-title": "^5.29.14",
     "next": "12.2.0",
+    "next-auth": "^4.10.1",
     "next-pwa": "^5.5.4",
     "next-redux-wrapper": "^7.0.5",
     "prisma": "^4.1.0",
@@ -39,6 +41,7 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
     "@types/lodash": "^4.14.182",
     "@types/node": "18.0.3",
     "@types/react": "18.0.15",

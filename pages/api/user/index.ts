@@ -6,6 +6,7 @@ import {
   getUser,
   updateUser,
 } from "../../../prisma/user";
+import bcrypt from "bcryptjs";
 
 export default async function handler(
   req: NextApiRequest,
@@ -23,8 +24,8 @@ export default async function handler(
           return res.json(users);
         }
       case "POST":
-        const { email, username, password } = req.body;
-        const postUser = await createUser(email, username, password);
+        const { email, password } = req.body;
+        const postUser = await createUser(email, bcrypt.hashSync(password, 8));
         return res.json(postUser);
       case "PUT":
         const { id, ...updateData } = req.body;

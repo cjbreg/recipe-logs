@@ -12,15 +12,10 @@ export const getUser = async (id: string) => {
   return user;
 };
 
-export const createUser = async (
-  email: string,
-  username: string,
-  password: string
-) => {
+export const createUser = async (email: string, password: string) => {
   const user = await prisma.user.create({
     data: {
       email,
-      username,
       password,
     },
   });
@@ -44,6 +39,13 @@ export const deleteUser = async (id: string) => {
     where: {
       id,
     },
+  });
+  return user;
+};
+
+export const getUserByEmail = async (email: string) => {
+  const user = await prisma.user.findUnique({
+    where: { email },
   });
   return user;
 };

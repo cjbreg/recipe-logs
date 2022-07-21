@@ -4,10 +4,11 @@ import { Provider } from "react-redux";
 import { store, wrapper, persistor } from "../store/store";
 import { PersistGate } from "redux-persist/integration/react";
 import Head from "next/head";
+import { SessionProvider } from "next-auth/react";
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
-    <>
+    <SessionProvider session={session}>
       <Head>
         <meta charSet="utf-8" />
         <meta name="application-name" content="Recipe Logs" />
@@ -59,7 +60,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </PersistGate>
       </Provider>
-    </>
+    </SessionProvider>
   );
 }
 
