@@ -38,7 +38,7 @@ export default async function handler(
         }
 
         var accessToken = jwt.sign(
-          { id: user.id, username: user.email },
+          { id: user.id, email: user.email },
           secretKey
         );
 

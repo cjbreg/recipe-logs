@@ -1,5 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type { NextApiRequest, NextApiResponse } from "next";
+import type { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
 import {
   createUser,
   getAllUsers,
@@ -7,15 +7,16 @@ import {
   updateUser,
 } from "../../../prisma/user";
 import bcrypt from "bcryptjs";
-import { getToken } from "next-auth/jwt";
-
-const secret = process.env.NEXTAUTH_SECRET || "";
+import { authenticateJWT } from "..";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   try {
+    const user = await authenticateJWT(req, res).catch((message) => {
+      throw { message: message, noToken: true };
+    });
     switch (req.method) {
       case "GET":
         if (req.query.id) {
@@ -25,16 +26,16 @@ export default async function handler(
         } else {
           // Otherwise, fetch all users
           const users = await getAllUsers();
-          return res.json(users);
+          return res.status(200).json(users);
         }
       case "POST":
         const { email, password } = req.body;
         const postUser = await createUser(email, bcrypt.hashSync(password, 8));
-        return res.json(postUser);
+        return res.status(200).json(postUser);
       case "PUT":
         const { id, ...updateData } = req.body;
         const user = await updateUser(id, updateData);
-        return res.json(user);
+        return res.status(200).json(user);
       case "DELETE":
         return;
 
@@ -42,6 +43,8 @@ export default async function handler(
         break;
     }
   } catch (error: any) {
+    console.log(error);
+    if (error.noToken) return res.status(401).json({ message: error.message });
     return res.status(500).json({ ...error, message: error.message });
   }
 }
