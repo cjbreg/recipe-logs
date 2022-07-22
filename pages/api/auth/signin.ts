@@ -1,6 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { getUserByEmail } from "../../../prisma/user";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+
+const secretKey = process.env.SECRET_KEY || "";
 
 export default async function handler(
   req: NextApiRequest,
@@ -34,7 +37,15 @@ export default async function handler(
             .json({ message: "Incorrect username or password" });
         }
 
-        return res.status(200).json(user);
+        var accessToken = jwt.sign(
+          { id: user.id, username: user.email },
+          secretKey
+        );
+
+        // @ts-ignore
+        delete user.password;
+
+        return res.status(200).json({ user, accessToken });
       case "PUT":
         return res.status(405).json({ message: "Method not allowed" });
       case "DELETE":

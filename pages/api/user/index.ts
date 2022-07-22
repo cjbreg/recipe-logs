@@ -19,6 +19,7 @@ export default async function handler(
     switch (req.method) {
       case "GET":
         if (req.query.id) {
+          // @ts-ignore
           const user = await getUser(req.query.id);
           return res.status(200).json(user);
         } else {
