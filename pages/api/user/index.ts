@@ -15,8 +15,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const token = await getToken({ req, secret });
-  console.log("JSON Web Token", token);
   try {
     switch (req.method) {
       case "GET":

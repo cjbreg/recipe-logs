@@ -1,10 +1,7 @@
 import axios from "axios";
 import React from "react";
-import { useSession, signIn, signOut } from "next-auth/react";
 
 const test = () => {
-  const { data: session, status } = useSession();
-
   const testFunction = async () => {
     try {
       const res = await axios.get("/api/user", {
@@ -20,23 +17,12 @@ const test = () => {
     }
   };
 
-  const renderSessionState = () => {
-    console.log(session, status);
-    if (session) return "true";
-    return "false";
-  };
-
   return (
     <div className="flex flex-col">
       test
       <br />
       <button onClick={testFunction}>press</button>
       <br />
-      <button onClick={() => signIn()}>Sign in</button>
-      <br />
-      <button onClick={() => signOut()}>Sign out</button>
-      <br />
-      <p>{renderSessionState()}</p>
     </div>
   );
 };
