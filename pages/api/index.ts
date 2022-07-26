@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import jwt from "jsonwebtoken";
-import { ResponseToken } from "../../models/responseToken";
+import { TokenData } from "../../models/TokenData";
 
 export const authenticateJWT = async (
   req: NextApiRequest,
@@ -9,7 +9,7 @@ export const authenticateJWT = async (
   const authHeader = req.headers.authorization;
   const secretKey = process.env.SECRET_KEY || "";
 
-  return new Promise<ResponseToken>((resolve, reject) => {
+  return new Promise<TokenData>((resolve, reject) => {
     if (authHeader) {
       const token = authHeader.split(" ")[1];
       jwt.verify(token, secretKey, (err, user) => {

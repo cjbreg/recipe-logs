@@ -8,18 +8,16 @@ import {
 } from "../../../prisma/user";
 import bcrypt from "bcryptjs";
 import { authenticateJWT } from "..";
-import { ResponseToken } from "../../../models/responseToken";
+import { TokenData } from "../../../models/TokenData";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   try {
-    const user: ResponseToken = await authenticateJWT(req, res).catch(
-      (message) => {
-        throw { message: message, noToken: true };
-      }
-    );
+    const user: TokenData = await authenticateJWT(req, res).catch((message) => {
+      throw { message: message, noToken: true };
+    });
 
     switch (req.method) {
       case "GET":
