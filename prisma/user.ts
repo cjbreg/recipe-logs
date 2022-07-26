@@ -49,3 +49,7 @@ export const getUserByEmail = async (email: string) => {
   });
   return user;
 };
+
+export const verifyEmail = async (email: string) => {
+  prisma.user.findUniqueOrThrow({ where: { email } });
+};
