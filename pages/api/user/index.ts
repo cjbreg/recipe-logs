@@ -8,34 +8,32 @@ import {
 } from "../../../prisma/user";
 import bcrypt from "bcryptjs";
 import { authenticateJWT } from "..";
+import { ResponseToken } from "../../../models/responseToken";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   try {
-    const user = await authenticateJWT(req, res).catch((message) => {
-      throw { message: message, noToken: true };
-    });
+    const user: ResponseToken = await authenticateJWT(req, res).catch(
+      (message) => {
+        throw { message: message, noToken: true };
+      }
+    );
+
     switch (req.method) {
       case "GET":
-        if (req.query.id) {
-          // @ts-ignore
-          const user = await getUser(req.query.id);
-          return res.status(200).json(user);
-        } else {
-          // Otherwise, fetch all users
-          const users = await getAllUsers();
-          return res.status(200).json(users);
-        }
+        const requestUser = await getUser(user.id);
+        return res.status(200).json(requestUser);
+
       case "POST":
         const { email, password } = req.body;
         const postUser = await createUser(email, bcrypt.hashSync(password, 8));
         return res.status(200).json(postUser);
       case "PUT":
         const { id, ...updateData } = req.body;
-        const user = await updateUser(id, updateData);
-        return res.status(200).json(user);
+        const newUser = await updateUser(id, updateData);
+        return res.status(200).json(newUser);
       case "DELETE":
         return;
 
@@ -43,7 +41,6 @@ export default async function handler(
         break;
     }
   } catch (error: any) {
-    console.log(error);
     if (error.noToken) return res.status(401).json({ message: error.message });
     return res.status(500).json({ ...error, message: error.message });
   }
