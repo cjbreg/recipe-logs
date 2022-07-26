@@ -1,20 +1,25 @@
 import axios from "axios";
 import React from "react";
+import { signIn } from "../store/actions/authAction";
+import { useAppDispatch } from "../store/store";
 
 const test = () => {
+  const dispatch = useAppDispatch();
+
   const testFunction = async () => {
-    try {
-      const res = await axios.get("/api/user", {
-        headers: {
-          Authorization: "Bearer " + "asdf", //the token is a variable which holds the token
-        },
+    const res = await axios
+      .get<string>("/api/user")
+      .then((data) => {
+        console.log(data.data.name);
+
+        return data.data.name;
+      })
+      .catch((error) => {
+        console.log(error);
+        console.log(error.response.data.message);
       });
 
-      const data = await res.data;
-      console.log(data);
-    } catch (error) {
-      console.log("ERROR: ", error);
-    }
+    dispatch(signIn(res, "Password123"));
   };
 
   return (
