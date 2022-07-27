@@ -1,12 +1,13 @@
+import produce from "immer";
 import { AuthStates } from "../../models/AuthStates";
-import { AUTH_SIGNIN } from "../types";
+import { AUTH_SIGNIN, AUTH_SIGNOUT } from "../types";
 
 export interface AuthState {
   loading: boolean;
   error: Error;
   authState: AuthStates;
-  token: string | null;
-  userId: number | null;
+  accessToken: string | null;
+  id: number | null;
   email: string | null;
 }
 
@@ -20,8 +21,8 @@ export const initialState: AuthState = {
     enabled: false,
   },
   authState: AuthStates.SIGNED_OUT,
-  token: null,
-  userId: null,
+  accessToken: null,
+  id: null,
   email: null,
 };
 
@@ -30,7 +31,16 @@ const authReducer = (state = initialState, action: any) => {
     case AUTH_SIGNIN:
       console.log(action.payload);
 
-      return state;
+      return produce(state, (draftState) => {
+        draftState.loading = false;
+        draftState.accessToken = action.payload.accessToken;
+        draftState.authState = AuthStates.SIGNED_IN;
+        draftState.id = action.payload.user.id;
+        draftState.email = action.payload.user.email;
+      });
+
+    case AUTH_SIGNOUT:
+      return initialState;
 
     default:
       return state;

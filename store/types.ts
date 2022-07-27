@@ -11,3 +11,4 @@ export const RECIPE_RESET_RECIPES = "RECIPE_RESET_RECIPES";
 
 // Auth actions
 export const AUTH_SIGNIN = "AUTH_SIGNIN";
+export const AUTH_SIGNOUT = "AUTH_SIGNOUT";

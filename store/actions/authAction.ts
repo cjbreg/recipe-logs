@@ -1,6 +1,16 @@
-import { AUTH_SIGNIN } from "../types";
+import { User } from "../../models/User";
+import { AUTH_SIGNIN, AUTH_SIGNOUT } from "../types";
 
-export const signIn = (email: string, password: string) => ({
+interface ISignInResponse {
+  accessToken: string;
+  user: User;
+}
+
+export const signIn = ({ accessToken, user }: ISignInResponse) => ({
   type: AUTH_SIGNIN,
-  payload: { email, password },
+  payload: { accessToken, user },
+});
+
+export const signOut = () => ({
+  type: AUTH_SIGNOUT,
 });
