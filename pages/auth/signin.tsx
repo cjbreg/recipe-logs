@@ -3,8 +3,16 @@ import React, { useState } from "react";
 import BackButtonComponent from "../../components/common/BackButtonComponent";
 import Image from "next/image";
 import SignInButton from "../../components/auth/SignInButton";
+import { useSelector } from "react-redux";
+import { State } from "../../store/reducers";
+import { useAppDispatch } from "../../store/store";
+import { AUTH_ERROR_DISMISS } from "../../store/types";
 
 const signin = () => {
+  const dispatch = useAppDispatch();
+
+  const { error } = useSelector((state: State) => state.authData);
+
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
@@ -16,6 +24,22 @@ const signin = () => {
     return email.length > 0 && password.length > 8 && regex.test(email);
   };
 
+  const onBackPress = () => {
+    dispatch({ type: AUTH_ERROR_DISMISS });
+  };
+
+  const renderError = () => {
+    if (!error.enabled) return;
+
+    return (
+      <div>
+        <span className="text-red-500 text-xs">
+          {error.message ?? "Something went wrong, pleasy try again"}
+        </span>
+      </div>
+    );
+  };
+
   return (
     <div className="flex flex-col bg-primary min-h-screen	">
       <Head>
@@ -23,14 +47,14 @@ const signin = () => {
         <title>Sign In - Recipe Log</title>
       </Head>
       <div className="absolute left-0 top-0 m-4 pt-8">
-        <BackButtonComponent />
+        <BackButtonComponent onPress={onBackPress} />
       </div>
 
       <div className="container flex flex-col mx-auto justify-center items-center px-4 py-4 min-h-screen  w-full">
         <div className="-mt-64 text-center mb-8">
           <Image src="/images/undraw_login.svg" height={300} width={300} />
           <h1 className="-mt-12 font-semibold text-2xl text-secondary ">
-            Sign In
+            Login
           </h1>
         </div>
         <form className="px-16 w-full">
@@ -64,6 +88,7 @@ const signin = () => {
             />
           </div>
         </form>
+        {renderError()}
       </div>
     </div>
   );

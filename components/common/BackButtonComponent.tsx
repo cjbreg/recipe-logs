@@ -2,10 +2,15 @@ import { useRouter } from "next/router";
 import React from "react";
 import { ArrowLeft } from "react-feather";
 
-const BackButtonComponent = () => {
+type Props = {
+  onPress?: () => void;
+};
+
+const BackButtonComponent = (props: Props) => {
   const router = useRouter();
 
   const handleButtonPress = () => {
+    if (props.onPress) props.onPress();
     router.back();
   };
   return (
