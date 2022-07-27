@@ -1,26 +1,12 @@
 import Head from "next/head";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import BackButtonComponent from "../../components/common/BackButtonComponent";
 import Image from "next/image";
-import axios from "axios";
-import { useAppDispatch } from "../../store/store";
-import { signIn } from "../../store/actions/authAction";
-import { useRouter } from "next/router";
+import SignInButton from "../../components/auth/SignInButton";
 
 const signin = () => {
-  const dispatch = useAppDispatch();
-  const router = useRouter();
-
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [errorMessage, setErrorMessage] = useState<string>("");
-  const [error, setError] = useState(false);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setErrorMessage("");
-    }, 3000);
-  }, [errorMessage]);
 
   const handleEmailChange = (event: any) => setEmail(event.target.value);
   const handlePasswordChange = (event: any) => setPassword(event.target.value);
@@ -28,19 +14,6 @@ const signin = () => {
   const isValid = () => {
     const regex = /^\S+@\S+$/;
     return email.length > 0 && password.length > 8 && regex.test(email);
-  };
-
-  const handleLogin = async (event: any) => {
-    event.preventDefault();
-    if (error) return;
-    try {
-      const authData = await axios
-        .post("/api/auth/signin", { email, password })
-        .then((res) => res.data);
-      console.log(authData);
-      dispatch(signIn(authData));
-      router.push("/profile");
-    } catch (error) {}
   };
 
   return (
@@ -84,17 +57,11 @@ const signin = () => {
             />
           </div>
           <div className="w-full mx-auto flex justify-center">
-            <button
-              disabled={!isValid()}
-              onClick={handleLogin}
-              type="submit"
-              className="disabled:bg-gray-300 px-8 py-2 font-medium bg-secondary text-white uppercase rounded hover:bg-green-500 transition duration-150"
-            >
-              Login
-            </button>
-          </div>
-          <div className="mx-auto flex justify-center mt-2">
-            <p className="text-red-500 text-xs">{errorMessage}</p>
+            <SignInButton
+              email={email}
+              password={password}
+              isValid={isValid()}
+            />
           </div>
         </form>
       </div>
