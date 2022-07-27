@@ -1,4 +1,4 @@
 export enum AuthStates {
-  SIGNED_IN,
-  SIGNED_OUT,
+  SIGNED_IN = "authorized",
+  SIGNED_OUT = "unauthorized",
 }
