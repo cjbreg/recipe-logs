@@ -15,10 +15,12 @@ export default async function handler(
         const recipes = await getAllRecipes();
         return res.status(200).json(recipes);
       case "POST":
-        const { newRecipe } = req.body;
-        console.log("recipeData", newRecipe);
+        const { newRecipe, metaData } = req.body;
 
-        const recipe = await createRecipe(newRecipe);
+        console.log("recipeData", newRecipe);
+        console.log("metaData", metaData);
+
+        const recipe = await createRecipe(newRecipe, metaData);
         return res.status(200).json(recipe);
       case "PUT":
         return;

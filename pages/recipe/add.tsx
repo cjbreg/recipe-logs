@@ -7,10 +7,15 @@ import { useRouter } from "next/router";
 import { Image, Search } from "react-feather";
 import { MetaData } from "../../models/MetaData";
 import Page from "../../components/layout/Page";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { State } from "../../store/reducers";
 
 const Add = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
+
+  const { id } = useSelector((state: State) => state.authData);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -37,18 +42,19 @@ const Add = () => {
     setRecipeUrl(event.target.value);
   const handleNameChange = (event: any) => setName(event.target.value);
   const handleDurationMinutesChange = (event: any) =>
-    setDurationMinutes(event.target.value);
+    setDurationMinutes(event.target.value.parseInt);
   const handleCommentChange = (event: any) => setComment(event.target.value);
 
-  const handleSubminRecipe = (event: any) => {
+  const handleSubminRecipe = async (event: any) => {
     event.preventDefault();
-    let newRecipe: Recipe = {
-      id: uuidv4(),
+    let newRecipe: any = {
+      // id: uuidv4(),
       name,
       recipeUrl,
       durationMinutes: durationMinutes ?? 0,
       favorite: false,
       backgroundImageUrl,
+      userId: id,
     };
     if (comment !== "" || null) {
       newRecipe = {
@@ -62,8 +68,30 @@ const Add = () => {
         metaData,
       };
     }
+    const recipeData = await axios
+      .post("/api/recipe", newRecipe)
+      .then((res) => res.data);
+
     dispatch(addRecipe(newRecipe));
     router.push("/");
+  };
+
+  const testAdd = async (event: any) => {
+    event.preventDefault();
+    let newRecipe: any = {
+      name,
+      recipeUrl,
+      durationMinutes: durationMinutes ?? 0,
+      favorite: false,
+      backgroundImageUrl,
+      userId: id,
+      categories: [],
+    };
+    console.log(newRecipe);
+
+    const recipeData = await axios
+      .post("/api/recipe", { newRecipe: newRecipe, metaData })
+      .then((res) => res.data);
   };
 
   const handleCancelPress = () => {
@@ -83,7 +111,6 @@ const Add = () => {
       );
 
       const data = await res.json();
-      console.log(data);
 
       setLoading(false);
       setMetaData(data.data);
@@ -237,7 +264,7 @@ const Add = () => {
           </div>
 
           <button
-            onClick={handleSubminRecipe}
+            onClick={testAdd}
             disabled={isDisabled()}
             type="submit"
             className="text-white transition-colors duration-300 bg-secondary disabled:bg-green-200 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center 0"
