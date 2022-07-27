@@ -2,11 +2,19 @@ import Head from "next/head";
 import React, { useEffect, useState } from "react";
 import BackButtonComponent from "../../components/common/BackButtonComponent";
 import Image from "next/image";
+import axios from "axios";
+import { useAppDispatch } from "../../store/store";
+import { signIn } from "../../store/actions/authAction";
+import { useRouter } from "next/router";
 
 const signin = () => {
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
@@ -17,17 +25,22 @@ const signin = () => {
   const handleEmailChange = (event: any) => setEmail(event.target.value);
   const handlePasswordChange = (event: any) => setPassword(event.target.value);
 
-  const handleLogin = (event: any) => {
-    event.preventDefault();
-    verifyFields();
-    console.log(errorMessage);
+  const isValid = () => {
+    const regex = /^\S+@\S+$/;
+    return email.length > 0 && password.length > 8 && regex.test(email);
   };
 
-  const verifyFields = () => {
-    if (email === "" || password == "") {
-      return setErrorMessage("Please fill out both fields ");
-    }
-    return setErrorMessage("");
+  const handleLogin = async (event: any) => {
+    event.preventDefault();
+    if (error) return;
+    try {
+      const authData = await axios
+        .post("/api/auth/signin", { email, password })
+        .then((res) => res.data);
+      console.log(authData);
+      dispatch(signIn(authData));
+      router.push("/profile");
+    } catch (error) {}
   };
 
   return (
@@ -72,9 +85,10 @@ const signin = () => {
           </div>
           <div className="w-full mx-auto flex justify-center">
             <button
+              disabled={!isValid()}
               onClick={handleLogin}
               type="submit"
-              className="px-8 py-2 font-medium bg-secondary text-white uppercase rounded hover:bg-green-500 transition duration-150"
+              className="disabled:bg-gray-300 px-8 py-2 font-medium bg-secondary text-white uppercase rounded hover:bg-green-500 transition duration-150"
             >
               Login
             </button>
