@@ -10,4 +10,6 @@ export type Recipe = {
   durationMinutes: number;
   comment?: string;
   metaData?: MetaData;
+  createdAt: Date;
+  updatedAt: Date;
 };
