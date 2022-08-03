@@ -1,5 +1,6 @@
 import Head from "next/head";
 import React from "react";
+import AuthCheck from "@Components/common/AuthCheck";
 
 const Page = ({ children }: any) => {
   return (
@@ -8,6 +9,7 @@ const Page = ({ children }: any) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Recipe Log</title>
       </Head>
+      <AuthCheck />
       <div className="container mx-auto px-4 pt-8 flex flex-col h-screen">
         {children}
       </div>

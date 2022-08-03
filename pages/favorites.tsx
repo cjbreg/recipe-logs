@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import Main from "../src/components/layout/Main";
-import RecipeComponent from "../src/components/recipes/RecipeComponent";
+import Main from "@Components/layout/Main";
+import RecipeComponent from "@Components/recipes/RecipeComponent";
 import { Recipe } from "../src/models/Recipe";
 import Image from "next/image";
 

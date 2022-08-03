@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React from "react";
+import AuthCheck from "@Components/common/AuthCheck";
 import Navbar from "../common/Navbar";
 
 const Main = ({ children }: any) => {
@@ -11,6 +12,7 @@ const Main = ({ children }: any) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Recipe Log</title>
       </Head>
+      <AuthCheck />
 
       <Navbar path={router.asPath} />
 

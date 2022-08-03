@@ -1,5 +1,5 @@
 import React from "react";
-import FavoriteIconComponent from "../../src/components/recipes/FavoriteIconComponent";
+import FavoriteIconComponent from "@Components/recipes/FavoriteIconComponent";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../src/store/store";
@@ -8,8 +8,8 @@ import {
   toggleFavorite,
 } from "../../src/store/actions/recipeAction";
 import { defaultRecipeState } from "../../src/store/reducers/recipeReducer";
-import BackButtonComponent from "../../src/components/common/BackButtonComponent";
-import RemoveButtonComponent from "../../src/components/common/RemoveButtonComponent";
+import BackButtonComponent from "@Components/common/BackButtonComponent";
+import RemoveButtonComponent from "@Components/common/RemoveButtonComponent";
 import { getCleanString } from "../../src/shared/helpers";
 import Head from "next/head";
 import { Clock, ExternalLink, PenTool } from "react-feather";

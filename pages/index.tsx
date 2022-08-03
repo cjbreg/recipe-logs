@@ -2,11 +2,11 @@ import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import AddRecipeComponents from "../src/components/dashboard/AddRecipeComponents";
-import FilterComponent from "../src/components/filter/FilterComponent";
-import HeaderComponent from "../src/components/HeaderComponent";
-import Main from "../src/components/layout/Main";
-import RecipeComponent from "../src/components/recipes/RecipeComponent";
+import AddRecipeComponents from "@Components/dashboard/AddRecipeComponents";
+import FilterComponent from "@Components/filter/FilterComponent";
+import HeaderComponent from "@Components/HeaderComponent";
+import Main from "@Components/layout/Main";
+import RecipeComponent from "@Components/recipes/RecipeComponent";
 import { Recipe } from "../src/models/Recipe";
 import Image from "next/image";
 

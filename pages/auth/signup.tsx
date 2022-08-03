@@ -1,7 +1,7 @@
 import Head from "next/head";
 import React, { useState } from "react";
-import SignUpButton from "../../components/auth/SignUpButton";
-import BackButtonComponent from "../../components/common/BackButtonComponent";
+import SignUpButton from "@Components/auth/SignUpButton";
+import BackButtonComponent from "@Components/common/BackButtonComponent";
 import Image from "next/image";
 import { useSelector } from "react-redux";
 import { State } from "../../src/store/reducers";
