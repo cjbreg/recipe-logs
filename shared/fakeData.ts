@@ -1,5 +1,5 @@
-import { CategoryEnum } from "../models/CategoryEnum";
-import { Recipe } from "../models/Recipe";
+import { CategoryEnum } from "../src/models/CategoryEnum";
+import { Recipe } from "../src/models/Recipe";
 
 export const categories = [
   {

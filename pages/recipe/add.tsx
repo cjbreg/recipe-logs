@@ -3,7 +3,7 @@ import { addRecipe } from "../../store/actions/recipeAction";
 import { useAppDispatch } from "../../store/store";
 import { useRouter } from "next/router";
 import { Image, Search } from "react-feather";
-import { MetaData } from "../../models/MetaData";
+import { MetaData } from "../../src/models/MetaData";
 import Page from "../../components/layout/Page";
 import axios from "axios";
 import { useSelector } from "react-redux";

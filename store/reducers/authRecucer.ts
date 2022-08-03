@@ -1,5 +1,5 @@
 import produce from "immer";
-import { AuthStates } from "../../models/AuthStates";
+import { AuthStates } from "../../src/models/AuthStates";
 import {
   AUTH_ERROR,
   AUTH_ERROR_DISMISS,

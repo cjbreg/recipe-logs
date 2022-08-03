@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import { Clock } from "react-feather";
 import { useSelector } from "react-redux";
-import { Recipe } from "../../models/Recipe";
+import { Recipe } from "../../src/models/Recipe";
 import { toggleFavorite } from "../../store/actions/recipeAction";
 import { useAppDispatch } from "../../store/store";
 import FavoriteIconComponent from "./FavoriteIconComponent";

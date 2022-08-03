@@ -7,7 +7,7 @@ import FilterComponent from "../components/filter/FilterComponent";
 import HeaderComponent from "../components/HeaderComponent";
 import Main from "../components/layout/Main";
 import RecipeComponent from "../components/recipes/RecipeComponent";
-import { Recipe } from "../models/Recipe";
+import { Recipe } from "../src/models/Recipe";
 import Image from "next/image";
 
 const Home: NextPage = () => {

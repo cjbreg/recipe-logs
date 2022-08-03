@@ -5,7 +5,7 @@ import { State } from "../store/reducers";
 import { useAppDispatch } from "../store/store";
 import { signOut } from "../store/actions/authAction";
 import { LogOut } from "react-feather";
-import { AuthStates } from "../models/AuthStates";
+import { AuthStates } from "../src/models/AuthStates";
 import { useRouter } from "next/router";
 
 const Profile = () => {

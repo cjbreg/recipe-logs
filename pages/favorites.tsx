@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Main from "../components/layout/Main";
 import RecipeComponent from "../components/recipes/RecipeComponent";
-import { Recipe } from "../models/Recipe";
+import { Recipe } from "../src/models/Recipe";
 import Image from "next/image";
 
 const Favorites = () => {

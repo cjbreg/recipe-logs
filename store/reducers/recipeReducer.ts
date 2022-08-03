@@ -1,5 +1,5 @@
 import produce from "immer";
-import { Recipe } from "../../models/Recipe";
+import { Recipe } from "../../src/models/Recipe";
 import { recipes } from "../../shared/fakeData";
 import {
   GET_SAMPLE,

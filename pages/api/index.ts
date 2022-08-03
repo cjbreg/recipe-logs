@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import jwt from "jsonwebtoken";
-import { TokenData } from "../../models/TokenData";
+import { TokenData } from "../../src/models/TokenData";
 
 export const authenticateJWT = async (
   req: NextApiRequest,

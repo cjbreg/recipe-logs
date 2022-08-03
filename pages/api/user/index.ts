@@ -8,7 +8,7 @@ import {
 } from "../../../prisma/user";
 import bcrypt from "bcryptjs";
 import { authenticateJWT } from "..";
-import { TokenData } from "../../../models/TokenData";
+import { TokenData } from "../../../src/models/TokenData";
 
 export default async function handler(
   req: NextApiRequest,
