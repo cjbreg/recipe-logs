@@ -1,7 +1,7 @@
 import axios from "axios";
 import React from "react";
-import { signIn } from "../store/actions/authAction";
-import { useAppDispatch } from "../store/store";
+import { signIn } from "../src/store/actions/authAction";
+import { useAppDispatch } from "../src/store/store";
 
 const test = () => {
   const dispatch = useAppDispatch();

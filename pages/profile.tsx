@@ -1,9 +1,9 @@
 import React from "react";
 import Main from "../components/layout/Main";
 import { useSelector } from "react-redux";
-import { State } from "../store/reducers";
-import { useAppDispatch } from "../store/store";
-import { signOut } from "../store/actions/authAction";
+import { State } from "../src/store/reducers";
+import { useAppDispatch } from "../src/store/store";
+import { signOut } from "../src/store/actions/authAction";
 import { LogOut } from "react-feather";
 import { AuthStates } from "../src/models/AuthStates";
 import { useRouter } from "next/router";

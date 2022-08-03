@@ -4,9 +4,9 @@ import SignUpButton from "../../components/auth/SignUpButton";
 import BackButtonComponent from "../../components/common/BackButtonComponent";
 import Image from "next/image";
 import { useSelector } from "react-redux";
-import { State } from "../../store/reducers";
-import { useAppDispatch } from "../../store/store";
-import { AUTH_ERROR_DISMISS } from "../../store/types";
+import { State } from "../../src/store/reducers";
+import { useAppDispatch } from "../../src/store/store";
+import { AUTH_ERROR_DISMISS } from "../../src/store/types";
 
 const signup = () => {
   const dispatch = useAppDispatch();

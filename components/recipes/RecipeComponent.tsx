@@ -3,8 +3,8 @@ import React from "react";
 import { Clock } from "react-feather";
 import { useSelector } from "react-redux";
 import { Recipe } from "../../src/models/Recipe";
-import { toggleFavorite } from "../../store/actions/recipeAction";
-import { useAppDispatch } from "../../store/store";
+import { toggleFavorite } from "../../src/store/actions/recipeAction";
+import { useAppDispatch } from "../../src/store/store";
 import FavoriteIconComponent from "./FavoriteIconComponent";
 
 type Props = {

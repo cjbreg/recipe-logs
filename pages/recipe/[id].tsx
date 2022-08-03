@@ -2,9 +2,12 @@ import React, { useEffect } from "react";
 import FavoriteIconComponent from "../../components/recipes/FavoriteIconComponent";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
-import { useAppDispatch } from "../../store/store";
-import { removeRecipe, toggleFavorite } from "../../store/actions/recipeAction";
-import { defaultRecipeState } from "../../store/reducers/recipeReducer";
+import { useAppDispatch } from "../../src/store/store";
+import {
+  removeRecipe,
+  toggleFavorite,
+} from "../../src/store/actions/recipeAction";
+import { defaultRecipeState } from "../../src/store/reducers/recipeReducer";
 import BackButtonComponent from "../../components/common/BackButtonComponent";
 import RemoveButtonComponent from "../../components/common/RemoveButtonComponent";
 import { getCleanString } from "../../src/shared/helpers";

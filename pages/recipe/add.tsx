@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { addRecipe } from "../../store/actions/recipeAction";
-import { useAppDispatch } from "../../store/store";
+import { addRecipe } from "../../src/store/actions/recipeAction";
+import { useAppDispatch } from "../../src/store/store";
 import { useRouter } from "next/router";
 import { Image, Search } from "react-feather";
 import { MetaData } from "../../src/models/MetaData";
 import Page from "../../components/layout/Page";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { State } from "../../store/reducers";
+import { State } from "../../src/store/reducers";
 
 const Add = () => {
   const dispatch = useAppDispatch();

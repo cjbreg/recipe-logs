@@ -2,9 +2,13 @@ import axios, { AxiosError } from "axios";
 import { useRouter } from "next/router";
 import React from "react";
 import { useSelector } from "react-redux";
-import { authError, signIn, startAuth } from "../../store/actions/authAction";
-import { State } from "../../store/reducers";
-import { useAppDispatch } from "../../store/store";
+import {
+  authError,
+  signIn,
+  startAuth,
+} from "../../src/store/actions/authAction";
+import { State } from "../../src/store/reducers";
+import { useAppDispatch } from "../../src/store/store";
 
 interface Props {
   isValid: boolean;

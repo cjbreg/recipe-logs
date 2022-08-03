@@ -4,9 +4,9 @@ import BackButtonComponent from "../../components/common/BackButtonComponent";
 import Image from "next/image";
 import SignInButton from "../../components/auth/SignInButton";
 import { useSelector } from "react-redux";
-import { State } from "../../store/reducers";
-import { useAppDispatch } from "../../store/store";
-import { AUTH_ERROR_DISMISS } from "../../store/types";
+import { State } from "../../src/store/reducers";
+import { useAppDispatch } from "../../src/store/store";
+import { AUTH_ERROR_DISMISS } from "../../src/store/types";
 
 const signin = () => {
   const dispatch = useAppDispatch();
