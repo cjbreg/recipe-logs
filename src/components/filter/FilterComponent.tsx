@@ -1,6 +1,6 @@
 import React from "react";
 import { Search } from "react-feather";
-import { availableCategories } from "../../src/shared/staticData";
+import { availableCategories } from "../../shared/staticData";
 import CategoryItemComponent from "./CategoryItemComponent";
 
 type Props = {

@@ -1,5 +1,5 @@
 import React from "react";
-import Main from "../components/layout/Main";
+import Main from "../src/components/layout/Main";
 import { useSelector } from "react-redux";
 import { State } from "../src/store/reducers";
 import { useAppDispatch } from "../src/store/store";

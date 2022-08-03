@@ -8,7 +8,7 @@ const Page = ({ children }: any) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Recipe Log</title>
       </Head>
-      <div className="container mx-auto px-4 py-8 flex flex-col">
+      <div className="container mx-auto px-4 pt-8 flex flex-col h-screen">
         {children}
       </div>
     </div>

@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import FavoriteIconComponent from "../../components/recipes/FavoriteIconComponent";
+import React from "react";
+import FavoriteIconComponent from "../../src/components/recipes/FavoriteIconComponent";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../src/store/store";
@@ -8,11 +8,11 @@ import {
   toggleFavorite,
 } from "../../src/store/actions/recipeAction";
 import { defaultRecipeState } from "../../src/store/reducers/recipeReducer";
-import BackButtonComponent from "../../components/common/BackButtonComponent";
-import RemoveButtonComponent from "../../components/common/RemoveButtonComponent";
+import BackButtonComponent from "../../src/components/common/BackButtonComponent";
+import RemoveButtonComponent from "../../src/components/common/RemoveButtonComponent";
 import { getCleanString } from "../../src/shared/helpers";
 import Head from "next/head";
-import { Clock, Edit, ExternalLink, PenTool } from "react-feather";
+import { Clock, ExternalLink, PenTool } from "react-feather";
 
 const Index = () => {
   const router = useRouter();
