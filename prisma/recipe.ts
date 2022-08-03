@@ -15,6 +15,8 @@ export const getRecipe = async (id: string) => {
 };
 
 export const createRecipe = async (recipe: Recipe, metaData: MetaData) => {
+  console.log(typeof parseInt(recipe.durationMinutes));
+
   const newRecipe = await prisma.recipe.create({
     data: {
       ...recipe,

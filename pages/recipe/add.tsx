@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
-import { Recipe } from "../../models/Recipe";
 import { addRecipe } from "../../store/actions/recipeAction";
 import { useAppDispatch } from "../../store/store";
 import { useRouter } from "next/router";
@@ -42,56 +40,36 @@ const Add = () => {
     setRecipeUrl(event.target.value);
   const handleNameChange = (event: any) => setName(event.target.value);
   const handleDurationMinutesChange = (event: any) =>
-    setDurationMinutes(event.target.value.parseInt);
+    setDurationMinutes(event.target.value);
   const handleCommentChange = (event: any) => setComment(event.target.value);
 
   const handleSubminRecipe = async (event: any) => {
     event.preventDefault();
-    let newRecipe: any = {
-      // id: uuidv4(),
-      name,
-      recipeUrl,
-      durationMinutes: durationMinutes ?? 0,
-      favorite: false,
-      backgroundImageUrl,
-      userId: id,
-    };
-    if (comment !== "" || null) {
-      newRecipe = {
-        ...newRecipe,
-        comment,
-      };
-    }
-    if (metaData) {
-      newRecipe = {
-        ...newRecipe,
-        metaData,
-      };
-    }
-    const recipeData = await axios
-      .post("/api/recipe", newRecipe)
-      .then((res) => res.data);
+    setLoading(true);
 
-    dispatch(addRecipe(newRecipe));
-    router.push("/");
-  };
-
-  const testAdd = async (event: any) => {
-    event.preventDefault();
     let newRecipe: any = {
       name,
       recipeUrl,
-      durationMinutes: durationMinutes ?? 0,
+      durationMinutes: parseInt(durationMinutes) ?? 0,
       favorite: false,
       backgroundImageUrl,
       userId: id,
       categories: [],
     };
-    console.log(newRecipe);
 
-    const recipeData = await axios
-      .post("/api/recipe", { newRecipe: newRecipe, metaData })
-      .then((res) => res.data);
+    try {
+      const recipeData = await axios
+        .post("/api/recipe", { newRecipe: newRecipe, metaData })
+        .then((res) => res.data);
+
+      dispatch(addRecipe(recipeData));
+      setLoading(false);
+      router.push("/");
+    } catch (error) {
+      setLoading(false);
+      setError(true);
+      console.log("ERROR: ", error);
+    }
   };
 
   const handleCancelPress = () => {
@@ -264,7 +242,7 @@ const Add = () => {
           </div>
 
           <button
-            onClick={testAdd}
+            onClick={handleSubminRecipe}
             disabled={isDisabled()}
             type="submit"
             className="text-white transition-colors duration-300 bg-secondary disabled:bg-green-200 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center 0"
