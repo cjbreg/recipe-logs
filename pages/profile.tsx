@@ -1,6 +1,5 @@
 import React from "react";
 import Main from "../components/layout/Main";
-import Image from "next/image";
 import { useSelector } from "react-redux";
 import { State } from "../store/reducers";
 import { useAppDispatch } from "../store/store";
