@@ -7,7 +7,7 @@ import { removeRecipe, toggleFavorite } from "../../store/actions/recipeAction";
 import { defaultRecipeState } from "../../store/reducers/recipeReducer";
 import BackButtonComponent from "../../components/common/BackButtonComponent";
 import RemoveButtonComponent from "../../components/common/RemoveButtonComponent";
-import { getCleanString } from "../../shared/helpers";
+import { getCleanString } from "../../src/shared/helpers";
 import Head from "next/head";
 import { Clock, Edit, ExternalLink, PenTool } from "react-feather";
 

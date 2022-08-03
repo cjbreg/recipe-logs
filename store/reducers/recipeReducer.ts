@@ -1,6 +1,6 @@
 import produce from "immer";
 import { Recipe } from "../../src/models/Recipe";
-import { recipes } from "../../shared/fakeData";
+import { recipes } from "../../src/shared/fakeData";
 import {
   GET_SAMPLE,
   RECIPE_ADD_RECIPE,
