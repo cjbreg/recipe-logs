@@ -33,7 +33,7 @@ const SignInButton = (props: Props) => {
         .then((res) => res.data);
       console.log(authData);
       dispatch(signIn(authData));
-      router.push("/profile");
+      router.push("/");
     } catch (error: AxiosError | any) {
       dispatch(authError(error.response));
     }

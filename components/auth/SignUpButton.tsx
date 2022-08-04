@@ -41,7 +41,7 @@ const SignUpButton = (props: Props) => {
         .post("/api/auth/signup", { email, password })
         .then((res) => res.data);
       dispatch(signIn(authData));
-      router.push("/profile");
+      router.push("/");
     } catch (error: AxiosError | any) {
       dispatch(authError(error.response));
     }
