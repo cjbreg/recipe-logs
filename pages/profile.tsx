@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Main from "@Components/layout/Main";
 import { useSelector } from "react-redux";
 import { State } from "../src/store/reducers";
@@ -13,6 +13,10 @@ const Profile = () => {
   const router = useRouter();
 
   const { authState, email } = useSelector((state: State) => state.authData);
+
+  useEffect(() => {
+    if (authState === AuthStates.SIGNED_OUT) router.push("/auth");
+  }, []);
 
   const handleSignOut = () => {
     dispatch(signOut());

@@ -8,12 +8,17 @@ import Page from "@Components/layout/Page";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { State } from "../../src/store/reducers";
+import { AuthStates } from "@Models/AuthStates";
 
 const Add = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
-  const { id } = useSelector((state: State) => state.authData);
+  const { id, authState } = useSelector((state: State) => state.authData);
+
+  useEffect(() => {
+    if (authState === AuthStates.SIGNED_OUT) router.push("/auth");
+  }, []);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);

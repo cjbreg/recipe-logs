@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import AddRecipeComponents from "@Components/dashboard/AddRecipeComponents";
 import FilterComponent from "@Components/filter/FilterComponent";
@@ -9,11 +9,18 @@ import Main from "@Components/layout/Main";
 import RecipeComponent from "@Components/recipes/RecipeComponent";
 import { Recipe } from "../src/models/Recipe";
 import Image from "next/image";
+import { State } from "src/store/reducers";
+import { AuthStates } from "@Models/AuthStates";
 
 const Home: NextPage = () => {
   const router = useRouter();
 
-  const { recipes } = useSelector((state: any) => state.recipeData);
+  const { recipes } = useSelector((state: State) => state.recipeData);
+  const { authState } = useSelector((state: any) => state.authData);
+
+  useEffect(() => {
+    if (authState === AuthStates.SIGNED_OUT) router.push("/auth");
+  }, []);
 
   const [query, setQuery] = useState("");
   // const [categoriesFilter, setCategoriesFilter] = useState([]);

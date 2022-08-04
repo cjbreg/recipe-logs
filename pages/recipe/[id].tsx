@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import FavoriteIconComponent from "@Components/recipes/FavoriteIconComponent";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
@@ -13,12 +13,19 @@ import RemoveButtonComponent from "@Components/common/RemoveButtonComponent";
 import { getCleanString } from "../../src/shared/helpers";
 import Head from "next/head";
 import { Clock, ExternalLink, PenTool } from "react-feather";
+import { AuthStates } from "@Models/AuthStates";
 
 const Index = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
+  const { authState } = useSelector((state: any) => state.authData);
+
   const { id } = router.query;
+
+  useEffect(() => {
+    if (authState === AuthStates.SIGNED_OUT) router.push("/auth");
+  }, []);
 
   const recipe = useSelector(
     (state: any) =>

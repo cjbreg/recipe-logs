@@ -1,8 +1,7 @@
 import { useRouter } from "next/router";
 import React from "react";
-import Page from "@Components/layout/Page";
 
-const welcome = () => {
+const Index = () => {
   const router = useRouter();
 
   const navigateSignup = () => {
@@ -13,7 +12,7 @@ const welcome = () => {
   };
 
   return (
-    <Page>
+    <div className="container mx-auto px-4 pt-8 flex flex-col h-screen">
       <div className="flex flex-col  ">
         <div className="flex flex-col pb-8">
           <h1 className="text-dark text-3xl font-bold">Welcome</h1>
@@ -43,8 +42,8 @@ const welcome = () => {
           </button>
         </div>
       </div>
-    </Page>
+    </div>
   );
 };
 
-export default welcome;
+export default Index;
