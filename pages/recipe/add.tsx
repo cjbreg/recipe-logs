@@ -9,8 +9,9 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { State } from "../../src/store/reducers";
 import { AuthStates } from "@Models/AuthStates";
+import { NextPage } from "next/types";
 
-const Add = () => {
+const Add: NextPage = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
 

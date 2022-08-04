@@ -7,8 +7,9 @@ import { useSelector } from "react-redux";
 import { State } from "../../src/store/reducers";
 import { useAppDispatch } from "../../src/store/store";
 import { AUTH_ERROR_DISMISS } from "../../src/store/types";
+import { NextPage } from "next/types";
 
-const SignIn = () => {
+const SignIn: NextPage = () => {
   const dispatch = useAppDispatch();
 
   const { error } = useSelector((state: State) => state.authData);

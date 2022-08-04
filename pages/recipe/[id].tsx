@@ -15,8 +15,9 @@ import Head from "next/head";
 import { Clock, ExternalLink, PenTool } from "react-feather";
 import { AuthStates } from "@Models/AuthStates";
 import axios from "axios";
+import { NextPage } from "next/types";
 
-const Index = () => {
+const Index: NextPage = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
 

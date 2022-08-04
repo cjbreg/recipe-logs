@@ -7,8 +7,9 @@ import { signOut } from "../src/store/actions/authAction";
 import { LogOut } from "react-feather";
 import { AuthStates } from "../src/models/AuthStates";
 import { useRouter } from "next/router";
+import { NextPage } from "next/types";
 
-const Profile = () => {
+const Profile: NextPage = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
 

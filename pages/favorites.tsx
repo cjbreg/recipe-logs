@@ -6,8 +6,9 @@ import { Recipe } from "../src/models/Recipe";
 import Image from "next/image";
 import { AuthStates } from "@Models/AuthStates";
 import { useRouter } from "next/router";
+import { NextPage } from "next/types";
 
-const Favorites = () => {
+const Favorites: NextPage = () => {
   const router = useRouter();
 
   const { recipes } = useSelector((state: any) => state.recipeData);
