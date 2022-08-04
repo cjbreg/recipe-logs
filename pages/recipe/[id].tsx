@@ -27,7 +27,11 @@ const Index = () => {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    if (authState === AuthStates.SIGNED_OUT) router.push("/auth");
+    const checkAuthState = () => {
+      if (authState === AuthStates.SIGNED_OUT) router.push("/auth");
+    };
+
+    checkAuthState();
   }, []);
 
   const recipe = useSelector(

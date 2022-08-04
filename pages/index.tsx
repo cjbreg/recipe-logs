@@ -19,7 +19,11 @@ const Home: NextPage = () => {
   const { authState } = useSelector((state: any) => state.authData);
 
   useEffect(() => {
-    if (authState === AuthStates.SIGNED_OUT) router.push("/auth");
+    const checkAuthState = () => {
+      if (authState === AuthStates.SIGNED_OUT) router.push("/auth");
+    };
+
+    checkAuthState();
   }, []);
 
   const [query, setQuery] = useState("");

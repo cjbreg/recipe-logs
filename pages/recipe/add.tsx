@@ -17,7 +17,11 @@ const Add = () => {
   const { id, authState } = useSelector((state: State) => state.authData);
 
   useEffect(() => {
-    if (authState === AuthStates.SIGNED_OUT) router.push("/auth");
+    const checkAuthState = () => {
+      if (authState === AuthStates.SIGNED_OUT) router.push("/auth");
+    };
+
+    checkAuthState();
   }, []);
 
   const [loading, setLoading] = useState(false);

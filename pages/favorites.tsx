@@ -16,7 +16,11 @@ const Favorites = () => {
   const favoriteRecipes = recipes.filter((recipe: Recipe) => recipe.favorite);
 
   useEffect(() => {
-    if (authState === AuthStates.SIGNED_OUT) router.push("/auth");
+    const checkAuthState = () => {
+      if (authState === AuthStates.SIGNED_OUT) router.push("/auth");
+    };
+
+    checkAuthState();
   }, []);
 
   const renderEmptyState = () => {
