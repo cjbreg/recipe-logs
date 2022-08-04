@@ -6,6 +6,6 @@ export type MetaData = {
   logo?: string;
   publisher: string;
   title: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 };

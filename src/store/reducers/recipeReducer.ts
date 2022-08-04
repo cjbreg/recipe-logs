@@ -1,6 +1,5 @@
 import produce from "immer";
 import { Recipe } from "../../models/Recipe";
-import { recipes } from "../../shared/fakeData";
 import {
   GET_SAMPLE,
   RECIPE_ADD_RECIPE,
@@ -10,6 +9,7 @@ import {
   RECIPE_TOGGLE_FAVORITE,
 } from "../types";
 import { remove } from "lodash";
+import { MetaData } from "@Models/MetaData";
 
 export interface RecipeState {
   recipes: Recipe[];
@@ -29,6 +29,13 @@ const initialState: RecipeState = {
   },
 };
 
+export const defaultMetaDataState: MetaData = {
+  id: "",
+  image: "",
+  publisher: "",
+  title: "",
+};
+
 export const defaultRecipeState: Recipe = {
   id: "",
   name: "",
@@ -37,6 +44,7 @@ export const defaultRecipeState: Recipe = {
   favorite: false,
   durationMinutes: 0,
   comment: "",
+  metaData: defaultMetaDataState,
 };
 
 const recipeReducer = (state = initialState, action: any) => {
@@ -79,7 +87,7 @@ const recipeReducer = (state = initialState, action: any) => {
 
     case RECIPE_RESET_RECIPES:
       return produce(state, (draftState) => {
-        draftState.recipes = recipes;
+        draftState.recipes = [];
       });
 
     default:
