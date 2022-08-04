@@ -57,11 +57,13 @@ export const deleteRecipe = async (id: string) => {
     },
   });
 
-  const metaDataId = data.metaData.id;
+  const metaDataId = data?.metaData?.id ?? "";
 
-  await prisma.metaData.delete({
-    where: { id: metaDataId },
-  });
+  if (metaDataId !== "") {
+    await prisma.metaData.delete({
+      where: { id: metaDataId },
+    });
+  }
 
   const recipe = await prisma.recipe.delete({
     where: {

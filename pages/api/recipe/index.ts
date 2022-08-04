@@ -12,27 +12,26 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    const user: TokenData = await authenticateJWT(req, res).catch((message) => {
-      throw { message: message, noToken: true };
-    });
-
     switch (req.method) {
       case "GET":
         const recipes = await getAllRecipes();
         return res.status(200).json(recipes);
       case "POST":
+        const user: TokenData = await authenticateJWT(req, res).catch(
+          (message) => {
+            throw { message: message, noToken: true };
+          }
+        );
+
         const { newRecipe, metaData } = req.body;
         const recipe = await createRecipe(newRecipe, metaData, user.id);
         return res.status(200).json(recipe);
       case "PUT":
         return;
       case "DELETE":
-        console.log(req.body);
-
         const { recipeId } = req.body;
         const removedRecipe = await deleteRecipe(recipeId);
         return res.status(200).json(removedRecipe);
-        return;
 
       default:
         break;
