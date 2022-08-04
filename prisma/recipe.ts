@@ -10,13 +10,14 @@ export const getAllRecipes = async () => {
 export const getRecipe = async (id: string) => {
   const recipe = await prisma.recipe.findUnique({
     where: { id },
+    include: {
+      metaData: true,
+    },
   });
   return recipe;
 };
 
 export const createRecipe = async (recipe: Recipe, metaData: MetaData) => {
-  console.log(typeof parseInt(recipe.durationMinutes));
-
   const newRecipe = await prisma.recipe.create({
     data: {
       ...recipe,
@@ -44,10 +45,24 @@ export const updateRecipe = async (id: string, updateData: any) => {
 };
 
 export const deleteRecipe = async (id: string) => {
+  const data = await prisma.recipe.findUnique({
+    where: { id },
+    include: {
+      metaData: true,
+    },
+  });
+
+  const metaDataId = data.metaData.id;
+
+  await prisma.metaData.delete({
+    where: { id: metaDataId },
+  });
+
   const recipe = await prisma.recipe.delete({
     where: {
       id,
     },
   });
+
   return recipe;
 };

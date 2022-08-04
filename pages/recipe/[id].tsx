@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import FavoriteIconComponent from "@Components/recipes/FavoriteIconComponent";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
@@ -14,6 +14,7 @@ import { getCleanString } from "../../src/shared/helpers";
 import Head from "next/head";
 import { Clock, ExternalLink, PenTool } from "react-feather";
 import { AuthStates } from "@Models/AuthStates";
+import axios from "axios";
 
 const Index = () => {
   const router = useRouter();
@@ -22,6 +23,8 @@ const Index = () => {
   const { authState } = useSelector((state: any) => state.authData);
 
   const { id } = router.query;
+
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     if (authState === AuthStates.SIGNED_OUT) router.push("/auth");
@@ -37,7 +40,20 @@ const Index = () => {
     dispatch(toggleFavorite(recipe));
   };
 
-  const handleRemovePress = () => {
+  const handleRemovePress = async () => {
+    try {
+      await axios
+        .delete("/api/recipe", { data: { recipeId: id } })
+        .catch((err) => {
+          throw err;
+        });
+
+      dispatch(removeRecipe(recipe));
+      router.push("/");
+    } catch (error) {
+      setError(true);
+      console.log("ERROR: ", error);
+    }
     dispatch(removeRecipe(recipe));
     router.push("/");
   };

@@ -1,5 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { createRecipe, getAllRecipes } from "../../../prisma/recipe";
+import {
+  createRecipe,
+  getAllRecipes,
+  deleteRecipe,
+} from "../../../prisma/recipe";
 
 export default async function handler(
   req: NextApiRequest,
@@ -16,15 +20,16 @@ export default async function handler(
         return res.status(200).json(recipes);
       case "POST":
         const { newRecipe, metaData } = req.body;
-
-        console.log("recipeData", newRecipe);
-        console.log("metaData", metaData);
-
         const recipe = await createRecipe(newRecipe, metaData);
         return res.status(200).json(recipe);
       case "PUT":
         return;
       case "DELETE":
+        console.log(req.body);
+
+        const { recipeId } = req.body;
+        const removedRecipe = await deleteRecipe(recipeId);
+        return res.status(200).json(removedRecipe);
         return;
 
       default:
