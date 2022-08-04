@@ -1,4 +1,6 @@
+import { TokenData } from "@Models/TokenData";
 import type { NextApiRequest, NextApiResponse } from "next";
+import { authenticateJWT } from "..";
 import {
   createRecipe,
   getAllRecipes,
@@ -10,9 +12,9 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    // const user: TokenData = await authenticateJWT(req, res).catch((message) => {
-    //   throw { message: message, noToken: true };
-    // });
+    const user: TokenData = await authenticateJWT(req, res).catch((message) => {
+      throw { message: message, noToken: true };
+    });
 
     switch (req.method) {
       case "GET":
@@ -20,7 +22,7 @@ export default async function handler(
         return res.status(200).json(recipes);
       case "POST":
         const { newRecipe, metaData } = req.body;
-        const recipe = await createRecipe(newRecipe, metaData);
+        const recipe = await createRecipe(newRecipe, metaData, user.id);
         return res.status(200).json(recipe);
       case "PUT":
         return;

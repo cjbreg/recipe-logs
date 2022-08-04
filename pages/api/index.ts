@@ -10,8 +10,11 @@ export const authenticateJWT = async (
   const secretKey = process.env.SECRET_KEY || "";
 
   return new Promise<TokenData>((resolve, reject) => {
+    console.log(req.headers);
+
     if (authHeader) {
       const token = authHeader.split(" ")[1];
+
       jwt.verify(token, secretKey, (err, user) => {
         if (err) {
           return reject("Token is not valid");

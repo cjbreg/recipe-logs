@@ -17,10 +17,15 @@ export const getRecipe = async (id: string) => {
   return recipe;
 };
 
-export const createRecipe = async (recipe: Recipe, metaData: MetaData) => {
+export const createRecipe = async (
+  recipe: Recipe,
+  metaData: MetaData,
+  userId: string
+) => {
   const newRecipe = await prisma.recipe.create({
     data: {
       ...recipe,
+      userId: userId,
       metaData: {
         create: { ...metaData },
       },

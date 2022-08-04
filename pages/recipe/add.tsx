@@ -14,7 +14,13 @@ const Add = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
-  const { id, authState } = useSelector((state: State) => state.authData);
+  const { id, authState, accessToken } = useSelector(
+    (state: State) => state.authData
+  );
+
+  const axiosConfig = {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  };
 
   useEffect(() => {
     const checkAuthState = () => {
@@ -67,8 +73,12 @@ const Add = () => {
     };
 
     try {
+      const params = {
+        newRecipe: newRecipe,
+        metaData,
+      };
       const recipeData = await axios
-        .post("/api/recipe", { newRecipe: newRecipe, metaData })
+        .post("/api/recipe", params, axiosConfig)
         .then((res) => res.data);
 
       dispatch(addRecipe(recipeData));
