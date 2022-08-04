@@ -31,7 +31,6 @@ const SignInButton = (props: Props) => {
       const authData = await axios
         .post("/api/auth/signin", { email, password })
         .then((res) => res.data);
-      console.log(authData);
       dispatch(signIn(authData));
       router.push("/");
     } catch (error: AxiosError | any) {

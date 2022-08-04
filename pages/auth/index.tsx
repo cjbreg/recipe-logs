@@ -1,7 +1,8 @@
 import { useRouter } from "next/router";
+import { NextPage } from "next/types";
 import React from "react";
 
-const Index = () => {
+const Index: NextPage = () => {
   const router = useRouter();
 
   const navigateSignup = () => {

@@ -1,11 +1,7 @@
 import { TokenData } from "@Models/TokenData";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { authenticateJWT } from "..";
-import {
-  createRecipe,
-  getAllRecipes,
-  deleteRecipe,
-} from "../../../prisma/recipe";
+import { createRecipe, deleteRecipe, getRecipes } from "../../../prisma/recipe";
 
 export default async function handler(
   req: NextApiRequest,
@@ -14,7 +10,12 @@ export default async function handler(
   try {
     switch (req.method) {
       case "GET":
-        const recipes = await getAllRecipes();
+        const currentUser: TokenData = await authenticateJWT(req, res).catch(
+          (message) => {
+            throw { message: message, noToken: true };
+          }
+        );
+        const recipes = await getRecipes(currentUser.id);
         return res.status(200).json(recipes);
       case "POST":
         const user: TokenData = await authenticateJWT(req, res).catch(

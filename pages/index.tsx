@@ -11,12 +11,21 @@ import { Recipe } from "../src/models/Recipe";
 import Image from "next/image";
 import { State } from "src/store/reducers";
 import { AuthStates } from "@Models/AuthStates";
+import axios from "axios";
+import { useAppDispatch } from "src/store/store";
+import { addRecipes } from "src/store/actions/recipeAction";
 
 const Home: NextPage = () => {
   const router = useRouter();
+  const dispatch = useAppDispatch();
 
   const { recipes } = useSelector((state: State) => state.recipeData);
-  const { authState } = useSelector((state: any) => state.authData);
+  const { authState, accessToken } = useSelector(
+    (state: any) => state.authData
+  );
+
+  const [loading, setLoading] = useState(false);
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     const checkAuthState = () => {
@@ -24,17 +33,33 @@ const Home: NextPage = () => {
     };
 
     checkAuthState();
-  }, []);
 
-  const [query, setQuery] = useState("");
-  // const [categoriesFilter, setCategoriesFilter] = useState([]);
+    const getRecipes = async () => {
+      if (authState === AuthStates.SIGNED_IN && recipes.length === 0) {
+        setLoading(true);
+        const axiosConfig = {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        };
+        const data = await axios.get("/api/recipe", axiosConfig);
+        dispatch(addRecipes(data));
+        setLoading(false);
+        try {
+        } catch (error) {
+          console.log(error);
+          setLoading(false);
+        }
+      }
+    };
+
+    getRecipes();
+  }, [authState]);
 
   const handleNewRecipePress = () => {
     router.push("/recipe/add");
   };
 
   const renderRecipes = () => {
-    if (recipes.length === 0) return renderEmptyState();
+    if (recipes.length === 0 || loading) return renderEmptyState();
     return recipes.map((recipe: Recipe, index: number) => {
       if (!recipe.name.toLowerCase().includes(query.toLowerCase())) return;
       return <RecipeComponent recipe={recipe} key={index} />;

@@ -7,6 +7,13 @@ export const getAllRecipes = async () => {
   return recipes;
 };
 
+export const getRecipes = async (userId: string) => {
+  const recipes = await prisma.recipe.findMany({
+    where: { userId: userId },
+  });
+  return recipes;
+};
+
 export const getRecipe = async (id: string) => {
   const recipe = await prisma.recipe.findUnique({
     where: { id },

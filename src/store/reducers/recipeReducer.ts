@@ -1,8 +1,10 @@
 import produce from "immer";
 import { Recipe } from "../../models/Recipe";
 import {
+  AUTH_SIGNOUT,
   GET_SAMPLE,
   RECIPE_ADD_RECIPE,
+  RECIPE_ADD_RECIPES,
   RECIPE_ERROR,
   RECIPE_REMOVE_RECIPE,
   RECIPE_RESET_RECIPES,
@@ -71,6 +73,11 @@ const recipeReducer = (state = initialState, action: any) => {
         draftState.recipes.push(action.payload);
       });
 
+    case RECIPE_ADD_RECIPES:
+      return produce(state, (draftState) => {
+        draftState.recipes = action.payload.data;
+      });
+
     case RECIPE_REMOVE_RECIPE:
       return produce(state, (draftState) => {
         remove(draftState.recipes, (recipe) => recipe.id === action.payload.id);
@@ -89,6 +96,9 @@ const recipeReducer = (state = initialState, action: any) => {
       return produce(state, (draftState) => {
         draftState.recipes = [];
       });
+
+    case AUTH_SIGNOUT:
+      return initialState;
 
     default:
       return state;
