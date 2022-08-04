@@ -28,7 +28,7 @@ const Add = () => {
   const [error, setError] = useState(false);
   const [recipeUrl, setRecipeUrl] = useState("");
   const [name, setName] = useState("");
-  const [durationMinutes, setDurationMinutes] = useState(0);
+  const [durationMinutes, setDurationMinutes] = useState("");
   const [comment, setComment] = useState("");
   const [backgroundImageUrl, setBackgroundImageUrl] = useState("");
   const [metaData, setMetaData] = useState<MetaData>();
@@ -112,7 +112,7 @@ const Add = () => {
     if (loading) return true;
     if (recipeUrl === "") return true;
     if (name === "") return true;
-    if (durationMinutes === 0) return true;
+    if (durationMinutes === "0" || durationMinutes === "") return true;
 
     return false;
   };
