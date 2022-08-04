@@ -43,7 +43,12 @@ const Home: NextPage = () => {
         className="text-dark h-full hover:cursor-pointer"
         onClick={handleNewRecipePress}
       >
-        <Image src="/images/undraw_barbecue.svg" height={300} width={300} />
+        <Image
+          src="/images/undraw_barbecue.svg"
+          height={300}
+          width={300}
+          alt="empty image"
+        />
         <p>No recipes found yet.</p>
         <p>Go ahead and add your first recipe!</p>
       </div>

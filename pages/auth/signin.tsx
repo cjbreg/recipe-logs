@@ -8,7 +8,7 @@ import { State } from "../../src/store/reducers";
 import { useAppDispatch } from "../../src/store/store";
 import { AUTH_ERROR_DISMISS } from "../../src/store/types";
 
-const signin = () => {
+const SignIn = () => {
   const dispatch = useAppDispatch();
 
   const { error } = useSelector((state: State) => state.authData);
@@ -52,7 +52,12 @@ const signin = () => {
 
       <div className="container flex flex-col mx-auto justify-center items-center px-4 py-4 min-h-screen  w-full">
         <div className="-mt-64 text-center mb-8">
-          <Image src="/images/undraw_login.svg" height={300} width={300} />
+          <Image
+            src="/images/undraw_login.svg"
+            height={300}
+            width={300}
+            alt="signup image"
+          />
           <h1 className="-mt-12 font-semibold text-2xl text-secondary ">
             Login
           </h1>
@@ -94,4 +99,4 @@ const signin = () => {
   );
 };
 
-export default signin;
+export default SignIn;

@@ -22,7 +22,12 @@ const Favorites = () => {
   const renderEmptyState = () => {
     return (
       <div className="text-dark h-full hover:cursor-pointer">
-        <Image src="/images/undraw_barbecue.svg" height={300} width={300} />
+        <Image
+          src="/images/undraw_barbecue.svg"
+          height={300}
+          width={300}
+          alt="empty image"
+        />
         <p>No recipes found yet.</p>
         <p>Go ahead and add your first recipe!</p>
       </div>
@@ -32,7 +37,12 @@ const Favorites = () => {
   const renderNoFavoritesState = () => {
     return (
       <div className="text-dark h-full hover:cursor-pointer">
-        <Image src="/images/undraw_add_files.svg" height={300} width={300} />
+        <Image
+          src="/images/undraw_add_files.svg"
+          height={300}
+          width={300}
+          alt="empty image"
+        />
         <p>No favorite recipes found</p>
         <p>Go ahead and favorite your first recipe!</p>
       </div>
