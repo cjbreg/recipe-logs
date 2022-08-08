@@ -1,11 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
-import {
-  createUser,
-  getAllUsers,
-  getUser,
-  updateUser,
-} from "../../../prisma/user";
+import type { NextApiRequest, NextApiResponse } from "next";
+import { createUser, getUser, updateUser } from "../../../prisma/user";
 import bcrypt from "bcryptjs";
 import { authenticateJWT } from "..";
 import { TokenData } from "../../../src/models/TokenData";
@@ -15,13 +10,15 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    const user: TokenData = await authenticateJWT(req, res).catch((message) => {
-      throw { message: message, noToken: true };
-    });
+    const userData: TokenData = await authenticateJWT(req, res).catch(
+      (message) => {
+        throw { message: message, noToken: true };
+      }
+    );
 
     switch (req.method) {
       case "GET":
-        const requestUser = await getUser(user.id);
+        const requestUser = await getUser(userData.id);
         return res.status(200).json(requestUser);
 
       case "POST":
