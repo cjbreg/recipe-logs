@@ -22,13 +22,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           return res.status(400).json({ message: 'Incorrect username or password' });
         }
 
-        var passwordIsValid = bcrypt.compareSync(password, user.password);
+        const passwordIsValid = bcrypt.compareSync(password, user.password);
 
         if (!passwordIsValid) {
           return res.status(400).json({ message: 'Incorrect username or password' });
         }
 
-        var accessToken = jwt.sign({ id: user.id, email: user.email }, secretKey);
+        const accessToken = jwt.sign({ id: user.id, email: user.email }, secretKey);
 
         // @ts-ignore
         delete user.password;

@@ -1,4 +1,4 @@
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useSelector } from 'react-redux';
@@ -38,7 +38,7 @@ const SignUpButton = (props: Props) => {
         .then((res) => res.data);
       dispatch(signIn(authData));
       router.push('/');
-    } catch (error: AxiosError | any) {
+    } catch (error: any) {
       dispatch(authError(error.response));
     }
   };

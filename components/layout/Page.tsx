@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import React from 'react';
-import AuthCheck from '@Components/common/AuthCheck';
 
 const Page = ({ children }: any) => {
   return (

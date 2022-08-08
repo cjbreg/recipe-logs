@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux';
 import { State } from '../../src/store/reducers';
 import { AuthStates } from '@Models/AuthStates';
 import { NextPage } from 'next/types';
+import { Recipe } from '@Models/Recipe';
 
 const Add: NextPage = () => {
   const dispatch = useAppDispatch();
@@ -59,7 +60,7 @@ const Add: NextPage = () => {
     event.preventDefault();
     setLoading(true);
 
-    let newRecipe: any = {
+    const newRecipe: Recipe = {
       name,
       recipeUrl,
       durationMinutes: parseInt(durationMinutes) ?? 0,

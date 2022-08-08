@@ -13,7 +13,7 @@ export interface AuthState {
   error: Error;
   authState: AuthStates;
   accessToken: string | null;
-  id: number | null;
+  id: string | null;
   email: string | null;
 }
 

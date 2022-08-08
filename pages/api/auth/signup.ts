@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { createUser, getUserByEmail, verifyEmail } from '../../../prisma/user';
+import { createUser, getUserByEmail } from '../../../prisma/user';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
@@ -12,13 +12,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return res.status(405).json({ message: 'Method not allowed' });
       case 'POST':
         const { email, password } = req.body;
-        await verifySignup(req, res).catch((message) => {
+
+        await verifySignup(req).catch((message) => {
           throw { message: message, emailTaken: true };
         });
 
         const user = await createUser(email, bcrypt.hashSync(password, 8));
 
-        var accessToken = jwt.sign({ id: user.id, email: user.email }, secretKey);
+        const accessToken = jwt.sign({ id: user.id, email: user.email }, secretKey);
 
         return res.status(200).json({ user, accessToken });
       case 'PUT':
@@ -35,7 +36,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 }
 
-const verifySignup = async (req: NextApiRequest, res: NextApiResponse) => {
+const verifySignup = async (req: NextApiRequest) => {
   const { email } = req.body;
 
   const user = await getUserByEmail(email);

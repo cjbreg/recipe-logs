@@ -9,7 +9,8 @@ export type Recipe = {
   favorite: boolean;
   durationMinutes: number;
   comment?: string;
-  metaData: MetaData;
+  userId: string | null;
+  metaData?: MetaData;
   createdAt?: Date;
   updatedAt?: Date;
 };
