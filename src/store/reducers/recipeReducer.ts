@@ -44,6 +44,7 @@ export const defaultRecipeState: Recipe = {
   recipeUrl: '',
   backgroundImageUrl: '',
   favorite: false,
+  userId: '',
   durationMinutes: 0,
   comment: '',
   metaData: defaultMetaDataState
