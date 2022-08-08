@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { addRecipe } from "../../src/store/actions/recipeAction";
 import { useAppDispatch } from "../../src/store/store";
 import { useRouter } from "next/router";
-import { Image, Search } from "react-feather";
+import { Image as ImageIcon, Search } from "react-feather";
 import { MetaData } from "../../src/models/MetaData";
 import Page from "@Components/layout/Page";
 import axios from "axios";
@@ -146,7 +146,7 @@ const Add: NextPage = () => {
     }
     return (
       <div className="w-full h-48 bg-cover bg-center rounded-xl flex justify-center items-center border-2">
-        <Image size={48} className="text-primary" />
+        <ImageIcon size={48} className="text-primary" />
       </div>
     );
   };
