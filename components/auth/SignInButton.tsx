@@ -23,6 +23,7 @@ const SignInButton = (props: Props) => {
   const handleLogin = async (event: any) => {
     event.preventDefault();
     dispatch(startAuth());
+
     try {
       const authData = await axios
         .post('/api/auth/signin', { email, password })
