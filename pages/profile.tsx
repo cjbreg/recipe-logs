@@ -21,7 +21,7 @@ const Profile: NextPage = () => {
     };
 
     checkAuthState();
-  }, []);
+  }, [authState]);
 
   const handleSignOut = () => {
     dispatch(signOut());
