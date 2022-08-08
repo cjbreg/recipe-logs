@@ -1,6 +1,6 @@
-import React from "react";
-import * as Icon from "react-feather";
-import { CategoryEnum } from "../../src/models/CategoryEnum";
+import React from 'react';
+import * as Icon from 'react-feather';
+import { CategoryEnum } from '../../src/models/CategoryEnum';
 
 type Props = {
   category: string;

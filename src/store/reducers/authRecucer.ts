@@ -1,12 +1,12 @@
-import produce from "immer";
-import { AuthStates } from "../../models/AuthStates";
+import produce from 'immer';
+import { AuthStates } from '../../models/AuthStates';
 import {
   AUTH_ERROR,
   AUTH_ERROR_DISMISS,
   AUTH_SIGNIN,
   AUTH_SIGNOUT,
-  AUTH_START_FLOW,
-} from "../types";
+  AUTH_START_FLOW
+} from '../types';
 
 export interface AuthState {
   loading: boolean;
@@ -25,12 +25,12 @@ type Error = {
 export const initialState: AuthState = {
   loading: false,
   error: {
-    enabled: false,
+    enabled: false
   },
   authState: AuthStates.SIGNED_OUT,
   accessToken: null,
   id: null,
-  email: null,
+  email: null
 };
 
 const authReducer = (state = initialState, action: any) => {
@@ -39,7 +39,7 @@ const authReducer = (state = initialState, action: any) => {
       return produce(state, (draftState) => {
         draftState.loading = true;
         draftState.error = {
-          enabled: false,
+          enabled: false
         };
       });
     }
@@ -51,7 +51,7 @@ const authReducer = (state = initialState, action: any) => {
         draftState.id = action.payload.user.id;
         draftState.email = action.payload.user.email;
         draftState.error = {
-          enabled: false,
+          enabled: false
         };
       });
 
@@ -60,7 +60,7 @@ const authReducer = (state = initialState, action: any) => {
         console.log(action.payload);
 
         draftState.error = {
-          ...action.payload.data,
+          ...action.payload.data
         };
         draftState.error.enabled = true;
         draftState.loading = false;
@@ -69,7 +69,7 @@ const authReducer = (state = initialState, action: any) => {
     case AUTH_ERROR_DISMISS:
       return produce(state, (draftState) => {
         draftState.error = {
-          enabled: false,
+          enabled: false
         };
         draftState.loading = false;
       });

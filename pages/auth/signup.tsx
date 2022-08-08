@@ -1,27 +1,26 @@
-import Head from "next/head";
-import React, { useState } from "react";
-import SignUpButton from "@Components/auth/SignUpButton";
-import BackButtonComponent from "@Components/common/BackButtonComponent";
-import Image from "next/image";
-import { useSelector } from "react-redux";
-import { State } from "../../src/store/reducers";
-import { useAppDispatch } from "../../src/store/store";
-import { AUTH_ERROR_DISMISS } from "../../src/store/types";
-import { NextPage } from "next/types";
+import Head from 'next/head';
+import React, { useState } from 'react';
+import SignUpButton from '@Components/auth/SignUpButton';
+import BackButtonComponent from '@Components/common/BackButtonComponent';
+import Image from 'next/image';
+import { useSelector } from 'react-redux';
+import { State } from '../../src/store/reducers';
+import { useAppDispatch } from '../../src/store/store';
+import { AUTH_ERROR_DISMISS } from '../../src/store/types';
+import { NextPage } from 'next/types';
 
 const SignUp: NextPage = () => {
   const dispatch = useAppDispatch();
 
   const { error } = useSelector((state: State) => state.authData);
 
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [verifyPassword, setVerifyPassword] = useState<string>("");
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [verifyPassword, setVerifyPassword] = useState<string>('');
 
   const handleEmailChange = (event: any) => setEmail(event.target.value);
   const handlePasswordChange = (event: any) => setPassword(event.target.value);
-  const handleVerifyPasswordChange = (event: any) =>
-    setVerifyPassword(event.target.value);
+  const handleVerifyPasswordChange = (event: any) => setVerifyPassword(event.target.value);
 
   const onBackPress = () => {
     dispatch({ type: AUTH_ERROR_DISMISS });
@@ -38,7 +37,7 @@ const SignUp: NextPage = () => {
     return (
       <div>
         <span className="text-red-500 text-xs">
-          {error.message ?? "Something went wrong, pleasy try again"}
+          {error.message ?? 'Something went wrong, pleasy try again'}
         </span>
       </div>
     );
@@ -56,15 +55,8 @@ const SignUp: NextPage = () => {
 
       <div className="container flex flex-col mx-auto justify-center items-center px-4 py-4 min-h-screen  w-full">
         <div className="-mt-40 text-center mb-8">
-          <Image
-            src="/images/undraw_signup.svg"
-            height={300}
-            width={300}
-            alt="signup image"
-          />
-          <h1 className=" font-semibold text-2xl text-secondary ">
-            Create Account
-          </h1>
+          <Image src="/images/undraw_signup.svg" height={300} width={300} alt="signup image" />
+          <h1 className=" font-semibold text-2xl text-secondary ">Create Account</h1>
         </div>
         <form className="px-16 w-full">
           <div className="pb-4 w-full">

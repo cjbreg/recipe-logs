@@ -1,7 +1,7 @@
-import React from "react";
-import { Search } from "react-feather";
-import { availableCategories } from "../../src/shared/staticData";
-import CategoryItemComponent from "./CategoryItemComponent";
+import React from 'react';
+import { Search } from 'react-feather';
+import { availableCategories } from '../../src/shared/staticData';
+import CategoryItemComponent from './CategoryItemComponent';
 
 type Props = {
   queryChange: any;
@@ -35,8 +35,7 @@ const FilterComponent = (props: Props) => {
         </div>
         <button
           type="submit"
-          className="p-2.5  text-sm font-medium text-dark bg-primary rounded-r-lg border-0   focus:ring-0 focus:outline-none focus:ring-none "
-        >
+          className="p-2.5  text-sm font-medium text-dark bg-primary rounded-r-lg border-0   focus:ring-0 focus:outline-none focus:ring-none ">
           <Search />
         </button>
       </div>

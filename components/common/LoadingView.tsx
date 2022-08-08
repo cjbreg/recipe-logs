@@ -1,5 +1,5 @@
-import React from "react";
-import { Loader } from "react-feather";
+import React from 'react';
+import { Loader } from 'react-feather';
 
 const LoadingView = () => {
   return (

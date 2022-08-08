@@ -1,4 +1,4 @@
-import { prisma } from "../prisma";
+import { prisma } from '../prisma';
 
 export const getAllUsers = async () => {
   const users = await prisma.user.findMany({});
@@ -7,7 +7,7 @@ export const getAllUsers = async () => {
 
 export const getUser = async (id: string) => {
   const user = await prisma.user.findUnique({
-    where: { id },
+    where: { id }
   });
   return user;
 };
@@ -16,8 +16,8 @@ export const createUser = async (email: string, password: string) => {
   const user = await prisma.user.create({
     data: {
       email,
-      password,
-    },
+      password
+    }
   });
   return user;
 };
@@ -25,11 +25,11 @@ export const createUser = async (email: string, password: string) => {
 export const updateUser = async (id: string, updateData: any) => {
   const user = await prisma.user.update({
     where: {
-      id,
+      id
     },
     data: {
-      ...updateData,
-    },
+      ...updateData
+    }
   });
   return user;
 };
@@ -37,15 +37,15 @@ export const updateUser = async (id: string, updateData: any) => {
 export const deleteUser = async (id: string) => {
   const user = await prisma.user.delete({
     where: {
-      id,
-    },
+      id
+    }
   });
   return user;
 };
 
 export const getUserByEmail = async (email: string) => {
   const user = await prisma.user.findUnique({
-    where: { email },
+    where: { email }
   });
   return user;
 };

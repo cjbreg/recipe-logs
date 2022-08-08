@@ -1,21 +1,21 @@
-import Head from "next/head";
-import React, { useState } from "react";
-import BackButtonComponent from "@Components/common/BackButtonComponent";
-import Image from "next/image";
-import SignInButton from "@Components/auth/SignInButton";
-import { useSelector } from "react-redux";
-import { State } from "../../src/store/reducers";
-import { useAppDispatch } from "../../src/store/store";
-import { AUTH_ERROR_DISMISS } from "../../src/store/types";
-import { NextPage } from "next/types";
+import Head from 'next/head';
+import React, { useState } from 'react';
+import BackButtonComponent from '@Components/common/BackButtonComponent';
+import Image from 'next/image';
+import SignInButton from '@Components/auth/SignInButton';
+import { useSelector } from 'react-redux';
+import { State } from '../../src/store/reducers';
+import { useAppDispatch } from '../../src/store/store';
+import { AUTH_ERROR_DISMISS } from '../../src/store/types';
+import { NextPage } from 'next/types';
 
 const SignIn: NextPage = () => {
   const dispatch = useAppDispatch();
 
   const { error } = useSelector((state: State) => state.authData);
 
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
 
   const handleEmailChange = (event: any) => setEmail(event.target.value);
   const handlePasswordChange = (event: any) => setPassword(event.target.value);
@@ -35,7 +35,7 @@ const SignIn: NextPage = () => {
     return (
       <div>
         <span className="text-red-500 text-xs">
-          {error.message ?? "Something went wrong, pleasy try again"}
+          {error.message ?? 'Something went wrong, pleasy try again'}
         </span>
       </div>
     );
@@ -53,15 +53,8 @@ const SignIn: NextPage = () => {
 
       <div className="container flex flex-col mx-auto justify-center items-center px-4 py-4 min-h-screen  w-full">
         <div className="-mt-64 text-center mb-8">
-          <Image
-            src="/images/undraw_login.svg"
-            height={300}
-            width={300}
-            alt="signup image"
-          />
-          <h1 className="-mt-12 font-semibold text-2xl text-secondary ">
-            Login
-          </h1>
+          <Image src="/images/undraw_login.svg" height={300} width={300} alt="signup image" />
+          <h1 className="-mt-12 font-semibold text-2xl text-secondary ">Login</h1>
         </div>
         <form className="px-16 w-full">
           <div className="pb-4 w-full">
@@ -87,11 +80,7 @@ const SignIn: NextPage = () => {
             />
           </div>
           <div className="w-full mx-auto flex justify-center">
-            <SignInButton
-              email={email}
-              password={password}
-              isValid={isValid()}
-            />
+            <SignInButton email={email} password={password} isValid={isValid()} />
           </div>
         </form>
         {renderError()}

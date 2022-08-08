@@ -1,5 +1,5 @@
-import React from "react";
-import { Trash } from "react-feather";
+import React from 'react';
+import { Trash } from 'react-feather';
 
 const RemoveButtonComponent = () => {
   return (

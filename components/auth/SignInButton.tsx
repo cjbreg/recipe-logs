@@ -1,14 +1,10 @@
-import axios, { AxiosError } from "axios";
-import { useRouter } from "next/router";
-import React from "react";
-import { useSelector } from "react-redux";
-import {
-  authError,
-  signIn,
-  startAuth,
-} from "../../src/store/actions/authAction";
-import { State } from "../../src/store/reducers";
-import { useAppDispatch } from "../../src/store/store";
+import axios, { AxiosError } from 'axios';
+import { useRouter } from 'next/router';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { authError, signIn, startAuth } from '../../src/store/actions/authAction';
+import { State } from '../../src/store/reducers';
+import { useAppDispatch } from '../../src/store/store';
 
 interface Props {
   isValid: boolean;
@@ -29,10 +25,10 @@ const SignInButton = (props: Props) => {
     dispatch(startAuth());
     try {
       const authData = await axios
-        .post("/api/auth/signin", { email, password })
+        .post('/api/auth/signin', { email, password })
         .then((res) => res.data);
       dispatch(signIn(authData));
-      router.push("/");
+      router.push('/');
     } catch (error: AxiosError | any) {
       dispatch(authError(error.response));
     }
@@ -43,9 +39,8 @@ const SignInButton = (props: Props) => {
       disabled={!isValid}
       onClick={handleLogin}
       type="submit"
-      className="disabled:bg-gray-300 px-8 py-2 font-medium bg-secondary text-white uppercase rounded hover:bg-green-500 transition duration-150"
-    >
-      {loading ? <span className="animate-pulse">Loading...</span> : "Sign In"}
+      className="disabled:bg-gray-300 px-8 py-2 font-medium bg-secondary text-white uppercase rounded hover:bg-green-500 transition duration-150">
+      {loading ? <span className="animate-pulse">Loading...</span> : 'Sign In'}
     </button>
   );
 };
