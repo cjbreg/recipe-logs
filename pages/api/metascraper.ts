@@ -8,8 +8,6 @@ import metascraperTitle from "metascraper-title";
 import metascraperAuthor from "metascraper-author";
 import metascraperLogo from "metascraper-logo";
 import metascraperPublisher from "metascraper-publisher";
-import { resolve } from "path";
-import { resolveSoa } from "dns";
 
 const metascraper = createMetascraper([
   metascraperDescription(),
