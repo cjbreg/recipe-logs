@@ -4,10 +4,14 @@ import { Provider } from 'react-redux';
 import { store, wrapper, persistor } from '../src/store/store';
 import { PersistGate } from 'redux-persist/integration/react';
 import Head from 'next/head';
+import { useState } from 'react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+  const [queryClient] = useState(() => new QueryClient());
+
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <Head>
         <meta charSet="utf-8" />
         <meta name="application-name" content="Recipe Logs" />
@@ -38,7 +42,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
           <Component {...pageProps} />
         </PersistGate>
       </Provider>
-    </>
+    </QueryClientProvider>
   );
 }
 
