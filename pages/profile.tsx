@@ -8,10 +8,13 @@ import { LogOut } from 'react-feather';
 import { AuthStates } from '../src/models/AuthStates';
 import { useRouter } from 'next/router';
 import { NextPage } from 'next/types';
+import { useCookies } from 'react-cookie';
 
 const Profile: NextPage = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
+
+  const [cookies, setCookie, removeCookie] = useCookies();
 
   const { authState, email } = useSelector((state: State) => state.authData);
 
@@ -24,6 +27,7 @@ const Profile: NextPage = () => {
   }, [authState]);
 
   const handleSignOut = () => {
+    removeCookie('auth');
     dispatch(signOut());
   };
 
