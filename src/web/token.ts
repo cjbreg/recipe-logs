@@ -20,8 +20,7 @@ export const verifyToken = async (req: IncomingMessage & { cookies: NextApiReque
     const userData = jwt.verify(token, SECRET_KEY);
     if (!userData) return undefined;
 
-    const user = await getUserByEmail(userData.email);
-    return user;
+    return userData;
   } catch (error) {
     return undefined;
   }
