@@ -1,13 +1,13 @@
-import React, { useEffect } from "react";
-import Main from "@Components/layout/Main";
-import { useSelector } from "react-redux";
-import { State } from "../src/store/reducers";
-import { useAppDispatch } from "../src/store/store";
-import { signOut } from "../src/store/actions/authAction";
-import { LogOut } from "react-feather";
-import { AuthStates } from "../src/models/AuthStates";
-import { useRouter } from "next/router";
-import { NextPage } from "next/types";
+import React, { useEffect } from 'react';
+import Main from '@Components/layout/Main';
+import { useSelector } from 'react-redux';
+import { State } from '../src/store/reducers';
+import { useAppDispatch } from '../src/store/store';
+import { signOut } from '../src/store/actions/authAction';
+import { LogOut } from 'react-feather';
+import { AuthStates } from '../src/models/AuthStates';
+import { useRouter } from 'next/router';
+import { NextPage } from 'next/types';
 
 const Profile: NextPage = () => {
   const dispatch = useAppDispatch();
@@ -17,21 +17,21 @@ const Profile: NextPage = () => {
 
   useEffect(() => {
     const checkAuthState = () => {
-      if (authState === AuthStates.SIGNED_OUT) router.push("/auth");
+      if (authState === AuthStates.SIGNED_OUT) router.push('/auth');
     };
 
     checkAuthState();
-  }, []);
+  }, [authState]);
 
   const handleSignOut = () => {
     dispatch(signOut());
   };
 
   const navigateSignup = () => {
-    router.push("/auth/signup");
+    router.push('/auth/signup');
   };
   const navigateSignin = () => {
-    router.push("/auth/signin");
+    router.push('/auth/signin');
   };
 
   const renderAuthorizedView = () => (
@@ -59,8 +59,7 @@ const Profile: NextPage = () => {
         <button
           onClick={navigateSignin}
           type="submit"
-          className="disabled:bg-gray-300 w-48 py-3 font-medium bg-secondary text-white uppercase rounded-xl hover:bg-green-500 transition duration-150"
-        >
+          className="disabled:bg-gray-300 w-48 py-3 font-medium bg-secondary text-white uppercase rounded-xl hover:bg-green-500 transition duration-150">
           Login
         </button>
         <div className="flex relative py-2 items-center">
@@ -71,8 +70,7 @@ const Profile: NextPage = () => {
         <button
           onClick={navigateSignup}
           type="submit"
-          className="disabled:bg-gray-300 w-48 py-3 font-medium bg-secondary text-white uppercase rounded-xl hover:bg-green-500 transition duration-150"
-        >
+          className="disabled:bg-gray-300 w-48 py-3 font-medium bg-secondary text-white uppercase rounded-xl hover:bg-green-500 transition duration-150">
           Sign up
         </button>
       </div>
@@ -81,9 +79,7 @@ const Profile: NextPage = () => {
 
   return (
     <Main>
-      {authState === AuthStates.SIGNED_IN
-        ? renderAuthorizedView()
-        : renderUnauthorizedView()}
+      {authState === AuthStates.SIGNED_IN ? renderAuthorizedView() : renderUnauthorizedView()}
     </Main>
   );
 };

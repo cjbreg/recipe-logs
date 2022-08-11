@@ -1,35 +1,25 @@
-import { TokenData } from "@Models/TokenData";
-import type { NextApiRequest, NextApiResponse } from "next";
-import { authenticateJWT } from "..";
-import { createRecipe, deleteRecipe, getRecipes } from "../../../prisma/recipe";
+import { TokenData } from '@Models/TokenData';
+import type { NextApiRequest, NextApiResponse } from 'next';
+import { authenticateJWT } from '..';
+import { createRecipe, deleteRecipe, getRecipes } from '../../../prisma/recipe';
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  const userData: TokenData = await authenticateJWT(req, res).catch((message) => {
+    throw { message: message, noToken: true };
+  });
+
   try {
     switch (req.method) {
-      case "GET":
-        const currentUser: TokenData = await authenticateJWT(req, res).catch(
-          (message) => {
-            throw { message: message, noToken: true };
-          }
-        );
-        const recipes = await getRecipes(currentUser.id);
+      case 'GET':
+        const recipes = await getRecipes(userData.id);
         return res.status(200).json(recipes);
-      case "POST":
-        const user: TokenData = await authenticateJWT(req, res).catch(
-          (message) => {
-            throw { message: message, noToken: true };
-          }
-        );
-
+      case 'POST':
         const { newRecipe, metaData } = req.body;
-        const recipe = await createRecipe(newRecipe, metaData, user.id);
+        const recipe = await createRecipe(newRecipe, metaData, userData.id);
         return res.status(200).json(recipe);
-      case "PUT":
+      case 'PUT':
         return;
-      case "DELETE":
+      case 'DELETE':
         const { recipeId } = req.body;
         const removedRecipe = await deleteRecipe(recipeId);
         return res.status(200).json(removedRecipe);

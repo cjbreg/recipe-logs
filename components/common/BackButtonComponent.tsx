@@ -1,6 +1,6 @@
-import { useRouter } from "next/router";
-import React from "react";
-import { ArrowLeft } from "react-feather";
+import { useRouter } from 'next/router';
+import React from 'react';
+import { ArrowLeft } from 'react-feather';
 
 type Props = {
   onPress?: () => void;
@@ -16,8 +16,7 @@ const BackButtonComponent = (props: Props) => {
   return (
     <div
       className="bg-opacity-60 bg-blur p-3 bg-dark rounded-xl backdrop-blur "
-      onClick={handleButtonPress}
-    >
+      onClick={handleButtonPress}>
       <div className="filter-none text-white">
         <ArrowLeft />
       </div>

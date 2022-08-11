@@ -1,8 +1,8 @@
-import { GET_SAMPLE, SAMPLE_ERROR } from "../types";
+import { GET_SAMPLE, SAMPLE_ERROR } from '../types';
 
 const initialState = {
   sample: [],
-  loading: true,
+  loading: true
 };
 
 const sampleReducer = (state = initialState, action: any) => {
@@ -11,13 +11,13 @@ const sampleReducer = (state = initialState, action: any) => {
       return {
         ...state,
         sample: action.payload,
-        loading: false,
+        loading: false
       };
 
     case SAMPLE_ERROR:
       return {
         loading: false,
-        error: action.payload,
+        error: action.payload
       };
 
     default:

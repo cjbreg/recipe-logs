@@ -1,5 +1,5 @@
-import produce from "immer";
-import { Recipe } from "../../models/Recipe";
+import produce from 'immer';
+import { Recipe } from '../../models/Recipe';
 import {
   AUTH_SIGNOUT,
   GET_SAMPLE,
@@ -8,10 +8,10 @@ import {
   RECIPE_ERROR,
   RECIPE_REMOVE_RECIPE,
   RECIPE_RESET_RECIPES,
-  RECIPE_TOGGLE_FAVORITE,
-} from "../types";
-import { remove } from "lodash";
-import { MetaData } from "@Models/MetaData";
+  RECIPE_TOGGLE_FAVORITE
+} from '../types';
+import { remove } from 'lodash';
+import { MetaData } from '@Models/MetaData';
 
 export interface RecipeState {
   recipes: Recipe[];
@@ -27,26 +27,27 @@ const initialState: RecipeState = {
   recipes: [],
   loading: false,
   error: {
-    enabled: false,
-  },
+    enabled: false
+  }
 };
 
 export const defaultMetaDataState: MetaData = {
-  id: "",
-  image: "",
-  publisher: "",
-  title: "",
+  id: '',
+  image: '',
+  publisher: '',
+  title: ''
 };
 
 export const defaultRecipeState: Recipe = {
-  id: "",
-  name: "",
-  recipeUrl: "",
-  backgroundImageUrl: "",
+  id: '',
+  name: '',
+  recipeUrl: '',
+  backgroundImageUrl: '',
   favorite: false,
+  userId: '',
   durationMinutes: 0,
-  comment: "",
-  metaData: defaultMetaDataState,
+  comment: '',
+  metaData: defaultMetaDataState
 };
 
 const recipeReducer = (state = initialState, action: any) => {
@@ -55,7 +56,7 @@ const recipeReducer = (state = initialState, action: any) => {
       return {
         ...state,
         sample: action.payload,
-        loading: false,
+        loading: false
       };
 
     case RECIPE_TOGGLE_FAVORITE:
@@ -86,7 +87,7 @@ const recipeReducer = (state = initialState, action: any) => {
     case RECIPE_ERROR:
       return produce(state, (draftState) => {
         draftState.error = {
-          ...action.payload,
+          ...action.payload
         };
         draftState.error.enabled = true;
         draftState.loading = false;

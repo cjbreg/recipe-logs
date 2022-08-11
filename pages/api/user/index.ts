@@ -1,38 +1,30 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
-import {
-  createUser,
-  getAllUsers,
-  getUser,
-  updateUser,
-} from "../../../prisma/user";
-import bcrypt from "bcryptjs";
-import { authenticateJWT } from "..";
-import { TokenData } from "../../../src/models/TokenData";
+import type { NextApiRequest, NextApiResponse } from 'next';
+import { createUser, getUser, updateUser } from '../../../prisma/user';
+import bcrypt from 'bcryptjs';
+import { authenticateJWT } from '..';
+import { TokenData } from '../../../src/models/TokenData';
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const user: TokenData = await authenticateJWT(req, res).catch((message) => {
+    const userData: TokenData = await authenticateJWT(req, res).catch((message) => {
       throw { message: message, noToken: true };
     });
 
     switch (req.method) {
-      case "GET":
-        const requestUser = await getUser(user.id);
+      case 'GET':
+        const requestUser = await getUser(userData.id);
         return res.status(200).json(requestUser);
 
-      case "POST":
+      case 'POST':
         const { email, password } = req.body;
         const postUser = await createUser(email, bcrypt.hashSync(password, 8));
         return res.status(200).json(postUser);
-      case "PUT":
+      case 'PUT':
         const { id, ...updateData } = req.body;
         const newUser = await updateUser(id, updateData);
         return res.status(200).json(newUser);
-      case "DELETE":
+      case 'DELETE':
         return;
 
       default:

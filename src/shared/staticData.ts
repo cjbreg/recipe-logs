@@ -1,8 +1,1 @@
-export const availableCategories = [
-  "Vegan",
-  "Fish",
-  "Pasta",
-  "Salad",
-  "Chicken",
-  "Desert",
-];
+export const availableCategories = ['Vegan', 'Fish', 'Pasta', 'Salad', 'Chicken', 'Desert'];

@@ -1,21 +1,18 @@
-import React, { useEffect, useState } from "react";
-import FavoriteIconComponent from "@Components/recipes/FavoriteIconComponent";
-import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
-import { useAppDispatch } from "../../src/store/store";
-import {
-  removeRecipe,
-  toggleFavorite,
-} from "../../src/store/actions/recipeAction";
-import { defaultRecipeState } from "../../src/store/reducers/recipeReducer";
-import BackButtonComponent from "@Components/common/BackButtonComponent";
-import RemoveButtonComponent from "@Components/common/RemoveButtonComponent";
-import { getCleanString } from "../../src/shared/helpers";
-import Head from "next/head";
-import { Clock, ExternalLink, PenTool } from "react-feather";
-import { AuthStates } from "@Models/AuthStates";
-import axios from "axios";
-import { NextPage } from "next/types";
+import React, { useEffect, useState } from 'react';
+import FavoriteIconComponent from '@Components/recipes/FavoriteIconComponent';
+import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
+import { useAppDispatch } from '../../src/store/store';
+import { removeRecipe, toggleFavorite } from '../../src/store/actions/recipeAction';
+import { defaultRecipeState } from '../../src/store/reducers/recipeReducer';
+import BackButtonComponent from '@Components/common/BackButtonComponent';
+import RemoveButtonComponent from '@Components/common/RemoveButtonComponent';
+import { getCleanString } from '../../src/shared/helpers';
+import Head from 'next/head';
+import { Clock, ExternalLink, PenTool } from 'react-feather';
+import { AuthStates } from '@Models/AuthStates';
+import axios from 'axios';
+import { NextPage } from 'next/types';
 
 const Index: NextPage = () => {
   const router = useRouter();
@@ -29,16 +26,14 @@ const Index: NextPage = () => {
 
   useEffect(() => {
     const checkAuthState = () => {
-      if (authState === AuthStates.SIGNED_OUT) router.push("/auth");
+      if (authState === AuthStates.SIGNED_OUT) router.push('/auth');
     };
 
     checkAuthState();
   }, []);
 
   const recipe = useSelector(
-    (state: any) =>
-      state.recipeData.recipes.find((x: any) => x.id === id) ??
-      defaultRecipeState
+    (state: any) => state.recipeData.recipes.find((x: any) => x.id === id) ?? defaultRecipeState
   );
 
   const handleFavoritePress = () => {
@@ -47,20 +42,18 @@ const Index: NextPage = () => {
 
   const handleRemovePress = async () => {
     try {
-      await axios
-        .delete("/api/recipe", { data: { recipeId: id } })
-        .catch((err) => {
-          throw err;
-        });
+      await axios.delete('/api/recipe', { data: { recipeId: id } }).catch((err) => {
+        throw err;
+      });
 
       dispatch(removeRecipe(recipe));
-      router.push("/");
+      router.push('/');
     } catch (error) {
       setError(true);
-      console.log("ERROR: ", error);
+      console.log('ERROR: ', error);
     }
     dispatch(removeRecipe(recipe));
-    router.push("/");
+    router.push('/');
   };
 
   const renderDuration = () => {
@@ -96,8 +89,8 @@ const Index: NextPage = () => {
     return (
       <div className="flex flex-col  text-dark">
         <p className=" font-medium">Comment</p>
-        <p className={recipe.comment ? "" : "opacity-60"}>
-          {recipe.comment ?? "No comment available"}
+        <p className={recipe.comment ? '' : 'opacity-60'}>
+          {recipe.comment ?? 'No comment available'}
         </p>
       </div>
     );
@@ -105,7 +98,7 @@ const Index: NextPage = () => {
 
   const handleNavigateToRecipe = (event: any) => {
     event.preventDefault();
-    window.open(recipe.recipeUrl, "_blank", "noopener,noreferrer");
+    window.open(recipe.recipeUrl, '_blank', 'noopener,noreferrer');
   };
 
   const renderpPage = () => {
@@ -118,25 +111,20 @@ const Index: NextPage = () => {
         <div className="absolute left-0 top-0 m-4 pt-8">
           <BackButtonComponent />
         </div>
-        <div
-          className="absolute right-0 top-0 m-4 pt-8"
-          onClick={handleRemovePress}
-        >
+        <div className="absolute right-0 top-0 m-4 pt-8" onClick={handleRemovePress}>
           <RemoveButtonComponent />
         </div>
         <div
           className="w-full h-64 bg-cover bg-center"
           style={{
-            backgroundImage: `url(${recipe.backgroundImageUrl} )`,
+            backgroundImage: `url(${recipe.backgroundImageUrl} )`
           }}
         />
         <div className="container mx-auto px-4 py-4 -mt-8 rounded-t-3xl bg-primary ">
           <div className=" flex flew-row justify-between">
             <div>
               <h1 className="text-dark text-3xl font-bold">{recipe.name}</h1>
-              <h4 className="text-dark opacity-60 mt-2">
-                {getCleanString(recipe.recipeUrl)}
-              </h4>
+              <h4 className="text-dark opacity-60 mt-2">{getCleanString(recipe.recipeUrl)}</h4>
             </div>
             <div onClick={handleFavoritePress}>
               <FavoriteIconComponent favorite={recipe.favorite} notBlurred />
@@ -152,8 +140,7 @@ const Index: NextPage = () => {
             <button
               onClick={handleNavigateToRecipe}
               type="submit"
-              className=" text-white bg-secondary hover:bg-green-500 flex justify-center focus:ring-4 focus:outline-none focus:ring-green-200  rounded-lg text-base w-full sm:w-auto px-5 py-2.5 text-center 0"
-            >
+              className=" text-white bg-secondary hover:bg-green-500 flex justify-center focus:ring-4 focus:outline-none focus:ring-green-200  rounded-lg text-base w-full sm:w-auto px-5 py-2.5 text-center 0">
               <div className="flex items-center">
                 <p className="mr-2 ">Open</p> <ExternalLink />
               </div>
