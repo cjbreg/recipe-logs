@@ -1,4 +1,4 @@
-import type { NextPage } from 'next';
+import type { GetServerSidePropsContext, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -9,12 +9,12 @@ import RecipeComponent from '@Components/recipes/RecipeComponent';
 import { Recipe } from '../src/models/Recipe';
 import Image from 'next/image';
 import { State } from 'src/store/reducers';
-import { AuthStates } from '@Models/AuthStates';
 import axios from 'axios';
 import { useAppDispatch } from 'src/store/store';
 import { addRecipes } from 'src/store/actions/recipeAction';
 import LoadingView from '@Components/common/LoadingView';
 import { RefreshCw } from 'react-feather';
+import { verifyToken } from 'src/web/token';
 
 const Home: NextPage = () => {
   const router = useRouter();
@@ -27,15 +27,8 @@ const Home: NextPage = () => {
   const [query, setQuery] = useState('');
 
   useEffect(() => {
-    const checkAuthState = () => {
-      if (authState === AuthStates.SIGNED_OUT) router.push('/auth');
-    };
-    if (authState === AuthStates.SIGNED_IN && recipes.length === 0) {
-      getRecipes();
-    }
-    checkAuthState();
-  }, [authState]);
-
+    getRecipes();
+  }, []);
   const handleNewRecipePress = () => {
     router.push('/recipe/add');
   };
@@ -104,3 +97,10 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const user = await verifyToken(context.req);
+  return {
+    props: {}
+  };
+}
