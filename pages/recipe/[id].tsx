@@ -38,9 +38,9 @@ const Index: NextPage = () => {
 
       dispatch(removeRecipe(recipe));
       router.push('/');
-    } catch (error) {
+    } catch (err) {
       setError(true);
-      console.log('ERROR: ', error);
+      console.log('ERROR: ', err);
     }
     dispatch(removeRecipe(recipe));
     router.push('/');

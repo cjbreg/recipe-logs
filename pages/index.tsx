@@ -21,7 +21,6 @@ const Home: NextPage = () => {
   const dispatch = useAppDispatch();
 
   const { recipes } = useSelector((state: State) => state.recipeData);
-  const { authState, accessToken } = useSelector((state: any) => state.authData);
 
   const [loading, setLoading] = useState(false);
   const [query, setQuery] = useState('');
@@ -35,10 +34,7 @@ const Home: NextPage = () => {
 
   const getRecipes = async () => {
     setLoading(true);
-    const axiosConfig = {
-      headers: { Authorization: `Bearer ${accessToken}` }
-    };
-    const data = await axios.get('/api/recipe', axiosConfig);
+    const data = await axios.get('/api/recipe');
     dispatch(addRecipes(data));
     setLoading(false);
     try {

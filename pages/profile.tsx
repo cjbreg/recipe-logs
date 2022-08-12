@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Main from '@Components/layout/Main';
 import { useSelector } from 'react-redux';
 import { State } from '../src/store/reducers';
