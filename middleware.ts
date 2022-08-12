@@ -4,9 +4,13 @@ import { NextRequest, NextResponse } from 'next/server';
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
   const authCookie: any = request.cookies.get('auth');
+
   if (authCookie === undefined) {
     return NextResponse.redirect(new URL('/auth', request.url));
   }
+  const { token } = JSON.parse(authCookie);
+
+  if (!token) return NextResponse.redirect(new URL('/auth', request.url));
 
   return NextResponse.next();
 }

@@ -8,27 +8,19 @@ import Page from '@Components/layout/Page';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { State } from '../../src/store/reducers';
-import { AuthStates } from '@Models/AuthStates';
-import { NextPage } from 'next/types';
+import { GetServerSidePropsContext, NextPage } from 'next/types';
 import { Recipe } from '@Models/Recipe';
+import { verifyToken } from 'src/web/token';
 
 const Add: NextPage = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
-  const { id, authState, accessToken } = useSelector((state: State) => state.authData);
+  const { id, accessToken } = useSelector((state: State) => state.authData);
 
   const axiosConfig = {
     headers: { Authorization: `Bearer ${accessToken}` }
   };
-
-  useEffect(() => {
-    const checkAuthState = () => {
-      if (authState === AuthStates.SIGNED_OUT) router.push('/auth');
-    };
-
-    checkAuthState();
-  }, []);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -270,3 +262,12 @@ const Add: NextPage = () => {
 };
 
 export default Add;
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const user = await verifyToken(context.req);
+  console.log(user);
+
+  return {
+    props: {}
+  };
+}
