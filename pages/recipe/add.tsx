@@ -265,8 +265,15 @@ export default Add;
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const user = await verifyToken(context.req);
-  console.log(user);
-
+  if (!user) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/auth'
+      },
+      props: {}
+    };
+  }
   return {
     props: {}
   };
