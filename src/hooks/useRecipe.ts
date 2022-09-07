@@ -1,7 +1,8 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
 type Recipe = {
+  id: string;
   name: string;
   recipeUrl: string;
   durationMinutes: number;
@@ -17,8 +18,16 @@ export const useUploadRecipe = () => {
   return useMutation(createRecipe);
 };
 
+export const useToggleFavorite = () => {
+  return useMutation(toggleFavorite);
+};
+
 const createRecipe = async (newRecipe: any) => {
   return await axios.post('/api/recipe', newRecipe);
+};
+
+const toggleFavorite = async (params: { recipeId: string; favorite: boolean }) => {
+  return await axios.put('/api/recipe/favorite', { params });
 };
 
 export const useFetchRecipes = () => {
