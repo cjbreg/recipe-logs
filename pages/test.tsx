@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useFetchRecipes } from 'src/hooks/useRecipe';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { State } from 'src/store/reducers';
 
 const Test = () => {
