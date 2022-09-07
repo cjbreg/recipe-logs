@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Main from '@Components/layout/Main';
 import { useSelector } from 'react-redux';
 import { State } from '../src/store/reducers';
@@ -7,23 +7,20 @@ import { signOut } from '../src/store/actions/authAction';
 import { LogOut } from 'react-feather';
 import { AuthStates } from '../src/models/AuthStates';
 import { useRouter } from 'next/router';
-import { NextPage } from 'next/types';
+import { GetServerSidePropsContext, NextPage } from 'next/types';
+import { useCookies } from 'react-cookie';
+import { verifyToken } from 'src/web/token';
 
 const Profile: NextPage = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
+  const [cookies, setCookie, removeCookie] = useCookies();
+
   const { authState, email } = useSelector((state: State) => state.authData);
 
-  useEffect(() => {
-    const checkAuthState = () => {
-      if (authState === AuthStates.SIGNED_OUT) router.push('/auth');
-    };
-
-    checkAuthState();
-  }, [authState]);
-
   const handleSignOut = () => {
+    removeCookie('auth');
     dispatch(signOut());
   };
 
@@ -85,3 +82,19 @@ const Profile: NextPage = () => {
 };
 
 export default Profile;
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const user = await verifyToken(context.req);
+  if (!user) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/auth'
+      },
+      props: {}
+    };
+  }
+  return {
+    props: {}
+  };
+}

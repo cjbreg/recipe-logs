@@ -3,14 +3,16 @@ import jwt from 'jsonwebtoken';
 import { TokenData } from '../../src/models/TokenData';
 
 export const authenticateJWT = async (req: NextApiRequest, res: NextApiResponse) => {
-  const authHeader = req.headers.authorization;
+  const cookies = req.cookies;
   const secretKey = process.env.SECRET_KEY || '';
 
   return new Promise<TokenData>((resolve, reject) => {
-    if (authHeader) {
-      const token = authHeader.split(' ')[1];
+    if (cookies) {
+      const { auth } = cookies;
+      if (!auth) return reject('No token present');
+      const { token } = JSON.parse(auth);
 
-      jwt.verify(token, secretKey, (err, user) => {
+      jwt.verify(token, secretKey, (err: any, user: any) => {
         if (err) {
           return reject('Token is not valid');
         }

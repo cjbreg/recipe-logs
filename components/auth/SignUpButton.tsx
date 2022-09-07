@@ -1,7 +1,9 @@
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { useCookies } from 'react-cookie';
 import { useSelector } from 'react-redux';
+import { cookieOptions } from 'src/web/token';
 import { authError, signIn, startAuth } from '../../src/store/actions/authAction';
 import { State } from '../../src/store/reducers';
 import { useAppDispatch } from '../../src/store/store';
@@ -16,6 +18,8 @@ interface Props {
 const SignUpButton = (props: Props) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
+
+  const [cookie, setCookie] = useCookies(['auth']);
 
   const { loading } = useSelector((state: State) => state.authData);
 
@@ -36,6 +40,7 @@ const SignUpButton = (props: Props) => {
       const authData = await axios
         .post('/api/auth/signup', { email, password })
         .then((res) => res.data);
+      setCookie('auth', JSON.stringify({ token: authData.accessToken }), cookieOptions);
       dispatch(signIn(authData));
       router.push('/');
     } catch (error: any) {

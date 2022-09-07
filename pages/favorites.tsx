@@ -1,28 +1,16 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import Main from '@Components/layout/Main';
 import RecipeComponent from '@Components/recipes/RecipeComponent';
 import { Recipe } from '../src/models/Recipe';
 import Image from 'next/image';
-import { AuthStates } from '@Models/AuthStates';
-import { useRouter } from 'next/router';
-import { NextPage } from 'next/types';
+import { GetServerSidePropsContext, NextPage } from 'next/types';
+import { verifyToken } from 'src/web/token';
 
 const Favorites: NextPage = () => {
-  const router = useRouter();
-
   const { recipes } = useSelector((state: any) => state.recipeData);
-  const { authState } = useSelector((state: any) => state.authData);
 
   const favoriteRecipes = recipes.filter((recipe: Recipe) => recipe.favorite);
-
-  useEffect(() => {
-    const checkAuthState = () => {
-      if (authState === AuthStates.SIGNED_OUT) router.push('/auth');
-    };
-
-    checkAuthState();
-  }, []);
 
   const renderEmptyState = () => {
     return (
@@ -69,3 +57,19 @@ const Favorites: NextPage = () => {
 };
 
 export default Favorites;
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const user = await verifyToken(context.req);
+  if (!user) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/auth'
+      },
+      props: {}
+    };
+  }
+  return {
+    props: {}
+  };
+}
