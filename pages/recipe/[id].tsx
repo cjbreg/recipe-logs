@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FavoriteIconComponent from '@Components/recipes/FavoriteIconComponent';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
@@ -13,6 +13,8 @@ import { Clock, ExternalLink, PenTool } from 'react-feather';
 import axios from 'axios';
 import { GetServerSidePropsContext, NextPage } from 'next/types';
 import { verifyToken } from 'src/web/token';
+import { useFetchRecipeById, useFetchRecipes } from 'src/hooks/useRecipe';
+import LoadingView from '@Components/common/LoadingView';
 
 const Index: NextPage = () => {
   const router = useRouter();
@@ -20,11 +22,9 @@ const Index: NextPage = () => {
 
   const { id } = router.query;
 
-  const [error, setError] = useState(false);
+  const { data: recipe, isLoading, refetch, isFetching, isFetched } = useFetchRecipeById(id);
 
-  const recipe = useSelector(
-    (state: any) => state.recipeData.recipes.find((x: any) => x.id === id) ?? defaultRecipeState
-  );
+  if (!recipe) return <LoadingView />;
 
   const handleFavoritePress = () => {
     dispatch(toggleFavorite(recipe));
@@ -39,7 +39,6 @@ const Index: NextPage = () => {
       dispatch(removeRecipe(recipe));
       router.push('/');
     } catch (err) {
-      setError(true);
       console.log('ERROR: ', err);
     }
     dispatch(removeRecipe(recipe));
@@ -150,7 +149,7 @@ const Index: NextPage = () => {
     );
   };
 
-  return renderpPage();
+  return isLoading || isFetching ? <LoadingView /> : renderpPage();
 };
 
 export default Index;
