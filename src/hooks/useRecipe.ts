@@ -1,4 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import axios from 'axios';
 
 type Recipe = {
   name: string;
@@ -12,23 +13,17 @@ type Recipe = {
 };
 
 export const useUploadRecipe = () => {
-  return useMutation((newRecipe: Recipe) => {
-    return fetch('/api/recipe', {
-      method: 'POST',
-      body: JSON.stringify(newRecipe)
-    });
-  });
+  return useMutation(createRecipe);
 };
 
-export const useFetchRecipes = (token: string | null) => {
+const createRecipe = async (newRecipe: any) => {
+  await axios.post('/api/recipe', newRecipe);
+};
+
+export const useFetchRecipes = () => {
   return useQuery<Recipe[], Error>(
     ['get-users-recipes'],
-    () =>
-      fetch('api/recipe', {
-        headers: new Headers({
-          Authorization: 'Basic ' + token
-        })
-      }).then((res) => res.json()),
+    () => fetch('api/recipe', {}).then((res) => res.json()),
     {
       refetchInterval: false,
       refetchOnReconnect: false,
