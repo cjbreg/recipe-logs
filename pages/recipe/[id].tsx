@@ -20,7 +20,15 @@ const Index: NextPage = () => {
 
   const { id } = router.query;
 
-  const { data: recipe, isLoading, isFetching } = useFetchRecipeById(id);
+  const { data: recipe, isLoading, isFetching, error } = useFetchRecipeById(id);
+
+  if (error)
+    // TODO: create error view
+    return (
+      <>
+        <p>error</p>
+      </>
+    );
 
   if (!recipe) return <LoadingView />;
 
@@ -33,14 +41,10 @@ const Index: NextPage = () => {
       await axios.delete('/api/recipe', { data: { recipeId: id } }).catch((err) => {
         throw err;
       });
-
-      dispatch(removeRecipe(recipe));
       router.push('/');
     } catch (err) {
       console.log('ERROR: ', err);
     }
-    dispatch(removeRecipe(recipe));
-    router.push('/');
   };
 
   const renderDuration = () => {
