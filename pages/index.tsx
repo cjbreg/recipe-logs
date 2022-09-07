@@ -15,7 +15,7 @@ import { useFetchRecipes } from 'src/hooks/useRecipe';
 const Home: NextPage = () => {
   const router = useRouter();
 
-  const { data: recipes, isLoading, refetch, isFetching, isFetched } = useFetchRecipes();
+  const { data: recipes, isLoading, refetch, isFetching } = useFetchRecipes();
 
   const [query, setQuery] = useState('');
 
