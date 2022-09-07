@@ -6,11 +6,14 @@ import { Recipe } from '../src/models/Recipe';
 import Image from 'next/image';
 import { GetServerSidePropsContext, NextPage } from 'next/types';
 import { verifyToken } from 'src/web/token';
+import { useFetchRecipes } from 'src/hooks/useRecipe';
+import LoadingView from '@Components/common/LoadingView';
 
 const Favorites: NextPage = () => {
-  const { recipes } = useSelector((state: any) => state.recipeData);
+  const { data: recipes, isLoading, refetch, isFetching } = useFetchRecipes();
 
-  const favoriteRecipes = recipes.filter((recipe: Recipe) => recipe.favorite);
+  let favoriteRecipes = [];
+  if (recipes) favoriteRecipes = recipes.filter((recipe: Recipe) => recipe.favorite);
 
   const renderEmptyState = () => {
     return (
@@ -33,7 +36,8 @@ const Favorites: NextPage = () => {
   };
 
   const renderRecipes = () => {
-    if (recipes.length === 0) return renderEmptyState();
+    if (!recipes) return renderEmptyState();
+    if (isLoading || isFetching) return <LoadingView />;
     if (favoriteRecipes.length === 0) return renderNoFavoritesState();
     return recipes.map((recipe: Recipe, index: number) => {
       if (!recipe.favorite) return;

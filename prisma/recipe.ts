@@ -52,6 +52,18 @@ export const updateRecipe = async (id: string, updateData: any) => {
   return recipe;
 };
 
+export const toggleFavorite = async (id: string, favorite: boolean) => {
+  const recipe = await prisma.recipe.update({
+    where: {
+      id
+    },
+    data: {
+      favorite: !favorite
+    }
+  });
+  return recipe;
+};
+
 export const deleteRecipe = async (id: string) => {
   const data = await prisma.recipe.findUnique({
     where: { id },

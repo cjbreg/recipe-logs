@@ -1,26 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { addRecipe } from '../../src/store/actions/recipeAction';
-import { useAppDispatch } from '../../src/store/store';
 import { useRouter } from 'next/router';
 import { Image as ImageIcon, Search } from 'react-feather';
 import { MetaData } from '../../src/models/MetaData';
 import Page from '@Components/layout/Page';
-import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { State } from '../../src/store/reducers';
 import { GetServerSidePropsContext, NextPage } from 'next/types';
 import { Recipe } from '@Models/Recipe';
 import { verifyToken } from 'src/web/token';
+import { useUploadRecipe } from 'src/hooks/useRecipe';
 
 const Add: NextPage = () => {
-  const dispatch = useAppDispatch();
   const router = useRouter();
 
-  const { id, accessToken } = useSelector((state: State) => state.authData);
+  const { isLoading, mutate, error: mutateError } = useUploadRecipe();
 
-  const axiosConfig = {
-    headers: { Authorization: `Bearer ${accessToken}` }
-  };
+  const { id } = useSelector((state: State) => state.authData);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -50,8 +45,6 @@ const Add: NextPage = () => {
 
   const handleSubminRecipe = async (event: any) => {
     event.preventDefault();
-    setLoading(true);
-
     const newRecipe: Recipe = {
       name,
       recipeUrl,
@@ -62,23 +55,17 @@ const Add: NextPage = () => {
       categories: []
     };
 
-    try {
-      const params = {
+    mutate(
+      {
         newRecipe: newRecipe,
         metaData
-      };
-      const recipeData = await axios
-        .post('/api/recipe', params, axiosConfig)
-        .then((res) => res.data);
-
-      dispatch(addRecipe(recipeData));
-      setLoading(false);
-      router.push('/');
-    } catch (error) {
-      setLoading(false);
-      setError(true);
-      console.log('ERROR: ', error);
-    }
+      },
+      {
+        onSuccess: () => {
+          router.push('/');
+        }
+      }
+    );
   };
 
   const handleCancelPress = () => {
@@ -109,7 +96,7 @@ const Add: NextPage = () => {
   };
 
   const isDisabled = () => {
-    if (loading) return true;
+    if (loading || isLoading) return true;
     if (recipeUrl === '') return true;
     if (name === '') return true;
     if (durationMinutes === '0' || durationMinutes === '') return true;
@@ -177,7 +164,7 @@ const Add: NextPage = () => {
               <Search />
             </button>
           </div>
-          {error ? renderErrorMessage() : <></>}
+          {error || mutateError ? renderErrorMessage() : <></>}
         </form>
 
         <form>

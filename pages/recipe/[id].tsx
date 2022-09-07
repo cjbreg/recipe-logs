@@ -1,10 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import FavoriteIconComponent from '@Components/recipes/FavoriteIconComponent';
 import { useRouter } from 'next/router';
-import { useSelector } from 'react-redux';
-import { useAppDispatch } from '../../src/store/store';
-import { removeRecipe, toggleFavorite } from '../../src/store/actions/recipeAction';
-import { defaultRecipeState } from '../../src/store/reducers/recipeReducer';
 import BackButtonComponent from '@Components/common/BackButtonComponent';
 import RemoveButtonComponent from '@Components/common/RemoveButtonComponent';
 import { getCleanString } from '../../src/shared/helpers';
@@ -13,21 +9,28 @@ import { Clock, ExternalLink, PenTool } from 'react-feather';
 import axios from 'axios';
 import { GetServerSidePropsContext, NextPage } from 'next/types';
 import { verifyToken } from 'src/web/token';
+import { useFetchRecipeById, useToggleFavorite } from 'src/hooks/useRecipe';
+import LoadingView from '@Components/common/LoadingView';
 
 const Index: NextPage = () => {
   const router = useRouter();
-  const dispatch = useAppDispatch();
-
   const { id } = router.query;
 
-  const [error, setError] = useState(false);
+  const { data: recipe, isLoading, isFetching, error, refetch } = useFetchRecipeById(id);
+  const { mutate } = useToggleFavorite();
 
-  const recipe = useSelector(
-    (state: any) => state.recipeData.recipes.find((x: any) => x.id === id) ?? defaultRecipeState
-  );
+  if (error)
+    // TODO: create error view
+    return (
+      <>
+        <p>error</p>
+      </>
+    );
+
+  if (!recipe) return <LoadingView />;
 
   const handleFavoritePress = () => {
-    dispatch(toggleFavorite(recipe));
+    mutate({ recipeId: recipe.id, favorite: recipe.favorite }, { onSuccess: () => refetch() });
   };
 
   const handleRemovePress = async () => {
@@ -35,15 +38,10 @@ const Index: NextPage = () => {
       await axios.delete('/api/recipe', { data: { recipeId: id } }).catch((err) => {
         throw err;
       });
-
-      dispatch(removeRecipe(recipe));
       router.push('/');
     } catch (err) {
-      setError(true);
       console.log('ERROR: ', err);
     }
-    dispatch(removeRecipe(recipe));
-    router.push('/');
   };
 
   const renderDuration = () => {
@@ -150,7 +148,7 @@ const Index: NextPage = () => {
     );
   };
 
-  return renderpPage();
+  return isLoading || isFetching ? <LoadingView /> : renderpPage();
 };
 
 export default Index;

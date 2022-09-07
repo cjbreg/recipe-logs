@@ -1,6 +1,8 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 
 type Recipe = {
+  id: string;
   name: string;
   recipeUrl: string;
   durationMinutes: number;
@@ -8,31 +10,48 @@ type Recipe = {
   backgroundImageUrl: string;
   userId: string;
   categories: any[];
+  comment: string;
   metaData: any;
 };
 
 export const useUploadRecipe = () => {
-  return useMutation((newRecipe: Recipe) => {
-    return fetch('/api/recipe', {
-      method: 'POST',
-      body: JSON.stringify(newRecipe)
-    });
-  });
+  return useMutation(createRecipe);
 };
 
-export const useFetchRecipes = (token: string | null) => {
+export const useToggleFavorite = () => {
+  return useMutation(toggleFavorite);
+};
+
+const createRecipe = async (newRecipe: any) => {
+  return await axios.post('/api/recipe', newRecipe);
+};
+
+const toggleFavorite = async (params: { recipeId: string; favorite: boolean }) => {
+  return await axios.put('/api/recipe/favorite', { params });
+};
+
+export const useFetchRecipes = () => {
   return useQuery<Recipe[], Error>(
     ['get-users-recipes'],
-    () =>
-      fetch('api/recipe', {
-        headers: new Headers({
-          Authorization: 'Basic ' + token
-        })
-      }).then((res) => res.json()),
+    () => axios.get('/api/recipe', {}).then((res) => res.data),
     {
       refetchInterval: false,
-      refetchOnReconnect: false,
-      refetchOnWindowFocus: false
+      refetchOnReconnect: true,
+      refetchOnWindowFocus: false,
+      refetchOnMount: true
+    }
+  );
+};
+
+export const useFetchRecipeById = (recipeId: any) => {
+  return useQuery<Recipe, Error>(
+    ['get-recipe-by-id'],
+    () => axios.get('/api/recipe', { params: { recipeId } }).then((res) => res.data),
+    {
+      refetchInterval: false,
+      refetchOnReconnect: true,
+      refetchOnWindowFocus: false,
+      refetchOnMount: true
     }
   );
 };
