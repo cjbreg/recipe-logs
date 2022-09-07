@@ -1,8 +1,6 @@
 import React from 'react';
 import FavoriteIconComponent from '@Components/recipes/FavoriteIconComponent';
 import { useRouter } from 'next/router';
-import { useAppDispatch } from '../../src/store/store';
-import { toggleFavorite } from '../../src/store/actions/recipeAction';
 import BackButtonComponent from '@Components/common/BackButtonComponent';
 import RemoveButtonComponent from '@Components/common/RemoveButtonComponent';
 import { getCleanString } from '../../src/shared/helpers';
@@ -11,16 +9,15 @@ import { Clock, ExternalLink, PenTool } from 'react-feather';
 import axios from 'axios';
 import { GetServerSidePropsContext, NextPage } from 'next/types';
 import { verifyToken } from 'src/web/token';
-import { useFetchRecipeById } from 'src/hooks/useRecipe';
+import { useFetchRecipeById, useToggleFavorite } from 'src/hooks/useRecipe';
 import LoadingView from '@Components/common/LoadingView';
 
 const Index: NextPage = () => {
   const router = useRouter();
-  const dispatch = useAppDispatch();
-
   const { id } = router.query;
 
-  const { data: recipe, isLoading, isFetching, error } = useFetchRecipeById(id);
+  const { data: recipe, isLoading, isFetching, error, refetch } = useFetchRecipeById(id);
+  const { mutate } = useToggleFavorite();
 
   if (error)
     // TODO: create error view
@@ -33,7 +30,7 @@ const Index: NextPage = () => {
   if (!recipe) return <LoadingView />;
 
   const handleFavoritePress = () => {
-    dispatch(toggleFavorite(recipe));
+    mutate({ recipeId: recipe.id, favorite: recipe.favorite }, { onSuccess: () => refetch() });
   };
 
   const handleRemovePress = async () => {
