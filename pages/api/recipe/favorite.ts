@@ -7,7 +7,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const userData: TokenData = await authenticateJWT(req, res).catch((message) => {
     throw { message: message, noToken: true };
   });
-  console.log('here we go', req.body);
 
   try {
     const { recipeId, favorite } = req.body.params;
@@ -17,8 +16,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       case 'POST':
         return;
       case 'PUT':
-        console.log(recipeId, favorite);
-
         const recipe = await toggleFavorite(recipeId, favorite);
         return res.status(200).json(recipe);
       case 'DELETE':
