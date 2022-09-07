@@ -1,52 +1,35 @@
 import type { GetServerSidePropsContext, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import AddRecipeComponents from '@Components/dashboard/AddRecipeComponents';
 import FilterComponent from '@Components/filter/FilterComponent';
 import Main from '@Components/layout/Main';
 import RecipeComponent from '@Components/recipes/RecipeComponent';
 import { Recipe } from '../src/models/Recipe';
 import Image from 'next/image';
-import { State } from 'src/store/reducers';
-import axios from 'axios';
-import { useAppDispatch } from 'src/store/store';
-import { addRecipes } from 'src/store/actions/recipeAction';
 import LoadingView from '@Components/common/LoadingView';
 import { RefreshCw } from 'react-feather';
 import { verifyToken } from 'src/web/token';
+import { useFetchRecipes } from 'src/hooks/useRecipe';
 
 const Home: NextPage = () => {
   const router = useRouter();
-  const dispatch = useAppDispatch();
 
-  const { recipes } = useSelector((state: State) => state.recipeData);
+  const { data: recipes, isLoading, refetch, isFetching, isFetched } = useFetchRecipes();
 
-  const [loading, setLoading] = useState(false);
   const [query, setQuery] = useState('');
 
-  useEffect(() => {
-    getRecipes();
-  }, []);
   const handleNewRecipePress = () => {
     router.push('/recipe/add');
   };
 
-  const getRecipes = async () => {
-    setLoading(true);
-    const data = await axios.get('/api/recipe');
-    dispatch(addRecipes(data));
-    setLoading(false);
-    try {
-    } catch (error) {
-      console.log(error);
-      setLoading(false);
-    }
+  const handleGetRecipes = () => {
+    refetch();
   };
 
   const renderRecipes = () => {
-    if (loading) return <LoadingView />;
-    if (recipes.length === 0 || loading) return renderEmptyState();
+    if (isLoading || isFetching) return <LoadingView />;
+    if (!recipes) return renderEmptyState();
     return recipes.map((recipe: Recipe, index: number) => {
       if (!recipe.name.toLowerCase().includes(query.toLowerCase())) return;
       return <RecipeComponent recipe={recipe} key={index} />;
@@ -64,8 +47,8 @@ const Home: NextPage = () => {
   };
 
   const renderRefreshButton = () => (
-    <button onClick={getRecipes}>
-      {loading ? <RefreshCw className="animate-spin" /> : <RefreshCw />}
+    <button onClick={handleGetRecipes}>
+      {isLoading || isFetching ? <RefreshCw className="animate-spin" /> : <RefreshCw />}
     </button>
   );
 
