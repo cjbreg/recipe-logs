@@ -17,7 +17,7 @@ export const useUploadRecipe = () => {
 };
 
 const createRecipe = async (newRecipe: any) => {
-  await axios.post('/api/recipe', newRecipe);
+  return await axios.post('/api/recipe', newRecipe);
 };
 
 export const useFetchRecipes = () => {
@@ -26,8 +26,9 @@ export const useFetchRecipes = () => {
     () => fetch('api/recipe', {}).then((res) => res.json()),
     {
       refetchInterval: false,
-      refetchOnReconnect: false,
-      refetchOnWindowFocus: false
+      refetchOnReconnect: true,
+      refetchOnWindowFocus: false,
+      refetchOnMount: true
     }
   );
 };
