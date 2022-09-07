@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import FavoriteIconComponent from '@Components/recipes/FavoriteIconComponent';
 import { useRouter } from 'next/router';
-import { useSelector } from 'react-redux';
 import { useAppDispatch } from '../../src/store/store';
 import { removeRecipe, toggleFavorite } from '../../src/store/actions/recipeAction';
-import { defaultRecipeState } from '../../src/store/reducers/recipeReducer';
 import BackButtonComponent from '@Components/common/BackButtonComponent';
 import RemoveButtonComponent from '@Components/common/RemoveButtonComponent';
 import { getCleanString } from '../../src/shared/helpers';
@@ -13,7 +11,7 @@ import { Clock, ExternalLink, PenTool } from 'react-feather';
 import axios from 'axios';
 import { GetServerSidePropsContext, NextPage } from 'next/types';
 import { verifyToken } from 'src/web/token';
-import { useFetchRecipeById, useFetchRecipes } from 'src/hooks/useRecipe';
+import { useFetchRecipeById } from 'src/hooks/useRecipe';
 import LoadingView from '@Components/common/LoadingView';
 
 const Index: NextPage = () => {
@@ -22,7 +20,7 @@ const Index: NextPage = () => {
 
   const { id } = router.query;
 
-  const { data: recipe, isLoading, refetch, isFetching, isFetched } = useFetchRecipeById(id);
+  const { data: recipe, isLoading, isFetching } = useFetchRecipeById(id);
 
   if (!recipe) return <LoadingView />;
 
