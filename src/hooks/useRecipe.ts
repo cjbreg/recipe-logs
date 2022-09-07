@@ -9,6 +9,7 @@ type Recipe = {
   backgroundImageUrl: string;
   userId: string;
   categories: any[];
+  comment: string;
   metaData: any;
 };
 
@@ -23,7 +24,20 @@ const createRecipe = async (newRecipe: any) => {
 export const useFetchRecipes = () => {
   return useQuery<Recipe[], Error>(
     ['get-users-recipes'],
-    () => fetch('api/recipe', {}).then((res) => res.json()),
+    () => axios.get('/api/recipe', {}).then((res) => res.data),
+    {
+      refetchInterval: false,
+      refetchOnReconnect: true,
+      refetchOnWindowFocus: false,
+      refetchOnMount: true
+    }
+  );
+};
+
+export const useFetchRecipeById = (recipeId: any) => {
+  return useQuery<Recipe, Error>(
+    ['get-recipe-by-id'],
+    () => axios.get('/api/recipe', { params: { recipeId } }).then((res) => res.data),
     {
       refetchInterval: false,
       refetchOnReconnect: true,
