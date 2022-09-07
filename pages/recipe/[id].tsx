@@ -2,7 +2,7 @@ import React from 'react';
 import FavoriteIconComponent from '@Components/recipes/FavoriteIconComponent';
 import { useRouter } from 'next/router';
 import { useAppDispatch } from '../../src/store/store';
-import { removeRecipe, toggleFavorite } from '../../src/store/actions/recipeAction';
+import { toggleFavorite } from '../../src/store/actions/recipeAction';
 import BackButtonComponent from '@Components/common/BackButtonComponent';
 import RemoveButtonComponent from '@Components/common/RemoveButtonComponent';
 import { getCleanString } from '../../src/shared/helpers';
