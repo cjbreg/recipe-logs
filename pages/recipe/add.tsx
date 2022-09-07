@@ -16,11 +16,7 @@ const Add: NextPage = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
-  const { id, accessToken } = useSelector((state: State) => state.authData);
-
-  const axiosConfig = {
-    headers: { Authorization: `Bearer ${accessToken}` }
-  };
+  const { id } = useSelector((state: State) => state.authData);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -67,9 +63,7 @@ const Add: NextPage = () => {
         newRecipe: newRecipe,
         metaData
       };
-      const recipeData = await axios
-        .post('/api/recipe', params, axiosConfig)
-        .then((res) => res.data);
+      const recipeData = await axios.post('/api/recipe', params).then((res) => res.data);
 
       dispatch(addRecipe(recipeData));
       setLoading(false);
