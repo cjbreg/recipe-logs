@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu
+    runs-on: ubuntu-latest
     name: Build Stage
 
     strategy:
@@ -29,7 +29,7 @@ jobs:
         run: yarn build
 
   lint:
-    runs-on: ubuntu
+    runs-on: ubuntu-latest
     name: Build Stage
 
     strategy:
