@@ -54,3 +54,7 @@ jobs:
       - name: Run Linter
         working-directory: ./
         run: yarn lint
+
+      - name: Run Prettier
+        working-directory: ./
+        run: yarn prettier --check ./**/*.ts{,x}
