@@ -1,0 +1,65 @@
+name: Develop CI
+run-name: Test workflow on pull request in development phase
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - feat/**
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build Stage
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Get node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{matrix.node-version}}
+          cache: 'yarn'
+          cache-dependency-path: ./yarn.lock
+
+      - name: Run Build
+        working-directory: ./
+        run: yarn
+  test:
+    runs-on: ubuntu-latest
+    name: Test Stage
+    needs: build
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Get node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{matrix.node-version}}
+          cache: 'yarn'
+          cache-dependency-path: ./yarn.lock
+
+      - name: Run Build
+        working-directory: ./
+        run: yarn
+
+      - name: Run Linter
+        working-directory: ./
+        run: yarn lint
+
+      - name: Run Prettier
+        working-directory: ./
+        run: yarn prettier --check ./**/*.ts{,x}
+
+      - name: Run Jest
+        working-directory: ./
+        run: yarn test:ci
