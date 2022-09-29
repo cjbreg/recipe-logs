@@ -1,4 +1,5 @@
 name: Develop CI
+run-name: Test workflow on pull request in development phase
 
 on:
   pull_request:
@@ -28,9 +29,9 @@ jobs:
       - name: Run Build
         working-directory: ./
         run: yarn
-  lint:
+  test:
     runs-on: ubuntu-latest
-    name: Linter Stage
+    name: Test Stage
     needs: build
 
     strategy:
@@ -58,3 +59,7 @@ jobs:
       - name: Run Prettier
         working-directory: ./
         run: yarn prettier --check ./**/*.ts{,x}
+
+      - name: Run Jest
+        working-directory: ./
+        run: yarn test:ci
