@@ -74,10 +74,6 @@ jobs:
           cache: 'yarn'
           cache-dependency-path: ./yarn.lock
 
-      - name: Run Build
-        working-directory: ./
-        run: yarn
-
       - name: Run Linter
         working-directory: ./
         run: yarn lint
