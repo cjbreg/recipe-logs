@@ -1,0 +1,22 @@
+name: Weekly ZAP scanner
+
+on:
+  schedule:
+    - cron: 0 18 * * 1
+
+jobs:
+  zap_scan:
+    runs-on: ubuntu-latest
+    name: Scan the web application
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: master
+      - name: ZAP Scan
+        uses: zaproxy/action-full-scan@v0.4.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          target: 'https://recipe-logs.vercel.app/'
+          rules_file_name: '.zap/rules.tsv'
+          cmd_options: '-a'
