@@ -52,6 +52,32 @@ jobs:
         working-directory: ./
         run: yarn
 
+      - name: Run Jest
+        working-directory: ./
+        run: yarn test:ci
+  analysis:
+    runs-on: ubuntu-latest
+    name: Analisys Stage
+    needs: test
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Get node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{matrix.node-version}}
+          cache: 'yarn'
+          cache-dependency-path: ./yarn.lock
+
+      - name: Run Build
+        working-directory: ./
+        run: yarn
+
       - name: Run Linter
         working-directory: ./
         run: yarn lint
@@ -59,7 +85,3 @@ jobs:
       - name: Run Prettier
         working-directory: ./
         run: yarn prettier --check ./**/*.ts{,x}
-
-      - name: Run Jest
-        working-directory: ./
-        run: yarn test:ci
