@@ -29,6 +29,7 @@ jobs:
       - name: Run Build
         working-directory: ./
         run: yarn
+
   test:
     runs-on: ubuntu-latest
     name: Test Stage
@@ -55,6 +56,7 @@ jobs:
       - name: Run Jest
         working-directory: ./
         run: yarn test:ci
+
   analysis:
     runs-on: ubuntu-latest
     name: Analisys Stage
