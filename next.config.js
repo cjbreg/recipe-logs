@@ -4,6 +4,9 @@ const runtimeCaching = require("next-pwa/cache");
 
 const nextConfig = {
   reactStrictMode: true,
+  experimental: {
+    outputStandalone: true,
+  },
 };
 
 const pwaConfig = {
