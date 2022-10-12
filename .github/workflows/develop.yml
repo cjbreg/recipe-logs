@@ -7,6 +7,9 @@ on:
       - develop
       - feat/**
 
+env:
+  APP_VERSION: 'v0.0.1'
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -126,5 +129,5 @@ jobs:
         with:
           context: ./
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: ${{ env.APP_VERSION }}
           labels: ${{ steps.meta.outputs.labels }}
