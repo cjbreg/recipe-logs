@@ -7,9 +7,6 @@ on:
       - develop
       - feat/**
 
-env:
-  APP_VERSION: 'v0.0.1'
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -106,8 +103,8 @@ jobs:
 
   push_image_to_dockerhub:
     needs: [build, test]
-    name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
+    name: Docker Push Stage
     steps:
       - name: Check out the repo
         uses: actions/checkout@v3
@@ -129,5 +126,5 @@ jobs:
         with:
           context: ./
           push: true
-          tags: ${{ env.APP_VERSION }}
+          tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
