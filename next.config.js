@@ -3,8 +3,7 @@ const withPWA = require('next-pwa');
 const runtimeCaching = require('next-pwa/cache');
 
 const nextConfig = {
-  reactStrictMode: true,
-  output: 'standalone'
+  reactStrictMode: true
 };
 
 const pwaConfig = {
@@ -17,6 +16,7 @@ const pwaConfig = {
 };
 
 module.exports = withPWA({
+  output: 'standalone',
   nextConfig,
   pwa: {
     dest: 'public',
