@@ -1,0 +1,11 @@
+version: '3.9'
+
+services:
+  nextjs-application:
+    container_name: nextjs-app
+    image: application
+    build: 
+      context: ./
+    ports: 
+      - "3000:3000" 
+
