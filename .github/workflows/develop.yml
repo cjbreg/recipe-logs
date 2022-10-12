@@ -101,7 +101,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-  push_image_to_dockerhub:
+  dockerhub:
     needs: [build, test]
     runs-on: ubuntu-latest
     name: Docker Push Stage
