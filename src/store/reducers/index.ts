@@ -1,7 +1,7 @@
-import { combineReducers } from "redux";
-import authReducer, { AuthState } from "./authRecucer";
-import recipeReducer, { RecipeState } from "./recipeReducer";
-import sampleReducer from "./sampleReducer";
+import { combineReducers } from 'redux';
+import authReducer, { AuthState } from './authRecucer';
+import recipeReducer, { RecipeState } from './recipeReducer';
+import sampleReducer from './sampleReducer';
 
 export interface State {
   authData: AuthState;
@@ -11,5 +11,5 @@ export interface State {
 export default combineReducers({
   sampleData: sampleReducer,
   recipeData: recipeReducer,
-  authData: authReducer,
+  authData: authReducer
 });

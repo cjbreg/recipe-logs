@@ -1,16 +1,21 @@
 // middleware.ts
-import { NextRequest, NextResponse } from "next/server";
-import type { NextApiRequest } from "next";
-import jwt from "jsonwebtoken";
+import { NextRequest, NextResponse } from 'next/server';
 
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
-  console.log("middleware bb");
+  const authCookie: any = request.cookies.get('auth');
+
+  if (authCookie === undefined) {
+    return NextResponse.redirect(new URL('/auth', request.url));
+  }
+  const { token } = JSON.parse(authCookie);
+
+  if (!token) return NextResponse.redirect(new URL('/auth', request.url));
 
   return NextResponse.next();
 }
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: "/api/user",
+  matcher: ['/', '/profile', '/favorites', '/recipe/:path*']
 };

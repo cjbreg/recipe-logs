@@ -1,53 +1,40 @@
-import type { NextPage } from "next";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import AddRecipeComponents from "@Components/dashboard/AddRecipeComponents";
-import FilterComponent from "@Components/filter/FilterComponent";
-import Main from "@Components/layout/Main";
-import RecipeComponent from "@Components/recipes/RecipeComponent";
-import { Recipe } from "../src/models/Recipe";
-import Image from "next/image";
-import { State } from "src/store/reducers";
-import { AuthStates } from "@Models/AuthStates";
-import axios from "axios";
-import { useAppDispatch } from "src/store/store";
-import { addRecipes } from "src/store/actions/recipeAction";
-import LoadingView from "@Components/common/LoadingView";
-import { RefreshCw } from "react-feather";
+import type { GetServerSidePropsContext, NextPage } from 'next';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import AddRecipeComponents from '@Components/dashboard/AddRecipeComponents';
+import FilterComponent from '@Components/filter/FilterComponent';
+import Main from '@Components/layout/Main';
+import RecipeComponent from '@Components/recipes/RecipeComponent';
+import { Recipe } from '../src/models/Recipe';
+import Image from 'next/image';
+import { State } from 'src/store/reducers';
+import axios from 'axios';
+import { useAppDispatch } from 'src/store/store';
+import { addRecipes } from 'src/store/actions/recipeAction';
+import LoadingView from '@Components/common/LoadingView';
+import { RefreshCw } from 'react-feather';
+import { verifyToken } from 'src/web/token';
 
 const Home: NextPage = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
   const { recipes } = useSelector((state: State) => state.recipeData);
-  const { authState, accessToken } = useSelector(
-    (state: any) => state.authData
-  );
 
   const [loading, setLoading] = useState(false);
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
 
   useEffect(() => {
-    const checkAuthState = () => {
-      if (authState === AuthStates.SIGNED_OUT) router.push("/auth");
-    };
-    if (authState === AuthStates.SIGNED_IN && recipes.length === 0) {
-      getRecipes();
-    }
-    checkAuthState();
-  }, [authState]);
-
+    getRecipes();
+  }, []);
   const handleNewRecipePress = () => {
-    router.push("/recipe/add");
+    router.push('/recipe/add');
   };
 
   const getRecipes = async () => {
     setLoading(true);
-    const axiosConfig = {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    };
-    const data = await axios.get("/api/recipe", axiosConfig);
+    const data = await axios.get('/api/recipe');
     dispatch(addRecipes(data));
     setLoading(false);
     try {
@@ -68,16 +55,8 @@ const Home: NextPage = () => {
 
   const renderEmptyState = () => {
     return (
-      <div
-        className="text-dark h-full hover:cursor-pointer"
-        onClick={handleNewRecipePress}
-      >
-        <Image
-          src="/images/undraw_barbecue.svg"
-          height={300}
-          width={300}
-          alt="empty image"
-        />
+      <div className="text-dark h-full hover:cursor-pointer" onClick={handleNewRecipePress}>
+        <Image src="/images/undraw_barbecue.svg" height={300} width={300} alt="empty image" />
         <p>No recipes found yet.</p>
         <p>Go ahead and add your first recipe!</p>
       </div>
@@ -102,13 +81,10 @@ const Home: NextPage = () => {
         <div className="pb-2">
           <FilterComponent queryChange={setQuery} query={query} />
         </div>
-        <div className="overflow-y-auto max-h-fit pb-20 scrollbar-hide">
-          {renderRecipes()}
-        </div>
+        <div className="overflow-y-auto max-h-fit pb-20 scrollbar-hide">{renderRecipes()}</div>
         <div
           className="fixed bottom-0 right-0 m-4 mb-20 z-10 hover:cursor-pointer"
-          onClick={handleNewRecipePress}
-        >
+          onClick={handleNewRecipePress}>
           <AddRecipeComponents />
         </div>
       </div>
@@ -117,3 +93,19 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const user = await verifyToken(context.req);
+  if (!user) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/auth'
+      },
+      props: {}
+    };
+  }
+  return {
+    props: {}
+  };
+}

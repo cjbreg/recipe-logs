@@ -1,15 +1,15 @@
-import { useRouter } from "next/router";
-import { NextPage } from "next/types";
-import React from "react";
+import { useRouter } from 'next/router';
+import { NextPage } from 'next/types';
+import React from 'react';
 
 const Index: NextPage = () => {
   const router = useRouter();
 
   const navigateSignup = () => {
-    router.push("/auth/signup");
+    router.push('/auth/signup');
   };
   const navigateSignin = () => {
-    router.push("/auth/signin");
+    router.push('/auth/signin');
   };
 
   return (
@@ -25,8 +25,7 @@ const Index: NextPage = () => {
           <button
             onClick={navigateSignin}
             type="submit"
-            className="disabled:bg-gray-300 w-48 py-3 font-medium bg-secondary text-white uppercase rounded-xl hover:bg-green-500 transition duration-150"
-          >
+            className="disabled:bg-gray-300 w-48 py-3 font-medium bg-secondary text-white uppercase rounded-xl hover:bg-green-500 transition duration-150">
             Login
           </button>
           <div className="flex relative py-2 items-center">
@@ -37,8 +36,7 @@ const Index: NextPage = () => {
           <button
             onClick={navigateSignup}
             type="submit"
-            className="disabled:bg-gray-300 w-48 py-3 font-medium bg-secondary text-white uppercase rounded-xl hover:bg-green-500 transition duration-150"
-          >
+            className="disabled:bg-gray-300 w-48 py-3 font-medium bg-secondary text-white uppercase rounded-xl hover:bg-green-500 transition duration-150">
             Sign up
           </button>
         </div>

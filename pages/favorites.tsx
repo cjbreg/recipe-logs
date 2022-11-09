@@ -1,38 +1,21 @@
-import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
-import Main from "@Components/layout/Main";
-import RecipeComponent from "@Components/recipes/RecipeComponent";
-import { Recipe } from "../src/models/Recipe";
-import Image from "next/image";
-import { AuthStates } from "@Models/AuthStates";
-import { useRouter } from "next/router";
-import { NextPage } from "next/types";
+import React from 'react';
+import { useSelector } from 'react-redux';
+import Main from '@Components/layout/Main';
+import RecipeComponent from '@Components/recipes/RecipeComponent';
+import { Recipe } from '../src/models/Recipe';
+import Image from 'next/image';
+import { GetServerSidePropsContext, NextPage } from 'next/types';
+import { verifyToken } from 'src/web/token';
 
 const Favorites: NextPage = () => {
-  const router = useRouter();
-
   const { recipes } = useSelector((state: any) => state.recipeData);
-  const { authState } = useSelector((state: any) => state.authData);
 
   const favoriteRecipes = recipes.filter((recipe: Recipe) => recipe.favorite);
-
-  useEffect(() => {
-    const checkAuthState = () => {
-      if (authState === AuthStates.SIGNED_OUT) router.push("/auth");
-    };
-
-    checkAuthState();
-  }, []);
 
   const renderEmptyState = () => {
     return (
       <div className="text-dark h-full hover:cursor-pointer">
-        <Image
-          src="/images/undraw_barbecue.svg"
-          height={300}
-          width={300}
-          alt="empty image"
-        />
+        <Image src="/images/undraw_barbecue.svg" height={300} width={300} alt="empty image" />
         <p>No recipes found yet.</p>
         <p>Go ahead and add your first recipe!</p>
       </div>
@@ -42,12 +25,7 @@ const Favorites: NextPage = () => {
   const renderNoFavoritesState = () => {
     return (
       <div className="text-dark h-full hover:cursor-pointer">
-        <Image
-          src="/images/undraw_add_files.svg"
-          height={300}
-          width={300}
-          alt="empty image"
-        />
+        <Image src="/images/undraw_add_files.svg" height={300} width={300} alt="empty image" />
         <p>No favorite recipes found</p>
         <p>Go ahead and favorite your first recipe!</p>
       </div>
@@ -72,12 +50,26 @@ const Favorites: NextPage = () => {
           </div>
         </div>
 
-        <div className="overflow-y-auto  max-h-fit pb-12 scrollbar-hide">
-          {renderRecipes()}
-        </div>
+        <div className="overflow-y-auto  max-h-fit pb-12 scrollbar-hide">{renderRecipes()}</div>
       </div>
     </Main>
   );
 };
 
 export default Favorites;
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const user = await verifyToken(context.req);
+  if (!user) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/auth'
+      },
+      props: {}
+    };
+  }
+  return {
+    props: {}
+  };
+}

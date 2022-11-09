@@ -1,10 +1,5 @@
-import { User } from "../../models/User";
-import {
-  AUTH_ERROR,
-  AUTH_SIGNIN,
-  AUTH_SIGNOUT,
-  AUTH_START_FLOW,
-} from "../types";
+import { User } from '../../models/User';
+import { AUTH_ERROR, AUTH_SIGNIN, AUTH_SIGNOUT, AUTH_START_FLOW } from '../types';
 
 interface ISignInResponse {
   accessToken: string;
@@ -13,18 +8,18 @@ interface ISignInResponse {
 
 export const signIn = ({ accessToken, user }: ISignInResponse) => ({
   type: AUTH_SIGNIN,
-  payload: { accessToken, user },
+  payload: { accessToken, user }
 });
 
 export const signOut = () => ({
-  type: AUTH_SIGNOUT,
+  type: AUTH_SIGNOUT
 });
 
 export const startAuth = () => ({
-  type: AUTH_START_FLOW,
+  type: AUTH_START_FLOW
 });
 
 export const authError = (payload: any) => ({
   type: AUTH_ERROR,
-  payload,
+  payload
 });

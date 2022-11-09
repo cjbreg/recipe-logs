@@ -1,7 +1,7 @@
-import Head from "next/head";
-import { useRouter } from "next/router";
-import React from "react";
-import Navbar from "../common/Navbar";
+import Head from 'next/head';
+import { useRouter } from 'next/router';
+import React from 'react';
+import Navbar from '../common/Navbar';
 
 const Main = ({ children }: any) => {
   const router = useRouter();
@@ -15,9 +15,7 @@ const Main = ({ children }: any) => {
 
       <Navbar path={router.asPath} />
 
-      <div className="container mx-auto px-4 pt-8 max-h-screen flex flex-col ">
-        {children}
-      </div>
+      <div className="container mx-auto px-4 pt-8 max-h-screen flex flex-col ">{children}</div>
     </div>
   );
 };

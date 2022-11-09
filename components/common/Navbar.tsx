@@ -1,6 +1,6 @@
-import NextLink from "next/link";
-import React from "react";
-import { Home, Star, User } from "react-feather";
+import NextLink from 'next/link';
+import React from 'react';
+import { Home, Star, User } from 'react-feather';
 
 const Navbar = (props: any) => {
   const { path } = props;
@@ -9,11 +9,7 @@ const Navbar = (props: any) => {
 
     return (
       <NextLink href={href}>
-        <div
-          className={
-            active ? "text-secondary" : "text-dark hover:cursor-pointer"
-          }
-        >
+        <div className={active ? 'text-secondary' : 'text-dark hover:cursor-pointer'}>
           {children}
         </div>
       </NextLink>
