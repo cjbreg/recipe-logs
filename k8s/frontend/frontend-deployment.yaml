@@ -17,26 +17,26 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: coenbreg/recipe-logs:pr-6
-          resources:
-            requests:
-              memory: 64Mi
-              cpu: 250m
-            limits:
-              memory: 500Mi
-              cpu: 500m
+          image: localhost:5000/recipe-logs:v0.2
+          # resources:
+          #   requests:
+          #     memory: 64Mi
+          #     cpu: 250m
+          #   limits:
+          #     memory: 500Mi
+          #     cpu: 500m
           ports:
             - containerPort: 3000
-          envFrom:
-            - configMapRef:
-                name: frontend-env
+          # envFrom:
+          #   - configMapRef:
+          #       name: frontend-env
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: frontend-service
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: frontend
   ports:
