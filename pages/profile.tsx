@@ -15,7 +15,7 @@ const Profile: NextPage = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
-  const [cookies, setCookie, removeCookie] = useCookies();
+  const [removeCookie] = useCookies();
 
   const { authState, email } = useSelector((state: State) => state.authData);
 

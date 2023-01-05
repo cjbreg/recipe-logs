@@ -1,8 +1,8 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextApiRequest } from 'next';
 import jwt from 'jsonwebtoken';
 import { TokenData } from '@Models/TokenData';
 
-export const authenticateJWT = async (req: NextApiRequest, response: NextApiResponse) => {
+export const authenticateJWT = async (req: NextApiRequest) => {
   const cookies = req.cookies;
   const secretKey = process.env.SECRET_KEY || '';
 

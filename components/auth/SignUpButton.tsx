@@ -18,7 +18,7 @@ interface Props {
 const SignUpButton = (props: Props) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
-
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [cookie, setCookie] = useCookies(['auth']);
 
   const { loading } = useSelector((state: State) => state.authData);

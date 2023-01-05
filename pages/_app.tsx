@@ -7,7 +7,7 @@ import Head from 'next/head';
 import { useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+function MyApp({ Component, pageProps: { ...pageProps } }: AppProps) {
   const [queryClient] = useState(() => new QueryClient());
 
   return (

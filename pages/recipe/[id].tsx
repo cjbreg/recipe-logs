@@ -40,6 +40,7 @@ const Index: NextPage = () => {
       router.push('/');
     } catch (err) {
       setError(true);
+      console.log(error);
       console.log('ERROR: ', err);
     }
     dispatch(removeRecipe(recipe));
