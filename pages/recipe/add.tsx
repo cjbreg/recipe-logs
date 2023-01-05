@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { addRecipe } from '../../src/store/actions/recipeAction';
-import { useAppDispatch } from '../../src/store/store';
+import { addRecipe } from 'src/store/actions/recipeAction';
+import { useAppDispatch } from 'src/store/store';
 import { useRouter } from 'next/router';
 import { Image as ImageIcon, Search } from 'react-feather';
-import { MetaData } from '../../src/models/MetaData';
+import { MetaData } from '@Models/MetaData';
 import Page from '@Components/layout/Page';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
-import { State } from '../../src/store/reducers';
+import { State } from 'src/store/reducers';
 import { GetServerSidePropsContext, NextPage } from 'next/types';
 import { Recipe } from '@Models/Recipe';
 import { verifyToken } from 'src/web/token';

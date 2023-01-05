@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { createUser, getUserByEmail } from '../../../prisma/user';
+import { createUser, getUserByEmail } from 'prisma/user';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 

@@ -6,7 +6,7 @@ import AddRecipeComponents from '@Components/dashboard/AddRecipeComponents';
 import FilterComponent from '@Components/filter/FilterComponent';
 import Main from '@Components/layout/Main';
 import RecipeComponent from '@Components/recipes/RecipeComponent';
-import { Recipe } from '../src/models/Recipe';
+import { Recipe } from '@Models/Recipe';
 import Image from 'next/image';
 import { State } from 'src/store/reducers';
 import axios from 'axios';

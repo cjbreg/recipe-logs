@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import Main from '@Components/layout/Main';
 import RecipeComponent from '@Components/recipes/RecipeComponent';
-import { Recipe } from '../src/models/Recipe';
+import { Recipe } from '@Models/Recipe';
 import Image from 'next/image';
 import { GetServerSidePropsContext, NextPage } from 'next/types';
 import { verifyToken } from 'src/web/token';

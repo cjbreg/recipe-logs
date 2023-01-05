@@ -1,11 +1,11 @@
 import React from 'react';
 import Main from '@Components/layout/Main';
 import { useSelector } from 'react-redux';
-import { State } from '../src/store/reducers';
-import { useAppDispatch } from '../src/store/store';
-import { signOut } from '../src/store/actions/authAction';
+import { State } from 'src/store/reducers';
+import { useAppDispatch } from 'src/store/store';
+import { signOut } from 'src/store/actions/authAction';
 import { LogOut } from 'react-feather';
-import { AuthStates } from '../src/models/AuthStates';
+import { AuthStates } from '@Models/AuthStates';
 import { useRouter } from 'next/router';
 import { GetServerSidePropsContext, NextPage } from 'next/types';
 import { useCookies } from 'react-cookie';
@@ -15,6 +15,7 @@ const Profile: NextPage = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [cookies, setCookie, removeCookie] = useCookies();
 
   const { authState, email } = useSelector((state: State) => state.authData);

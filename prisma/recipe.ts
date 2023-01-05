@@ -1,5 +1,5 @@
-import { MetaData } from '../src/models/MetaData';
-import { Recipe } from '../src/models/Recipe';
+import { MetaData } from '@Models/MetaData';
+import { Recipe } from '@Models/Recipe';
 import { prisma } from '../prisma';
 
 export const getAllRecipes = async () => {

@@ -1,4 +1,4 @@
-import { Recipe } from '../../models/Recipe';
+import { Recipe } from '@Models/Recipe';
 import {
   RECIPE_TOGGLE_FAVORITE,
   RECIPE_ADD_RECIPE,

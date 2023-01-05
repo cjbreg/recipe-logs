@@ -1,5 +1,5 @@
 import produce from 'immer';
-import { Recipe } from '../../models/Recipe';
+import { Recipe } from '@Models/Recipe';
 import {
   AUTH_SIGNOUT,
   GET_SAMPLE,

@@ -1,4 +1,4 @@
-import { User } from '../../models/User';
+import { User } from '@Models/User';
 import { AUTH_ERROR, AUTH_SIGNIN, AUTH_SIGNOUT, AUTH_START_FLOW } from '../types';
 
 interface ISignInResponse {

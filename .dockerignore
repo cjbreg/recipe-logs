@@ -5,3 +5,7 @@ npm-debug.log
 README.md
 .next
 .git
+.prettierrc.js
+yarn-error.log
+docker-compose.yml
+.eslint*

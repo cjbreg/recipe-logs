@@ -1,0 +1,5 @@
+---
+mirrors:
+  "localhost:5000":
+    endpoint:
+      - http://k3d-recipe-logs-r:5000
