@@ -7,7 +7,7 @@ import { TokenData } from '@Models/TokenData';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const userData: TokenData = await authenticateJWT(req, res).catch((message) => {
+    const userData: TokenData = await authenticateJWT(req).catch((message) => {
       throw { message: message, noToken: true };
     });
 

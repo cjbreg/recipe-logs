@@ -15,7 +15,8 @@ const Profile: NextPage = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
-  const [removeCookie] = useCookies();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [cookies, setCookie, removeCookie] = useCookies();
 
   const { authState, email } = useSelector((state: State) => state.authData);
 
