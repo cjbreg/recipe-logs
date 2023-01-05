@@ -1,9 +1,9 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { createUser, getUser, updateUser } from '../../../prisma/user';
+import { createUser, getUser, updateUser } from 'prisma/user';
 import bcrypt from 'bcryptjs';
 import { authenticateJWT } from '..';
-import { TokenData } from '../../../src/models/TokenData';
+import { TokenData } from '@Models/TokenData';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {

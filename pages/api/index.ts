@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import jwt from 'jsonwebtoken';
-import { TokenData } from '../../src/models/TokenData';
+import { TokenData } from '@Models/TokenData';
 
 export const authenticateJWT = async (req: NextApiRequest, response: NextApiResponse) => {
   const cookies = req.cookies;

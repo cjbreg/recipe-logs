@@ -4,9 +4,9 @@ import React from 'react';
 import { useCookies } from 'react-cookie';
 import { useSelector } from 'react-redux';
 import { cookieOptions } from 'src/web/token';
-import { authError, signIn, startAuth } from '../../src/store/actions/authAction';
-import { State } from '../../src/store/reducers';
-import { useAppDispatch } from '../../src/store/store';
+import { authError, signIn, startAuth } from 'src/store/actions/authAction';
+import { State } from 'src/store/reducers';
+import { useAppDispatch } from 'src/store/store';
 
 interface Props {
   isValid: boolean;

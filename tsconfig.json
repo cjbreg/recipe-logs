@@ -18,7 +18,8 @@
     "paths": {
       "@Components/*": ["components/*"],
       "@Models/*": ["src/models/*"],
-      "src/*": ["src/*"]
+      "src/*": ["src/*"],
+      "prisma": ["prisma/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
